@@ -10,6 +10,7 @@
 <title>Vishwa — Portfolio</title>
 <meta name="color-scheme" content="light dark" />
 <style>
+
 /* =========================
    THEME + GLASS VARIABLES
    ========================= */
@@ -313,6 +314,26 @@ html:not(.light) .skill-icons img {
   font-size: 15px;
   resize: none;
 }
+/* Fix focus outline */
+.contact-box input:focus,
+.contact-box textarea:focus {
+  outline: none !important;
+  border: 1px solid rgba(255,255,255,0.35) !important;
+  box-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+/* Remove default Chrome/Safari inner highlight */
+.contact-box input::-webkit-focus-inner,
+.contact-box textarea::-webkit-focus-inner {
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove mobile tap highlight (Android/iOS) */
+.contact-box input,
+.contact-box textarea {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 
 .contact-box textarea {
   min-height: 140px;
@@ -336,7 +357,14 @@ html:not(.light) .skill-icons img {
 @media (max-width:768px){
   .grid{ opacity:0; }
   .nav-center{ overflow-x:auto; white-space:nowrap; padding-bottom:6px; gap:10px; }
-
+  @media (max-width:768px) {
+  .contact-box {
+    width: 90% !important;
+    margin: 0 auto !important;
+    padding: 18px !important;
+    box-sizing: border-box !important;
+  }
+}
   .hero{ flex-direction:column; text-align:center; align-items:center; margin-top:12px; }
   .hero-left h1{ font-size:32px; } .hero-left p{ font-size:15px; }
 
