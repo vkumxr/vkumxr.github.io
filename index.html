@@ -287,6 +287,52 @@ html:not(.light) .skill-icons img {
 /* =========================
    MOBILE
    ========================= */
+/* CONTACT FORM */
+.contact-box {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 25px;
+  border-radius: 14px;
+}
+
+.contact-box form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px;
+  width: 100%;
+}
+
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font-size: 15px;
+  resize: none;
+}
+
+.contact-box textarea {
+  min-height: 140px;
+}
+
+.send-btn {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.send-btn:hover {
+  transform: translateY(-3px);
+  background: #222;
+}
 @media (max-width:768px){
   .grid{ opacity:0; }
   .nav-center{ overflow-x:auto; white-space:nowrap; padding-bottom:6px; gap:10px; }
@@ -529,7 +575,7 @@ svg#liquidFilters{position:absolute;width:0;height:0;}
   
   <!-- CONNECT -->
   <section id="connect" class="fade-up" aria-labelledby="connect-title">
-    <h2 id="connect-title">Connect With Me</h2>
+    <h2 id="connect-title">Get In Touch</h2>
     <div class="connect-links" role="group" aria-label="Contact links">
       <a class="connect-item glass" href="mailto:vishwakumarv05@gmail.com" aria-label="Email">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#EA4335" d="M12 13.065L1.2 6.3A2.4 2.4 0 013.6 4.8h16.8a2.4 2.4 0 012.4 1.5L12 13.065z"/><path fill="#D93025" d="M3.6 19.2h16.8a2.4 2.4 0 002.4-2.4V7.44L12 14.08 1.2 7.44V16.8a2.4 2.4 0 002.4 2.4z"/></svg>
@@ -546,6 +592,21 @@ svg#liquidFilters{position:absolute;width:0;height:0;}
         <span>github.com/vkumxr</span>
       </a>
     </div>
+    <!-- CONTACT FORM -->
+    <section id="contact" class="fade-up" aria-labelledby="contact-title">
+
+  <div class="contact-box glass">
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+
+      <textarea id="message" placeholder="Type in your Query..." required></textarea>
+
+      <button type="submit" class="send-btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
   </section>
 
   <footer>©️ 2025 Vishwa Kumar</footer>
@@ -649,5 +710,3 @@ const PROJECTS = [
 </script>
 </body>
 </html>
-
-
