@@ -747,23 +747,24 @@ const PROJECTS = [
 document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
+    const nameVal = document.getElementById("name").value;
+    const emailVal = document.getElementById("email").value;
+    const messageVal = document.getElementById("message").value;
+
+    console.log("DEBUG:", { nameVal, emailVal, messageVal });
+
     const params = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
+        name: nameVal,
+        email: emailVal,
+        message: messageVal
     };
 
     emailjs.send("service_hbvqs2f", "template_h66mljm", params)
-    .then(() => {
-        alert("Message sent successfully!");
-        document.getElementById("contactForm").reset();
-    })
-    .catch((error) => {
-        alert("Failed to send message. Try again.");
-        console.error("EmailJS Error:", error);
-    });
+    .then(() => alert("Message sent"))
+    .catch(err => console.error("EmailJS Error:", err));
 });
 </script>
 </body>
 </html>
+
 
