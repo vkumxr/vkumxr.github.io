@@ -754,10 +754,10 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
     console.log("DEBUG:", { nameVal, emailVal, messageVal });
 
     const params = {
-        name: nameVal,
-        email: emailVal,
-        message: messageVal
-    };
+    from_name: nameVal,
+    from_email: emailVal,
+    message: messageVal
+};
 
     emailjs.send("service_hbvqs2f", "template_h66mljm", params)
     .then(() => alert("Message sent"))
@@ -766,5 +766,6 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
 </script>
 </body>
 </html>
+
 
 
