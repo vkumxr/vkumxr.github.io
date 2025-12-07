@@ -182,7 +182,7 @@ html:not(.light) .knob{ transform:translateX(20px); background:linear-gradient(1
   transform: translateY(-3px) scale(1.025);
   box-shadow: 0 8px 24px rgba(255,255,255,0.12), inset 0 1px 2px rgba(255,255,255,0.2);
 }
-.nav-center{ display:flex; justify-content:center; gap:16px; margin-top:12px; }
+.nav-center{ display:flex; justify-content:center; gap:16px; margin-top:12px; flex-wrap:wrap; }
 .nav-pill{ padding:8px 14px;border-radius:12px; color:var(--muted); text-decoration:none; white-space:nowrap;
   border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
 }
@@ -234,6 +234,57 @@ footer{ text-align:center; color:var(--muted); margin-top:40px; padding:20px 0; 
 .fade-up{ opacity:0; transform:translateY(10px); transition:.55s; } .fade-up.in{ opacity:1; transform:translateY(0); }
 
 /* =========================
+   SKILLS SECTION
+   ========================= */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.skill-card {
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.skill-card h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.skill-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-icons img {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.25s ease;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+}
+
+/* Hover lift */
+.skill-icons img:hover {
+  transform: translateY(-4px) scale(1.07);
+}
+
+/* Auto monochrome icon behavior for skills */
+html.light .skill-icons img {
+  filter: brightness(0) saturate(100%) !important;   /* black in light mode */
+}
+
+html:not(.light) .skill-icons img {
+  filter: brightness(10) saturate(0%) !important;    /* white in dark mode */
+}
+
+/* =========================
    MOBILE
    ========================= */
 @media (max-width:768px){
@@ -263,6 +314,15 @@ footer{ text-align:center; color:var(--muted); margin-top:40px; padding:20px 0; 
   .mobile-dot.active{ background:var(--text); }
   .mobile-arrow{ background:transparent; border: none; padding:8px; border-radius:10px; display:flex; align-items:center; justify-content:center; }
   .mobile-arrow svg{ width:18px; height:18px; }
+
+  /* Skills mobile tweaks */
+  .skill-card {
+    padding:16px;
+  }
+  .skill-icons img {
+    width:36px;
+    height:36px;
+  }
 }
 /* GLOBAL LIQUID GLASS FILTER */
 svg#liquidFilters{position:absolute;width:0;height:0;}
@@ -315,8 +375,9 @@ svg#liquidFilters{position:absolute;width:0;height:0;}
   <!-- NAV -->
   <nav class="nav-center" role="navigation" aria-label="Primary">
     <a class="nav-pill glass" href="#home">Home</a>
-    <a class="nav-pill glass" href="#projects">Projects</a>
     <a class="nav-pill glass" href="#about">About</a>
+    <a class="nav-pill glass" href="#skills">Skills</a>
+    <a class="nav-pill glass" href="#projects">Projects</a>
     <a class="nav-pill glass" href="#connect">Connect</a>
     <a class="nav-pill glass" href="VISHWA-RESUME.pdf" target="_blank">Resume</a>
   </nav>
@@ -341,6 +402,102 @@ svg#liquidFilters{position:absolute;width:0;height:0;}
       Electronics and Communication Engineering student at PSG College of Technology with a solid foundation in algorithms, system design, and software development. Skilled in Java, C, C++, and Scratch, along with practical experience in Python, HTML, and SQL. My interests span AI, cybersecurity, robotics, and automation, where I focus on building efficient, scalable, and meaningful solutions. I enjoy combining engineering principles with creativity to bring ideas into working prototypes.
     </div>
   </section>
+
+<!-- SKILLS -->
+<section id="skills" class="fade-up" aria-labelledby="skills-title">
+  <h2 id="skills-title">Skills</h2>
+
+  <div class="skills-grid">
+
+    <!-- PROGRAMMING LANGUAGES -->
+    <div class="skill-card glass">
+      <h3>Programming Languages</h3>
+      <div class="skill-icons">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+        <img src="https://cdn.simpleicons.org/c" alt="C">
+        <img src="https://cdn.simpleicons.org/cplusplus" alt="C++">
+        <img src="https://cdn.simpleicons.org/python" alt="Python">
+        <img src="https://cdn.simpleicons.org/html5" alt="HTML5">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-plain.svg" alt="CSS">
+        <img src="https://cdn.simpleicons.org/javascript" alt="JavaScript">
+      </div>
+    </div>
+
+    <!-- OPERATING SYSTEMS -->
+    <div class="skill-card glass">
+      <h3>Operating Systems</h3>
+      <div class="skill-icons">
+        <img src="https://cdn.simpleicons.org/linux" alt="Linux">
+        <img src="https://cdn.simpleicons.org/debian" alt="Debian">
+        <img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux">
+        <img src="https://cdn.simpleicons.org/raspberrypi" alt="Raspberry Pi">
+	<img src="https://cdn.simpleicons.org/lineageos/000000" alt="LineageOS">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows">
+        <img src="https://cdn.simpleicons.org/apple" alt="macOS">
+      </div>
+    </div>
+
+    <!-- BACKEND & FRAMEWORKS -->
+    <div class="skill-card glass">
+      <h3>Backend & Frameworks</h3>
+      <div class="skill-icons">
+        <img src="https://cdn.simpleicons.org/spring" alt="Spring Boot">
+        <img src="https://cdn.simpleicons.org/mysql" alt="MySQL">
+        <img src="https://cdn.simpleicons.org/postgresql" alt="PostgreSQL">
+        <img src="https://cdn.simpleicons.org/sqlite" alt="SQLite">
+      </div>
+    </div>
+
+    <!-- TOOLS & IDEs -->
+    <div class="skill-card glass">
+      <h3>Tools & IDEs</h3>
+      <div class="skill-icons">
+        <img src="https://cdn.simpleicons.org/git" alt="Git">
+        <img src="https://cdn.simpleicons.org/github" alt="GitHub">
+        <img src="https://cdn.simpleicons.org/intellijidea" alt="IntelliJ IDEA">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" alt="MATLAB">
+      </div>
+    </div>
+
+    <!-- ML & DATA SCIENCE -->
+    <div class="skill-card glass">
+      <h3>ML / Data Science</h3>
+      <div class="skill-icons">
+        <img src="https://cdn.simpleicons.org/tensorflow" alt="TensorFlow">
+        <img src="https://cdn.simpleicons.org/pytorch" alt="PyTorch">
+        <img src="https://cdn.simpleicons.org/numpy" alt="NumPy">
+        <img src="https://cdn.simpleicons.org/pandas" alt="Pandas">
+      </div>
+    </div>
+    
+    <!-- CYBERSECURITY TOOLS -->
+    <div class="skill-card glass">
+    <h3>Cybersecurity Tools</h3>
+    <div class="skill-icons">
+
+    <!-- Metasploit -->
+    <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/metasploit.svg" alt="Metasploit">
+
+    <!-- Nmap -->
+    <img src="https://cdn.simpleicons.org/nmap/000000" alt="Nmap">
+
+    <!-- Wireshark -->
+    <img src="https://cdn.simpleicons.org/wireshark/000000" alt="Wireshark">
+
+    <!-- Burp Suite (PortSwigger) -->
+    <img src="https://cdn.simpleicons.org/portswigger/000000" alt="Burp Suite">
+
+    <!-- Hashcat -->
+    <img width="42" height="42" alt="Hashcat"
+src="https://raw.githubusercontent.com/vishwakumxr/icons/main/hashcat.svg">
+
+  </div>
+</div>
+
+  </div>
+	
+</section>
 
 
   <!-- PROJECTS -->
@@ -499,5 +656,3 @@ const PROJECTS = [
 </script>
 </body>
 </html>
-
-
