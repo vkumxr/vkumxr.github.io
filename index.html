@@ -736,5 +736,34 @@ const PROJECTS = [
 (function(){ const track = document.getElementById('projectsTrack'); const viewport = track.parentElement; viewport.addEventListener('mouseenter', ()=> track.classList.add('paused')); viewport.addEventListener('mouseleave', ()=> track.classList.remove('paused')) })();
 (function(){ if(localStorage.getItem('theme') === 'dark'){ document.documentElement.classList.remove('light'); } const btn = document.getElementById('themeToggle'); btn.addEventListener('click', ()=>{ const isLight = document.documentElement.classList.toggle('light'); localStorage.setItem('theme', isLight ? 'light' : 'dark'); }); })();
 </script>
+	<!-- EmailJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function() {
+    emailjs.init("pEkZwmUeWy6anm2tc");
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const params = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
+
+    emailjs.send("service_hbvqs2f", "template_h66mljm", params)
+    .then(() => {
+        alert("Message sent successfully!");
+        document.getElementById("contactForm").reset();
+    })
+    .catch((error) => {
+        alert("Failed to send message. Try again.");
+        console.error("EmailJS Error:", error);
+    });
+});
+</script>
 </body>
 </html>
+
