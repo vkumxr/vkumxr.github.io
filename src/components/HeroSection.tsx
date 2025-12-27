@@ -54,7 +54,7 @@ const HeroSection = () => {
 
         {/* Name */}
         <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white">
-          Vishwa Kumar
+          Vishwa Kumar Venkateswaran
         </h1>
 
         {/* Tagline */}
