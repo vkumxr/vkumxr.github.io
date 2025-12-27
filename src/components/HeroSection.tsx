@@ -262,14 +262,15 @@ const HeroSection = () => {
             </button>
           </div>
 
-          {/* View Resume - Right */}
-          <button
-            onClick={openResume}
+          {/* Download Resume - Right */}
+          <a
+            href="/VISHWA-RESUME.pdf"
+            download="Vishwa_Kumar_Resume.pdf"
             className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-all duration-200"
           >
             <FileText size={18} />
-            View Resume
-          </button>
+            Download Resume
+          </a>
         </div>
 
         {/* Social Links */}

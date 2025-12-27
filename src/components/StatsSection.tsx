@@ -91,7 +91,7 @@ const StatsSection = () => {
       />
 
       <div ref={ref} className={`container mx-auto max-w-5xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
@@ -110,6 +110,28 @@ const StatsSection = () => {
               <div className="text-xs text-muted-foreground">{stat.description}</div>
             </div>
           ))}
+        </div>
+
+        {/* GitHub Contribution Graph */}
+        <div className={`transition-all duration-700 delay-500 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-center mb-6">
+            <h3 className="text-lg font-semibold text-foreground mb-2">GitHub Activity</h3>
+            <p className="text-sm text-muted-foreground">Contribution graph from the past year</p>
+          </div>
+          <div className="flex justify-center">
+            <a 
+              href="https://github.com/vkumxr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block overflow-hidden rounded-lg border border-border hover:border-foreground/20 transition-colors p-4 bg-card"
+            >
+              <img 
+                src="https://ghchart.rshah.org/vkumxr" 
+                alt="vkumxr's GitHub contribution chart"
+                className="w-full max-w-2xl h-auto dark:invert dark:hue-rotate-180"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </section>
