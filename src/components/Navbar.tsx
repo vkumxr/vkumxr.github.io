@@ -17,6 +17,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isInHero, setIsInHero] = useState(true);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const { theme, toggleTheme } = useTheme();
@@ -24,8 +25,18 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Check if we're in the hero section (dark background)
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const heroBottom = heroSection.getBoundingClientRect().bottom;
+        setIsInHero(heroBottom > 80);
+      }
 
-      if (!isHomePage) return;
+      if (!isHomePage) {
+        setIsInHero(false);
+        return;
+      }
 
       const sectionItems = navItems.filter((item) => item.isSection);
       const sections = sectionItems.map((item) => item.href.slice(1));
@@ -42,6 +53,7 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
 
@@ -68,17 +80,26 @@ const Navbar = () => {
     return isHomePage && activeSection === item.href.slice(1);
   };
 
+  // Determine text colors based on whether we're in the hero section
+  // Hero section has inverted colors (dark bg, light text)
+  const textColor = isInHero ? 'text-background' : 'text-foreground';
+  const textColorMuted = isInHero ? 'text-background/60' : 'text-foreground/60';
+  const hoverBg = isInHero ? 'hover:bg-background/10' : 'hover:bg-foreground/10';
+  const activeBg = isInHero ? 'bg-background/10' : 'bg-foreground/10';
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-foreground/95 backdrop-blur-sm'
+          ? isInHero 
+            ? 'bg-foreground/95 backdrop-blur-sm' 
+            : 'bg-background/95 backdrop-blur-sm shadow-sm'
           : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-lg font-semibold text-background">
+          <Link to="/" className={`text-lg font-semibold ${textColor}`}>
             VK
           </Link>
 
@@ -91,8 +112,8 @@ const Navbar = () => {
                     onClick={() => handleNavClick(item)}
                     className={`text-sm font-medium transition-colors duration-200 ${
                       isActive(item)
-                        ? 'text-background'
-                        : 'text-background/60 hover:text-background'
+                        ? textColor
+                        : `${textColorMuted} hover:${textColor}`
                     }`}
                   >
                     {item.label}
@@ -102,8 +123,8 @@ const Navbar = () => {
                     to={item.href}
                     className={`text-sm font-medium transition-colors duration-200 ${
                       isActive(item)
-                        ? 'text-background'
-                        : 'text-background/60 hover:text-background'
+                        ? textColor
+                        : `${textColorMuted} hover:${textColor}`
                     }`}
                   >
                     {item.label}
@@ -114,7 +135,7 @@ const Navbar = () => {
             <li>
               <button
                 onClick={toggleTheme}
-                className="p-2 rounded-full text-background/70 hover:text-background hover:bg-background/10 transition-all duration-200"
+                className={`p-2 rounded-full ${textColorMuted} hover:${textColor} ${hoverBg} transition-all duration-200`}
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -126,14 +147,14 @@ const Navbar = () => {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full text-background/70 hover:text-background hover:bg-background/10 transition-all duration-200"
+              className={`p-2 rounded-full ${textColorMuted} hover:${textColor} ${hoverBg} transition-all duration-200`}
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-background"
+              className={`p-2 ${textColor}`}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -155,8 +176,8 @@ const Navbar = () => {
                     onClick={() => handleNavClick(item)}
                     className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
                       isActive(item)
-                        ? 'bg-background/10 text-background'
-                        : 'text-background/60 hover:text-background hover:bg-background/5'
+                        ? `${activeBg} ${textColor}`
+                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
                     }`}
                   >
                     {item.label}
@@ -167,8 +188,8 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
                       isActive(item)
-                        ? 'bg-background/10 text-background'
-                        : 'text-background/60 hover:text-background hover:bg-background/5'
+                        ? `${activeBg} ${textColor}`
+                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
                     }`}
                   >
                     {item.label}
