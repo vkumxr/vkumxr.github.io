@@ -26,15 +26,15 @@ const SpiderWebBackground = () => {
     };
 
     const createParticles = () => {
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 4000);
       particlesRef.current = [];
       
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
         });
       }
     };
@@ -66,8 +66,8 @@ const SpiderWebBackground = () => {
       
       const particles = particlesRef.current;
       const mouse = mouseRef.current;
-      const connectionDistance = 120;
-      const mouseConnectionDistance = 150;
+      const connectionDistance = 150;
+      const mouseConnectionDistance = 200;
 
       // Update and draw particles
       particles.forEach((particle, i) => {
@@ -90,7 +90,7 @@ const SpiderWebBackground = () => {
 
         // Draw particle
         ctx.beginPath();
-        ctx.arc(particle.x, particle.y, 1.5, 0, Math.PI * 2);
+        ctx.arc(particle.x, particle.y, 2, 0, Math.PI * 2);
         ctx.fillStyle = particleColor;
         ctx.fill();
 
@@ -102,12 +102,12 @@ const SpiderWebBackground = () => {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < connectionDistance) {
-            const opacity = (1 - distance / connectionDistance) * 0.15;
+            const opacity = (1 - distance / connectionDistance) * 0.35;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(other.x, other.y);
             ctx.strokeStyle = `${lineColor}${opacity})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.8;
             ctx.stroke();
           }
         }
@@ -119,7 +119,7 @@ const SpiderWebBackground = () => {
         const mouseDistance = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
 
         if (mouseDistance < mouseConnectionDistance) {
-          const opacity = (1 - mouseDistance / mouseConnectionDistance) * 0.5;
+          const opacity = (1 - mouseDistance / mouseConnectionDistance) * 0.7;
           ctx.beginPath();
           ctx.moveTo(particle.x, particle.y);
           ctx.lineTo(mouse.x, mouseY);
