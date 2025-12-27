@@ -132,7 +132,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         {/* Code brackets - top right */}
         <div 
-          className="absolute top-20 right-[10%] text-foreground/[0.04] font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-20 right-[10%] text-foreground/15 font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)` }}
         >
           {'{ }'}
@@ -140,7 +140,7 @@ const HeroSection = () => {
         
         {/* HTML tag - bottom left */}
         <div 
-          className="absolute bottom-32 left-[8%] text-foreground/[0.03] font-mono text-3xl animate-float-medium transition-transform duration-300 ease-out select-none"
+          className="absolute bottom-32 left-[8%] text-foreground/15 font-mono text-3xl animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
         >
           {'</>'}
@@ -174,7 +174,7 @@ const HeroSection = () => {
         
         {/* Arrow function - center right */}
         <div 
-          className="absolute top-[65%] right-[35%] text-foreground/10 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-[65%] right-[35%] text-foreground/15 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
         >
           {'=>'}
@@ -182,7 +182,7 @@ const HeroSection = () => {
         
         {/* Semicolon - top center */}
         <div 
-          className="absolute top-[15%] left-1/2 text-foreground/10 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none"
+          className="absolute top-[15%] left-1/2 text-foreground/15 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)` }}
         >
           ;
