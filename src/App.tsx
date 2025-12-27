@@ -10,6 +10,7 @@ import Preloader from "@/components/Preloader";
 import CursorTrail from "@/components/CursorTrail";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgress from "@/components/ScrollProgress";
+import SideNavDots from "@/components/SideNavDots";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -26,6 +27,7 @@ const App: React.FC = () => (
           <CursorTrail />
           <BackToTop />
           <ScrollProgress />
+          <SideNavDots />
           <Toaster />
           <Sonner />
           <BrowserRouter>

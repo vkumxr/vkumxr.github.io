@@ -113,8 +113,27 @@
 
   /* Section Bounce Animation on Scroll */
   .section-bounce {
-    animation: section-bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: section-bounce-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
+
+  /* Section reveal with slide */
+  .section-reveal {
+    animation: section-reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Staggered children animation */
+  .stagger-children > * {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: stagger-fade-in 0.6s ease-out forwards;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
 
   /* Cards */
   .card-clean {
@@ -507,18 +526,68 @@
 @keyframes section-bounce-in {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px) scale(0.98);
   }
   60% {
     opacity: 1;
-    transform: translateY(-8px);
+    transform: translateY(-10px) scale(1.01);
   }
   80% {
-    transform: translateY(4px);
+    transform: translateY(5px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Section reveal animation */
+@keyframes section-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+    filter: blur(10px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Stagger fade in */
+@keyframes stagger-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from left */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right */
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
