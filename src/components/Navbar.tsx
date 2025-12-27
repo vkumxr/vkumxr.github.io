@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTheme } from './ThemeProvider';
 
 const navItems = [
   { label: 'Home', href: '#home', isSection: true },
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -109,16 +111,34 @@ const Navbar = () => {
                 )}
               </li>
             ))}
+            <li>
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-full text-background/70 hover:text-background hover:bg-background/10 transition-all duration-200"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+            </li>
           </ul>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-background"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full text-background/70 hover:text-background hover:bg-background/10 transition-all duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-background"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

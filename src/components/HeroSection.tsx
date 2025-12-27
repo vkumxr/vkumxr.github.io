@@ -118,7 +118,7 @@ const HeroSection = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full flex items-center justify-center border border-white/30 text-white/70 hover:border-white hover:text-white transition-all duration-200"
+              className="social-icon-inverted"
               aria-label={link.label}
             >
               <link.icon size={20} />

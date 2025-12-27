@@ -134,19 +134,21 @@
     @apply border-background/40 bg-background/15;
   }
 
-  /* Social icons */
+  /* Social icons with hover animations */
   .social-icon {
     @apply w-10 h-10 rounded-full flex items-center justify-center
            border border-border text-muted-foreground
            hover:border-foreground hover:text-foreground
-           transition-all duration-200;
+           transition-all duration-300 hover:scale-110 hover:-translate-y-1
+           hover:shadow-lg;
   }
 
   .social-icon-inverted {
     @apply w-10 h-10 rounded-full flex items-center justify-center
            border border-background/30 text-background/70
            hover:border-background hover:text-background
-           transition-all duration-200;
+           transition-all duration-300 hover:scale-110 hover:-translate-y-1
+           hover:shadow-[0_4px_20px_rgba(255,255,255,0.2)];
   }
 
   /* Timeline */
