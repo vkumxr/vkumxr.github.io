@@ -76,13 +76,12 @@ const HeroSection = () => {
           {/* Hire Me - Center with glowing border */}
           <button
             onClick={openLinkedIn}
-            className="relative group inline-flex items-center justify-center gap-2 px-8 py-3 rounded-md bg-white text-[hsl(0,0%,8%)] font-semibold transition-all duration-200 hover:scale-105"
+            className="relative group inline-flex items-center justify-center px-8 py-3 rounded-md bg-white text-[hsl(0,0%,8%)] font-semibold transition-all duration-200 hover:scale-105"
             style={{
-              boxShadow: '0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1)',
-              animation: 'pulseGlow 2s ease-in-out infinite',
+              boxShadow: '0 0 12px rgba(255,255,255,0.25), 0 0 24px rgba(255,255,255,0.15)',
+              animation: 'pulseGlow 2.5s ease-in-out infinite',
             }}
           >
-            <Linkedin size={18} />
             Hire Me
           </button>
 
@@ -124,10 +123,10 @@ const HeroSection = () => {
       <style>{`
         @keyframes pulseGlow {
           0%, 100% {
-            box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2), 0 0 60px rgba(255,255,255,0.1);
+            box-shadow: 0 0 12px rgba(255,255,255,0.25), 0 0 24px rgba(255,255,255,0.15);
           }
           50% {
-            box-shadow: 0 0 30px rgba(255,255,255,0.6), 0 0 60px rgba(255,255,255,0.4), 0 0 80px rgba(255,255,255,0.2);
+            box-shadow: 0 0 18px rgba(255,255,255,0.35), 0 0 32px rgba(255,255,255,0.2);
           }
         }
       `}</style>
