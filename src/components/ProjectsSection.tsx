@@ -268,7 +268,7 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 bg-[hsl(0,0%,8%)] text-[hsl(0,0%,98%)] overflow-hidden">
+    <section id="projects" className="py-24 md:py-32 px-6 bg-foreground text-background overflow-hidden">
       <div ref={ref} className="container mx-auto max-w-6xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'

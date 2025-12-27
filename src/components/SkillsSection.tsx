@@ -28,7 +28,7 @@ const SkillsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 bg-[hsl(0,0%,8%)] text-[hsl(0,0%,98%)]">
+    <section id="skills" className="py-24 md:py-32 px-6 bg-foreground text-background">
       <div ref={ref} className="container mx-auto max-w-5xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
