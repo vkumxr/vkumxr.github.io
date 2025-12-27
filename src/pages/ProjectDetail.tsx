@@ -1,4 +1,5 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft, Github, ExternalLink, Calendar, Lightbulb, Target, Wrench, Trophy, BookOpen } from 'lucide-react';
 import { getProjectBySlug } from '../data/projects';
@@ -9,6 +10,11 @@ const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = slug ? getProjectBySlug(slug) : undefined;
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
 
   if (!project) {
     return (
@@ -43,13 +49,20 @@ const ProjectDetail = () => {
         
         <div className="container mx-auto max-w-4xl relative z-10">
           {/* Back button */}
-          <button
-            onClick={() => navigate('/#projects')}
+          <Link
+            to="/#projects"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/');
+              setTimeout(() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
           >
             <ArrowLeft size={18} />
             Back to Projects
-          </button>
+          </Link>
 
           {/* Header */}
           <div className="mb-8">
