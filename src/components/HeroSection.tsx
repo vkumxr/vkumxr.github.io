@@ -75,51 +75,83 @@ const HeroSection = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
       
-      {/* Floating Geometric Shapes with Parallax - Hidden on mobile */}
+      {/* Floating Code/Tech Elements with Parallax - Hidden on mobile */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
-        {/* Large circle - top right */}
+        {/* Code brackets - top right */}
         <div 
-          className="absolute -top-20 -right-20 w-64 h-64 border border-foreground/10 rounded-full animate-float-slow transition-transform duration-300 ease-out"
+          className="absolute top-20 right-[10%] text-foreground/10 font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)` }}
-        />
+        >
+          {'{ }'}
+        </div>
         
-        {/* Small circle - bottom left */}
+        {/* HTML tag - bottom left */}
         <div 
-          className="absolute bottom-32 left-16 w-24 h-24 border border-foreground/5 rounded-full animate-float-medium transition-transform duration-300 ease-out"
+          className="absolute bottom-32 left-[8%] text-foreground/8 font-mono text-3xl animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
-        />
+        >
+          {'</>'}
+        </div>
         
-        {/* Square - top left */}
+        {/* Binary code - top left */}
         <div 
-          className="absolute top-40 left-[10%] w-16 h-16 border border-foreground/5 rotate-45 animate-float-reverse transition-transform duration-300 ease-out"
-          style={{ transform: `rotate(45deg) translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
-        />
+          className="absolute top-32 left-[15%] text-foreground/6 font-mono text-sm animate-float-reverse transition-transform duration-300 ease-out select-none leading-tight"
+          style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
+        >
+          01101<br/>10010<br/>01011
+        </div>
         
-        {/* Rectangle - right side */}
+        {/* Terminal prompt - right side */}
         <div 
-          className="absolute top-1/2 right-[15%] w-8 h-20 border border-foreground/5 animate-float-slow transition-transform duration-300 ease-out"
+          className="absolute top-1/2 right-[12%] text-foreground/8 font-mono text-2xl animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
-        />
+        >
+          ~/dev $
+        </div>
         
-        {/* Small square - bottom right */}
+        {/* Array brackets - bottom right */}
         <div 
-          className="absolute bottom-40 right-[25%] w-12 h-12 border border-foreground/10 rotate-12 animate-float-medium transition-transform duration-300 ease-out"
-          style={{ transform: `rotate(12deg) translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)` }}
-        />
+          className="absolute bottom-40 right-[25%] text-foreground/10 font-mono text-4xl animate-float-medium transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)` }}
+        >
+          [ ]
+        </div>
         
-        {/* Tiny circles scattered */}
+        {/* Function syntax - scattered */}
         <div 
-          className="absolute top-1/4 left-1/4 w-3 h-3 bg-foreground/5 rounded-full animate-float-reverse transition-transform duration-300 ease-out"
+          className="absolute top-1/4 left-1/4 text-foreground/6 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` }}
-        />
+        >
+          {'() => {}'}
+        </div>
         <div 
-          className="absolute top-2/3 right-1/3 w-2 h-2 bg-foreground/10 rounded-full animate-float-slow transition-transform duration-300 ease-out"
+          className="absolute top-2/3 right-1/3 text-foreground/8 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
-        />
+        >
+          #
+        </div>
         <div 
-          className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-foreground/5 rounded-full animate-float-medium transition-transform duration-300 ease-out"
+          className="absolute bottom-1/4 left-1/3 text-foreground/6 font-mono text-sm animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)` }}
-        />
+        >
+          {'/**'}
+        </div>
+        
+        {/* Semicolon - top center */}
+        <div 
+          className="absolute top-[15%] left-1/2 text-foreground/10 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)` }}
+        >
+          ;
+        </div>
+        
+        {/* Import statement - bottom center */}
+        <div 
+          className="absolute bottom-[20%] left-[45%] text-foreground/5 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 14}px, ${mousePosition.y * 14}px)` }}
+        >
+          import * from
+        </div>
       </div>
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         {/* Profile Image */}
