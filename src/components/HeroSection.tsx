@@ -49,10 +49,26 @@ const devCommandsLeft = [
   'npm install -D',
 ];
 
+const sudoCommandsTopRight = [
+  'sudo apt update',
+  'sudo systemctl start',
+  'sudo chmod 755',
+  'sudo service restart',
+];
+
+const sudoCommandsBottomLeft = [
+  'sudo apt install',
+  'sudo rm -rf node_modules',
+  'sudo nano config',
+  'sudo ufw enable',
+];
+
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [rightCommandIndex, setRightCommandIndex] = useState(0);
   const [leftCommandIndex, setLeftCommandIndex] = useState(0);
+  const [sudoTopRightIndex, setSudoTopRightIndex] = useState(0);
+  const [sudoBottomLeftIndex, setSudoBottomLeftIndex] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -72,9 +88,17 @@ const HeroSection = () => {
     const leftInterval = setInterval(() => {
       setLeftCommandIndex((prev) => (prev + 1) % devCommandsLeft.length);
     }, 3500);
+    const sudoTopRightInterval = setInterval(() => {
+      setSudoTopRightIndex((prev) => (prev + 1) % sudoCommandsTopRight.length);
+    }, 4500);
+    const sudoBottomLeftInterval = setInterval(() => {
+      setSudoBottomLeftIndex((prev) => (prev + 1) % sudoCommandsBottomLeft.length);
+    }, 3800);
     return () => {
       clearInterval(rightInterval);
       clearInterval(leftInterval);
+      clearInterval(sudoTopRightInterval);
+      clearInterval(sudoBottomLeftInterval);
     };
   }, []);
 
@@ -164,12 +188,30 @@ const HeroSection = () => {
           ;
         </div>
         
-        {/* Console log - bottom left */}
+        {/* Sudo command - top right */}
         <div 
-          className="absolute bottom-[25%] left-[15%] text-foreground/[0.03] font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
-          style={{ transform: `translate(${mousePosition.x * 14}px, ${mousePosition.y * 14}px)` }}
+          className="absolute top-[20%] right-[8%] text-foreground/[0.06] font-mono text-base animate-float-reverse transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * -18}px, ${mousePosition.y * -18}px)` }}
         >
-          {'console.log()'}
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/[0.08]">$</span>
+            <span key={sudoTopRightIndex} className="typing-animation inline-block">
+              {sudoCommandsTopRight[sudoTopRightIndex]}
+            </span>
+          </div>
+        </div>
+        
+        {/* Sudo command - bottom left */}
+        <div 
+          className="absolute bottom-[22%] left-[8%] text-foreground/[0.06] font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 12}px)` }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/[0.08]">$</span>
+            <span key={sudoBottomLeftIndex} className="typing-animation inline-block">
+              {sudoCommandsBottomLeft[sudoBottomLeftIndex]}
+            </span>
+          </div>
         </div>
       </div>
       <div className="container mx-auto max-w-4xl text-center relative z-10">
