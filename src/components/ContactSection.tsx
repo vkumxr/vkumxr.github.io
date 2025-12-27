@@ -51,7 +51,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 section-light">
+    <section id="contact" className="py-24 md:py-32 px-6 section-dark">
       <div ref={ref} className="container mx-auto max-w-4xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -67,7 +67,7 @@ const ContactSection = () => {
           }`}>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2 text-background">
                   Name
                 </label>
                 <Input
@@ -76,12 +76,12 @@ const ContactSection = () => {
                   type="text"
                   required
                   placeholder="Your name"
-                  className="bg-background"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-background">
                   Email
                 </label>
                 <Input
@@ -90,12 +90,12 @@ const ContactSection = () => {
                   type="email"
                   required
                   placeholder="your@email.com"
-                  className="bg-background"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-background">
                   Message
                 </label>
                 <Textarea
@@ -104,11 +104,11 @@ const ContactSection = () => {
                   required
                   placeholder="Your message..."
                   rows={5}
-                  className="bg-background resize-none"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50 resize-none"
                 />
               </div>
               
-              <Button type="submit" disabled={isSubmitting} className="w-full">
+              <Button type="submit" disabled={isSubmitting} className="w-full bg-background text-foreground hover:bg-background/90">
                 {isSubmitting ? (
                   'Sending...'
                 ) : (
@@ -126,23 +126,23 @@ const ContactSection = () => {
             isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <div>
-              <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
+              <h3 className="text-lg font-semibold mb-4 text-background">Contact Information</h3>
               <div className="space-y-4">
                 <a 
                   href="mailto:vishwakumarv05@gmail.com"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
                 >
                   <Mail size={18} />
                   <span>vishwakumarv05@gmail.com</span>
                 </a>
                 <a 
                   href="tel:+919342236718"
-                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
                 >
                   <Phone size={18} />
                   <span>+91 9342236718</span>
                 </a>
-                <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="flex items-center gap-3 text-background/70">
                   <MapPin size={18} />
                   <span>Bengaluru, Karnataka, India</span>
                 </div>
@@ -150,13 +150,13 @@ const ContactSection = () => {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Connect</h3>
+              <h3 className="text-lg font-semibold mb-4 text-background">Connect</h3>
               <div className="flex items-center gap-3">
                 <a
                   href="https://github.com/vkumxr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-icon"
+                  className="social-icon-inverted"
                   aria-label="GitHub"
                 >
                   <Github size={18} />
@@ -165,14 +165,14 @@ const ContactSection = () => {
                   href="https://linkedin.com/in/vishwakumarv/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-icon"
+                  className="social-icon-inverted"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={18} />
                 </a>
                 <a
                   href="mailto:vishwakumarv05@gmail.com"
-                  className="social-icon"
+                  className="social-icon-inverted"
                   aria-label="Email"
                 >
                   <Mail size={18} />

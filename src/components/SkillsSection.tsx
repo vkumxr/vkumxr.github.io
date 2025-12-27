@@ -28,34 +28,34 @@ const SkillsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 bg-foreground text-background">
+    <section id="skills" className="py-24 md:py-32 px-6 section-light">
       <div ref={ref} className="container mx-auto max-w-5xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <p className="text-background/50 text-sm tracking-widest uppercase mb-4">What I work with</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-background">Skills</h2>
+          <p className="section-label">What I work with</p>
+          <h2 className="section-title">Skills</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (
             <div
               key={category.title}
-              className={`bg-background/5 border border-background/10 rounded-lg p-6 transition-all duration-700 hover:border-background/20 ${
+              className={`card-clean transition-all duration-700 ${
                 isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 100 + 100}ms` }}
             >
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-md bg-background/10 flex items-center justify-center">
-                  <category.icon className="text-background" size={20} />
+                <div className="w-10 h-10 rounded-md bg-foreground/10 flex items-center justify-center">
+                  <category.icon className="text-foreground" size={20} />
                 </div>
-                <h3 className="text-lg font-semibold text-background">{category.title}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
               </div>
 
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill) => (
-                  <span key={skill} className="skill-tag-inverted">
+                  <span key={skill} className="skill-tag">
                     {skill}
                   </span>
                 ))}

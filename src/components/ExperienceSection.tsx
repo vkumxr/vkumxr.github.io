@@ -20,7 +20,7 @@ const ExperienceSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 section-light">
+    <section id="experience" className="py-24 md:py-32 px-6 section-dark">
       <div ref={ref} className="container mx-auto max-w-3xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -39,14 +39,14 @@ const ExperienceSection = () => {
               style={{ transitionDelay: `${index * 150 + 100}ms` }}
             >
               {/* Timeline */}
-              <div className="timeline-line" />
-              <div className="timeline-dot" />
+              <div className="absolute left-[7px] top-4 bottom-0 w-px bg-background/30" />
+              <div className="absolute left-0 top-1 w-[15px] h-[15px] rounded-full bg-background border-4 border-foreground" />
               
-              <div className="card-clean ml-4">
+              <div className="bg-background/5 border border-background/10 rounded-lg p-6 transition-all duration-300 hover:border-background/20 ml-4">
                 <div className="mb-4">
-                  <h3 className="text-xl font-semibold">{exp.title}</h3>
-                  <p className="text-foreground/80 font-medium">{exp.company}</p>
-                  <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm mt-2">
+                  <h3 className="text-xl font-semibold text-background">{exp.title}</h3>
+                  <p className="text-background/80 font-medium">{exp.company}</p>
+                  <div className="flex flex-wrap items-center gap-4 text-background/60 text-sm mt-2">
                     <div className="flex items-center gap-1.5">
                       <Calendar size={14} />
                       <span>{exp.period}</span>
@@ -60,8 +60,8 @@ const ExperienceSection = () => {
 
                 <ul className="space-y-2">
                   {exp.responsibilities.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                      <span className="w-1.5 h-1.5 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
+                    <li key={i} className="flex items-start gap-3 text-background/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-background/40 mt-2 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
