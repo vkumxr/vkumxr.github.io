@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -13,6 +14,8 @@ const EMAILJS_PUBLIC_KEY = 'pEkZwmUeWy6anm2tc';
 
 const ContactSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,11 +54,12 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
-      {/* Faded background elements */}
+    <section ref={sectionRef} id="contact" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Faded background elements with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
         <div 
-          className="absolute top-20 right-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none"
+          className="absolute top-20 right-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.03}px)` }}
         >
           <div>{'// Let\'s connect'}</div>
           <div>{'const contact = {'}</div>
@@ -64,21 +68,26 @@ const ContactSection = () => {
           <div>{'};'}</div>
         </div>
         <div 
-          className="absolute bottom-20 left-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none"
+          className="absolute bottom-20 left-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * -0.04}px)` }}
         >
           <div>{'async function sendMessage() {'}</div>
           <div className="pl-4">{'await fetch("/api/contact");'}</div>
           <div>{'}'}</div>
         </div>
         <div 
-          className="absolute top-1/2 right-1/4 text-background/[0.03] font-mono text-6xl select-none"
+          className="absolute top-1/2 right-1/4 text-background/[0.03] font-mono text-6xl select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.02}px)` }}
         >
           @
         </div>
       </div>
 
-      {/* Gradient orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-background/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+      {/* Gradient orbs with parallax */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-background/10 to-transparent rounded-full blur-3xl pointer-events-none transition-transform duration-100"
+        style={{ transform: `translateX(-50%) translateY(${scrollY * -0.03}px)` }}
+      />
 
       <div ref={ref} className={`container mx-auto max-w-4xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">

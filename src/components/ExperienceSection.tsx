@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
 import { Calendar, MapPin } from 'lucide-react';
 
 const experiences = [
@@ -18,20 +20,24 @@ const experiences = [
 
 const ExperienceSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
 
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
-      {/* Faded background terminal elements */}
+    <section ref={sectionRef} id="experience" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Faded background terminal elements with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
         <div 
-          className="absolute top-1/4 right-10 text-background/[0.04] font-mono text-sm leading-relaxed select-none"
+          className="absolute top-1/4 right-10 text-background/[0.04] font-mono text-sm leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.04}px)` }}
         >
           <div>$ sudo systemctl start</div>
           <div>$ npm run deploy</div>
           <div>$ git push origin main</div>
         </div>
         <div 
-          className="absolute bottom-1/4 left-10 text-background/[0.04] font-mono text-sm leading-relaxed select-none"
+          className="absolute bottom-1/4 left-10 text-background/[0.04] font-mono text-sm leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * -0.03}px)` }}
         >
           <div>$ docker-compose up</div>
           <div>$ kubectl apply -f</div>
@@ -39,9 +45,15 @@ const ExperienceSection = () => {
         </div>
       </div>
 
-      {/* Gradient accents */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-background/5 to-transparent pointer-events-none rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-background/5 to-transparent pointer-events-none rounded-full blur-3xl" />
+      {/* Gradient accents with parallax */}
+      <div 
+        className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-background/5 to-transparent pointer-events-none rounded-full blur-3xl transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * 0.03}px, ${scrollY * -0.02}px)` }}
+      />
+      <div 
+        className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-background/5 to-transparent pointer-events-none rounded-full blur-3xl transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * -0.03}px, ${scrollY * 0.02}px)` }}
+      />
 
       <div ref={ref} className={`container mx-auto max-w-3xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">

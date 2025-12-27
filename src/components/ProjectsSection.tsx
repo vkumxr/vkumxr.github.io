@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
 import { ArrowUpRight, Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const projects = [
@@ -255,6 +256,8 @@ const DesktopMarquee = () => {
 
 const ProjectsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -268,12 +271,24 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden relative">
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 border border-foreground/5 rounded-full pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 border border-foreground/5 rounded-full pointer-events-none" />
-      <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-foreground/10 rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-foreground/5 rounded-full pointer-events-none" />
+    <section ref={sectionRef} id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden relative">
+      {/* Decorative elements with parallax */}
+      <div 
+        className="absolute top-20 left-10 w-32 h-32 border border-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
+        style={{ transform: `translateY(${scrollY * 0.03}px)` }}
+      />
+      <div 
+        className="absolute bottom-20 right-10 w-48 h-48 border border-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
+        style={{ transform: `translateY(${scrollY * -0.04}px)` }}
+      />
+      <div 
+        className="absolute top-1/2 left-1/4 w-2 h-2 bg-foreground/10 rounded-full pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * -0.02}px)` }}
+      />
+      <div 
+        className="absolute top-1/3 right-1/3 w-3 h-3 bg-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * -0.03}px, ${scrollY * 0.02}px)` }}
+      />
 
       <div ref={ref} className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">

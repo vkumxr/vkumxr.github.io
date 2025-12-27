@@ -1,4 +1,6 @@
+import { useRef } from 'react';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
 import { Code2, Wrench, Monitor, Shield } from 'lucide-react';
 
 const skillCategories = [
@@ -26,28 +28,36 @@ const skillCategories = [
 
 const SkillsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
 
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 section-light overflow-hidden relative grid-bg">
-      {/* Faded background code elements */}
+    <section ref={sectionRef} id="skills" className="py-24 md:py-32 px-6 section-light overflow-hidden relative grid-bg">
+      {/* Faded background code elements with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
         <div 
-          className="absolute top-20 right-0 text-foreground/[0.03] font-mono text-[200px] leading-none select-none"
-          style={{ transform: 'rotate(-15deg)' }}
+          className="absolute top-20 right-0 text-foreground/[0.03] font-mono text-[200px] leading-none select-none transition-transform duration-100"
+          style={{ transform: `rotate(-15deg) translateY(${scrollY * 0.05}px)` }}
         >
           {'</>'}
         </div>
         <div 
-          className="absolute bottom-10 left-0 text-foreground/[0.03] font-mono text-[150px] leading-none select-none"
-          style={{ transform: 'rotate(10deg)' }}
+          className="absolute bottom-10 left-0 text-foreground/[0.03] font-mono text-[150px] leading-none select-none transition-transform duration-100"
+          style={{ transform: `rotate(10deg) translateY(${scrollY * -0.03}px)` }}
         >
           {'{ }'}
         </div>
       </div>
 
-      {/* Corner gradient accent */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-foreground/5 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-foreground/5 to-transparent pointer-events-none" />
+      {/* Corner gradient accent with parallax */}
+      <div 
+        className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-foreground/5 to-transparent pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * -0.02}px, ${scrollY * 0.02}px)` }}
+      />
+      <div 
+        className="absolute bottom-0 right-0 w-64 h-64 bg-gradient-to-tl from-foreground/5 to-transparent pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * -0.02}px)` }}
+      />
 
       <div ref={ref} className={`container mx-auto max-w-5xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">

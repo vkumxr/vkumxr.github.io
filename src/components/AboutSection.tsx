@@ -1,14 +1,24 @@
+import { useRef } from 'react';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
 import profileImage from '@/assets/profile.png';
 
 const AboutSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
 
   return (
-    <section id="about" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
-      {/* Gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-background/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-background/3 rounded-full blur-3xl pointer-events-none" />
+    <section ref={sectionRef} id="about" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Gradient orbs with parallax */}
+      <div 
+        className="absolute top-1/4 left-1/4 w-72 h-72 bg-background/5 rounded-full blur-3xl pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * -0.04}px, ${scrollY * 0.02}px)` }}
+      />
+      <div 
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-background/3 rounded-full blur-3xl pointer-events-none transition-transform duration-100"
+        style={{ transform: `translate(${scrollY * 0.03}px, ${scrollY * -0.03}px)` }}
+      />
 
       <div ref={ref} className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         {/* Centered Header */}
