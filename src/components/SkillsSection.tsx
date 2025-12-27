@@ -1,75 +1,98 @@
-const skills = [
-  { name: "React", category: "Frontend" },
-  { name: "Next.js", category: "Frontend" },
-  { name: "TypeScript", category: "Language" },
-  { name: "JavaScript", category: "Language" },
-  { name: "Node.js", category: "Backend" },
-  { name: "Express.js", category: "Backend" },
-  { name: "MongoDB", category: "Database" },
-  { name: "PostgreSQL", category: "Database" },
-  { name: "Tailwind CSS", category: "Styling" },
-  { name: "Python", category: "Language" },
-  { name: "Git", category: "Tools" },
-  { name: "Docker", category: "DevOps" },
-  { name: "AWS", category: "Cloud" },
-  { name: "Figma", category: "Design" },
-  { name: "REST APIs", category: "Backend" },
-  { name: "GraphQL", category: "Backend" },
+import { useInView } from '../hooks/useInView';
+import { Code2, Wrench, Monitor, Shield } from 'lucide-react';
+import NetworkBackground from './NetworkBackground';
+
+const skillCategories = [
+  {
+    title: 'Languages',
+    icon: Code2,
+    skills: ['Java', 'C', 'C++', 'Python', 'MATLAB', 'JavaScript', 'HTML', 'Kotlin', 'BASH'],
+  },
+  {
+    title: 'Frameworks & Tools',
+    icon: Wrench,
+    skills: ['Spring Boot', 'REST APIs', 'LangChain', 'n8n', 'Git', 'Linux', 'IntelliJ IDEA', 'VS Code'],
+  },
+  {
+    title: 'Platforms & Systems',
+    icon: Monitor,
+    skills: [
+      'Linux (Primary OS)',
+      'Windows',
+      'macOS',
+      'UTM',
+      'VirtualBox',
+      'QEMU',
+      'Raspberry Pi',
+      'Arduino',
+    ],
+  },
+  {
+    title: 'Security & Tooling',
+    icon: Shield,
+    skills: [
+      'Nmap',
+      'Burp Suite',
+      'Metasploit',
+      'Android Debugging',
+      'Penetration Testing',
+      'CTF Platforms',
+    ],
+  },
 ];
 
 const SkillsSection = () => {
-  return (
-    <section id="skills" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent" />
-      
-      <div className="container px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <p className="text-primary font-body font-medium mb-3">Skills & Expertise</p>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
-              Technologies I
-              <span className="text-gradient"> Work With</span>
-            </h2>
-            <p className="text-muted-foreground font-body max-w-2xl mx-auto">
-              A curated collection of technologies and tools I use to bring ideas to life.
-              Always learning, always growing.
-            </p>
-          </div>
+  const { ref, isInView } = useInView({ threshold: 0.1 });
 
-          {/* Skills Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {skills.map((skill, index) => (
-              <SkillCard key={skill.name} skill={skill} index={index} />
-            ))}
-          </div>
+  return (
+    <section id="skills" className="py-28 px-6 bg-foreground text-background relative overflow-hidden">
+      <NetworkBackground variant="dark" />
+      <div ref={ref} className="container mx-auto max-w-5xl relative z-10">
+        <div
+          className={`text-center mb-16 transition-all duration-700 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <p className="text-background/50 text-sm tracking-widest uppercase mb-4">
+            What I work with
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Technical Skills</h2>
+          <div className="w-16 h-px bg-background/30 mx-auto" />
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {skillCategories.map((category, index) => (
+            <div
+              key={category.title}
+              className={`group bg-background/5 border border-background/10 rounded-2xl p-8 transition-all duration-700 hover:bg-background/10 hover:border-background/20 ${
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${index * 100 + 100}ms` }}
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
+                  <category.icon className="text-background" size={22} />
+                </div>
+                <h3 className="text-xl font-semibold">{category.title}</h3>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill, i) => (
+                  <span 
+                    key={skill} 
+                    className="px-4 py-2 rounded-full bg-background/10 text-background/80 text-sm font-medium border border-background/10 hover:border-background/30 hover:bg-background/20 transition-all duration-200"
+                    style={{ animationDelay: `${i * 50}ms` }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
-const SkillCard = ({ 
-  skill, 
-  index 
-}: { 
-  skill: { name: string; category: string }; 
-  index: number;
-}) => (
-  <div 
-    className="group relative p-6 rounded-xl card-gradient border border-border
-               hover:border-primary/50 hover:glow-border transition-all duration-300"
-    style={{ animationDelay: `${index * 50}ms` }}
-  >
-    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity" />
-    <div className="relative">
-      <p className="font-display font-semibold text-foreground group-hover:text-primary transition-colors">
-        {skill.name}
-      </p>
-      <p className="text-xs text-muted-foreground mt-1">{skill.category}</p>
-    </div>
-  </div>
-);
 
 export default SkillsSection;

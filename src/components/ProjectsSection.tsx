@@ -1,151 +1,117 @@
-import { ArrowUpRight, Github } from "lucide-react";
-import { Button } from "./ui/button";
+import { useInView } from '../hooks/useInView';
+import { ArrowUpRight, Bot, Cpu, MessageSquare, Github } from 'lucide-react';
+import NetworkBackground from './NetworkBackground';
 
 const projects = [
   {
-    title: "GitHub Profile README Maker",
-    description: "A modern tool to generate beautiful and customized GitHub profile READMEs with an intuitive UI.",
-    tags: ["React", "Tailwind CSS", "GitHub API"],
-    github: "https://github.com/vkumxr",
-    live: "#",
-    featured: true,
+    title: 'ReDroid-AI',
+    subtitle: 'Reverse Engineering Assistant',
+    period: 'Dec 2025 – Present',
+    icon: Bot,
+    description: 'AI-powered Linux-based reverse engineering framework for Android applications.',
+    githubUrl: 'https://github.com/vkumxr/ReDroid-AI',
+    highlights: [
+      'Automated static analysis of Android APKs',
+      'Python CLI tools for APK extraction & inspection',
+      'Modular architecture & intelligent analysis pipelines',
+    ],
   },
   {
-    title: "Portfolio Website",
-    description: "Personal portfolio showcasing projects, skills, and experience with stunning animations.",
-    tags: ["Next.js", "Framer Motion", "TypeScript"],
-    github: "https://github.com/vkumxr",
-    live: "#",
-    featured: true,
+    title: 'PuBOT',
+    subtitle: 'Portable Ultra ROBOT',
+    period: 'Aug 2025 – Present',
+    icon: Cpu,
+    description: 'Modular AI-enabled robotics system using Raspberry Pi.',
+    githubUrl: 'https://github.com/vkumxr/PuBOT',
+    highlights: [
+      'Autonomous navigation + conversational AI',
+      'Embedded Linux motor & sensor control',
+      'Hardware–software integration & optimization',
+    ],
   },
   {
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with payment integration, admin dashboard, and inventory management.",
-    tags: ["MERN Stack", "Stripe", "Redux"],
-    github: "https://github.com/vkumxr",
-    live: "#",
-    featured: false,
-  },
-  {
-    title: "Task Management App",
-    description: "Collaborative task management application with real-time updates and team features.",
-    tags: ["React", "Node.js", "Socket.io"],
-    github: "https://github.com/vkumxr",
-    live: "#",
-    featured: false,
+    title: 'IntelliBank AI',
+    subtitle: 'Conversational Banking Assistant',
+    period: 'Jun 2025 – Sept 2025',
+    icon: MessageSquare,
+    description: 'Java Spring Boot conversational banking system with AI capabilities.',
+    githubUrl: 'https://github.com/vkumxr/IntelliBank-AI',
+    highlights: [
+      'RESTful backend with scalable architecture',
+      'LLM integration via LangChain',
+      'Context-aware conversation management',
+    ],
   },
 ];
 
 const ProjectsSection = () => {
+  const { ref, isInView } = useInView({ threshold: 0.1 });
+
   return (
-    <section id="projects" className="py-24 md:py-32 relative">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      
-      <div className="container px-6 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <p className="text-primary font-body font-medium mb-3">Featured Work</p>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
-              Projects That
-              <span className="text-gradient"> Define Me</span>
-            </h2>
-            <p className="text-muted-foreground font-body max-w-2xl mx-auto">
-              A selection of projects that showcase my skills and passion for building 
-              impactful digital products.
-            </p>
-          </div>
+    <section id="projects" className="py-28 px-6 bg-foreground text-background relative overflow-hidden">
+      <NetworkBackground variant="dark" />
+      <div ref={ref} className="container mx-auto max-w-6xl relative z-10">
+        <div
+          className={`text-center mb-16 transition-all duration-700 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
+          <p className="text-background/50 text-sm tracking-widest uppercase mb-4">
+            What I've built
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Featured Projects</h2>
+          <div className="w-16 h-px bg-background/30 mx-auto" />
+        </div>
 
-          {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} />
-            ))}
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <a
+              key={project.title}
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`group relative bg-background/5 border border-background/10 rounded-2xl p-8 block transition-all duration-700 hover:bg-background/10 hover:border-background/20 hover:-translate-y-2 ${
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${index * 100 + 100}ms` }}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="w-12 h-12 rounded-xl bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors">
+                  <project.icon className="text-background" size={22} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Github className="text-background/40 group-hover:text-background/60 transition-colors" size={18} />
+                  <ArrowUpRight
+                    className="text-background/40 group-hover:text-background group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                    size={18}
+                  />
+                </div>
+              </div>
 
-          {/* View All */}
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" className="font-display">
-              View All Projects
-              <ArrowUpRight className="ml-2" size={18} />
-            </Button>
-          </div>
+              {/* Title */}
+              <h3 className="text-xl font-semibold mb-1 group-hover:text-background transition-colors">{project.title}</h3>
+              <p className="text-background/60 text-sm font-medium mb-1">{project.subtitle}</p>
+              <p className="text-background/40 text-xs mb-5 font-mono">{project.period}</p>
+
+              {/* Description */}
+              <p className="text-background/70 text-sm leading-relaxed mb-6">{project.description}</p>
+
+              {/* Highlights */}
+              <ul className="space-y-2">
+                {project.highlights.map((highlight, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm text-background/50">
+                    <span className="w-1 h-1 rounded-full bg-background/40 mt-2 flex-shrink-0" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </a>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
-const ProjectCard = ({ 
-  project, 
-  index 
-}: { 
-  project: typeof projects[0]; 
-  index: number;
-}) => (
-  <div 
-    className={`group relative p-8 rounded-2xl card-gradient border border-border
-                hover:border-primary/50 transition-all duration-500
-                ${project.featured ? 'md:col-span-1' : ''}`}
-  >
-    {/* Hover Glow */}
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      <div className="absolute inset-0 bg-primary/5 rounded-2xl" />
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-transparent to-primary/20 rounded-2xl blur-sm" />
-    </div>
-
-    <div className="relative">
-      {/* Project Number */}
-      <span className="text-primary/30 font-display font-bold text-6xl absolute -top-2 -left-2">
-        0{index + 1}
-      </span>
-
-      {/* Content */}
-      <div className="pt-8">
-        <h3 className="font-display font-bold text-xl md:text-2xl mb-3 group-hover:text-primary transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-muted-foreground font-body mb-6 leading-relaxed">
-          {project.description}
-        </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag) => (
-            <span 
-              key={tag}
-              className="px-3 py-1 text-xs font-body bg-secondary text-secondary-foreground rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        <div className="flex gap-4">
-          <a 
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-          >
-            <Github size={16} />
-            Code
-          </a>
-          <a 
-            href={project.live}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-          >
-            <ArrowUpRight size={16} />
-            Live Demo
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 export default ProjectsSection;
