@@ -35,8 +35,17 @@ const socialLinks = [
   },
 ];
 
+const devCommands = [
+  'npm run dev',
+  'git commit -m "feat"',
+  'npm install',
+  'git push origin',
+  'npm run build',
+];
+
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -47,6 +56,13 @@ const HeroSection = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCommandIndex((prev) => (prev + 1) % devCommands.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToProjects = () => {
@@ -93,21 +109,27 @@ const HeroSection = () => {
           {'</>'}
         </div>
         
-        {/* Binary code - top left */}
+        {/* Binary code - top left - styled as matrix */}
         <div 
-          className="absolute top-32 left-[15%] text-foreground/6 font-mono text-sm animate-float-reverse transition-transform duration-300 ease-out select-none leading-tight"
+          className="absolute top-32 left-[15%] text-foreground/10 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none leading-relaxed tracking-wider"
           style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
         >
-          01101<br/>10010<br/>01011
+          <div className="opacity-60">1 0 1 1</div>
+          <div className="opacity-40">0 1 0 0</div>
+          <div className="opacity-20">1 1 0 1</div>
         </div>
         
-        {/* Terminal prompt - right side with typing animation */}
+        {/* Terminal prompt - right side with cycling typing animation */}
         <div 
-          className="absolute top-1/2 right-[12%] text-foreground/15 font-mono text-2xl animate-float-slow transition-transform duration-300 ease-out select-none flex items-center gap-1"
+          className="absolute top-1/2 right-[12%] text-foreground/15 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
         >
-          <span>~/dev $</span>
-          <span className="typing-animation inline-block">npm run dev</span>
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/20">$</span>
+            <span key={currentCommandIndex} className="typing-animation inline-block">
+              {devCommands[currentCommandIndex]}
+            </span>
+          </div>
         </div>
         
         {/* Array brackets - bottom right */}
