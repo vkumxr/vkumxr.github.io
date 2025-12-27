@@ -69,17 +69,23 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right side - Faded Profile Photo with Gradient */}
-          <div className="hidden lg:block lg:w-1/2 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2">
-            <div className="relative w-full h-[600px]">
+          {/* Profile Photo with Gradient - Now visible on all screen sizes */}
+          <div className="mt-8 lg:mt-0 lg:w-1/2 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2">
+            <div className="relative w-full h-[300px] lg:h-[600px]">
+              {/* Mobile gradient - top to bottom fade */}
               <div 
-                className="absolute inset-0 z-10"
+                className="absolute inset-0 z-10 lg:hidden"
+                style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, hsl(var(--foreground)) 100%)' }}
+              />
+              {/* Desktop gradient - left fade */}
+              <div 
+                className="absolute inset-0 z-10 hidden lg:block"
                 style={{ background: 'linear-gradient(to left, transparent 0%, transparent 30%, hsl(var(--foreground)) 100%)' }}
               />
               <img 
                 src={profileImage} 
                 alt="Vishwa Kumar" 
-                className="w-full h-full object-cover object-center opacity-40 grayscale"
+                className="w-full h-full object-cover object-top lg:object-center opacity-40 grayscale"
               />
             </div>
           </div>

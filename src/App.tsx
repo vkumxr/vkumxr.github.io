@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Preloader from "@/components/Preloader";
+import CursorTrail from "@/components/CursorTrail";
+import BackToTop from "@/components/BackToTop";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -18,6 +21,9 @@ const App: React.FC = () => (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
+          <Preloader />
+          <CursorTrail />
+          <BackToTop />
           <Toaster />
           <Sonner />
           <BrowserRouter>
