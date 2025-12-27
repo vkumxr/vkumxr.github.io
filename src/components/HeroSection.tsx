@@ -55,8 +55,34 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
     >
+      {/* Noise/Grain Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" />
+      
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
+      
+      {/* Floating Geometric Shapes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Large circle - top right */}
+        <div className="absolute -top-20 -right-20 w-64 h-64 border border-foreground/10 rounded-full animate-float-slow" />
+        
+        {/* Small circle - bottom left */}
+        <div className="absolute bottom-32 left-16 w-24 h-24 border border-foreground/5 rounded-full animate-float-medium" />
+        
+        {/* Square - top left */}
+        <div className="absolute top-40 left-[10%] w-16 h-16 border border-foreground/5 rotate-45 animate-float-reverse" />
+        
+        {/* Rectangle - right side */}
+        <div className="absolute top-1/2 right-[15%] w-8 h-20 border border-foreground/5 animate-float-slow" />
+        
+        {/* Small square - bottom right */}
+        <div className="absolute bottom-40 right-[25%] w-12 h-12 border border-foreground/10 rotate-12 animate-float-medium" />
+        
+        {/* Tiny circles scattered */}
+        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-foreground/5 rounded-full animate-float-reverse" />
+        <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-foreground/10 rounded-full animate-float-slow" />
+        <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-foreground/5 rounded-full animate-float-medium" />
+      </div>
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         {/* Profile Image */}
         <div className="mb-8 animate-fade-up">
