@@ -1,54 +1,52 @@
 import { useInView } from '../hooks/useInView';
-import NetworkBackground from './NetworkBackground';
 
 const AboutSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
 
   return (
-    <section id="about" className="py-28 px-6 bg-background text-foreground relative overflow-hidden">
-      <NetworkBackground variant="light" />
-      <div
-        ref={ref}
-        className="container mx-auto max-w-3xl relative z-10"
-      >
-        <div className={`text-center mb-14 transition-all duration-700 ${
-          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+    <section id="about" className="py-24 md:py-32 px-6 section-light">
+      <div ref={ref} className="container mx-auto max-w-3xl">
+        <div className={`section-header transition-all duration-700 ${
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-            Get to know me
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">About Me</h2>
-          <div className="w-16 h-px bg-foreground/30 mx-auto" />
+          <p className="section-label">Get to know me</p>
+          <h2 className="section-title">About</h2>
         </div>
 
-        <div className="space-y-8">
-          <p 
-            className={`text-xl md:text-2xl leading-relaxed text-muted-foreground text-center transition-all duration-700 delay-100 ${
-              isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            Engineering student specializing in{' '}
-            <span className="text-foreground font-semibold">AI-driven systems</span>,{' '}
-            <span className="text-foreground font-semibold">cybersecurity</span>, and{' '}
-            <span className="text-foreground font-semibold">scalable backend development</span>.
+        <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+          <p className={`transition-all duration-700 delay-100 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            I'm an engineering student with a focus on building{' '}
+            <span className="text-foreground font-medium">intelligent tools</span> that actually work in the real world. 
+            My interests span AI-driven systems, backend development, and cybersecurity—three areas that, when combined, 
+            create software that's both smart and secure.
           </p>
           
-          <p 
-            className={`text-lg leading-relaxed text-muted-foreground text-center transition-all duration-700 delay-200 ${
-              isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            Proven experience building production-ready applications integrating
-            LLMs, REST APIs, and automation workflows.
+          <p className={`transition-all duration-700 delay-200 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            I run <span className="text-foreground font-medium">Linux as my primary OS</span>, not because it's trendy, 
+            but because I want to understand what's happening under the hood. From writing BASH scripts to automate 
+            repetitive tasks to debugging embedded systems on Raspberry Pi, I'm drawn to problems that require 
+            digging deeper than surface-level solutions.
           </p>
           
-          <p 
-            className={`text-lg leading-relaxed text-muted-foreground text-center transition-all duration-700 delay-300 ${
-              isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            Passionate about system-level understanding, Linux internals, security analysis, 
-            and creating intelligent software that solves real-world problems at scale.
+          <p className={`transition-all duration-700 delay-300 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            My projects reflect this approach: a{' '}
+            <span className="text-foreground font-medium">reverse engineering framework</span> for Android apps, 
+            a <span className="text-foreground font-medium">conversational banking assistant</span> powered by LLMs, 
+            and a <span className="text-foreground font-medium">modular robotics system</span> with voice control. 
+            Each one started with a practical problem and ended with working code.
+          </p>
+
+          <p className={`transition-all duration-700 delay-[400ms] ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            When I'm not coding, I'm usually exploring CTF challenges, learning about network protocols, 
+            or experimenting with new automation workflows.
           </p>
         </div>
       </div>

@@ -7,73 +7,64 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    --foreground: 0 0% 8%;
 
     --card: 0 0% 98%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 0 0% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 0 0% 0%;
+    --primary: 0 0% 8%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 20%;
 
-    --muted: 0 0% 92%;
+    --muted: 0 0% 94%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 0 0% 0%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 8%;
 
-    --destructive: 0 0% 30%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 0 0% 0%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 8%;
 
     --radius: 0.5rem;
-
-    /* Monochrome design tokens */
-    --shadow-subtle: 0 2px 8px -2px hsl(0 0% 0% / 0.08);
-    --shadow-card: 0 4px 16px -4px hsl(0 0% 0% / 0.1);
-    --shadow-hover: 0 8px 24px -8px hsl(0 0% 0% / 0.15);
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 14%;
     --secondary-foreground: 0 0% 85%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 0 0% 100%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 0% 70%;
-    --destructive-foreground: 0 0% 0%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 0 0% 100%;
-
-    --shadow-subtle: 0 2px 8px -2px hsl(0 0% 0% / 0.4);
-    --shadow-card: 0 4px 16px -4px hsl(0 0% 0% / 0.5);
-    --shadow-hover: 0 8px 24px -8px hsl(0 0% 100% / 0.1);
+    --ring: 0 0% 98%;
   }
 }
 
@@ -92,76 +83,12 @@
   }
 
   ::selection {
-    @apply bg-foreground/20 text-foreground;
+    @apply bg-foreground/10 text-foreground;
   }
 }
 
 @layer components {
-  /* Section variants for alternating backgrounds */
-  .section-dark {
-    @apply bg-foreground text-background;
-  }
-
-  .section-light {
-    @apply bg-background text-foreground;
-  }
-
-  .card-mono {
-    @apply bg-card border border-border;
-    box-shadow: var(--shadow-card);
-  }
-
-  .card-mono-hover {
-    @apply card-mono transition-all duration-300;
-  }
-
-  .card-mono-hover:hover {
-    @apply border-foreground/30;
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-2px);
-  }
-
-  /* Inverted card for dark sections */
-  .card-mono-inverted {
-    @apply bg-background/5 border border-background/20;
-  }
-
-  .card-mono-inverted-hover {
-    @apply card-mono-inverted transition-all duration-300;
-  }
-
-  .card-mono-inverted-hover:hover {
-    @apply border-background/40 bg-background/10;
-    transform: translateY(-2px);
-  }
-
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold tracking-tight;
-  }
-
-  .section-subtitle {
-    @apply text-muted-foreground text-lg max-w-2xl;
-  }
-
-  .skill-tag {
-    @apply px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground text-sm font-medium
-           border border-border transition-all duration-200;
-  }
-
-  .skill-tag:hover {
-    @apply border-foreground/40 bg-foreground/5;
-  }
-
-  /* Inverted skill tag for dark sections */
-  .skill-tag-inverted {
-    @apply px-3 py-1.5 rounded-md bg-background/10 text-background text-sm font-medium
-           border border-background/20 transition-all duration-200;
-  }
-
-  .skill-tag-inverted:hover {
-    @apply border-background/50 bg-background/20;
-  }
-
+  /* Navigation */
   .nav-link {
     @apply text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium;
   }
@@ -170,160 +97,127 @@
     @apply text-foreground;
   }
 
+  /* Cards */
+  .card-clean {
+    @apply bg-card border border-border rounded-lg p-6 transition-all duration-300;
+  }
+
+  .card-clean:hover {
+    @apply border-foreground/20;
+  }
+
+  /* Section styles */
+  .section-light {
+    @apply bg-background text-foreground;
+  }
+
+  .section-dark {
+    @apply bg-foreground text-background;
+  }
+
+  /* Tags */
+  .skill-tag {
+    @apply px-3 py-1.5 rounded-md bg-secondary text-secondary-foreground text-sm font-medium
+           border border-border transition-all duration-200;
+  }
+
+  .skill-tag:hover {
+    @apply border-foreground/30;
+  }
+
+  .skill-tag-inverted {
+    @apply px-3 py-1.5 rounded-md bg-background/10 text-background/90 text-sm font-medium
+           border border-background/20 transition-all duration-200;
+  }
+
+  .skill-tag-inverted:hover {
+    @apply border-background/40 bg-background/15;
+  }
+
+  /* Social icons */
   .social-icon {
     @apply w-10 h-10 rounded-full flex items-center justify-center
-           bg-secondary border border-border text-muted-foreground
-           hover:border-foreground hover:text-foreground hover:bg-foreground/5
+           border border-border text-muted-foreground
+           hover:border-foreground hover:text-foreground
            transition-all duration-200;
   }
 
-  /* Inverted social icon for dark sections */
   .social-icon-inverted {
     @apply w-10 h-10 rounded-full flex items-center justify-center
-           bg-background/10 border border-background/20 text-background/70
-           hover:border-background hover:text-background hover:bg-background/20
+           border border-background/30 text-background/70
+           hover:border-background hover:text-background
            transition-all duration-200;
   }
 
-  .project-card {
-    @apply card-mono-hover p-6 rounded-lg;
+  /* Timeline */
+  .timeline-line {
+    @apply absolute left-[7px] top-4 bottom-0 w-px bg-border;
   }
 
-  .experience-card {
-    @apply relative pl-8 pb-8 border-l border-border;
+  .timeline-dot {
+    @apply absolute left-0 top-1 w-[15px] h-[15px] rounded-full bg-foreground border-4 border-background;
   }
 
-  .experience-card::before {
-    content: '';
-    @apply absolute left-0 top-0 w-3 h-3 -translate-x-1/2 rounded-full bg-foreground;
+  /* Section header */
+  .section-header {
+    @apply text-center mb-16;
   }
 
-  /* Inverted experience card for dark sections */
-  .experience-card-inverted {
-    @apply relative pl-8 pb-8 border-l border-background/30;
+  .section-label {
+    @apply text-muted-foreground text-sm tracking-widest uppercase mb-4;
   }
 
-  .experience-card-inverted::before {
-    content: '';
-    @apply absolute left-0 top-0 w-3 h-3 -translate-x-1/2 rounded-full bg-background;
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold tracking-tight;
   }
 }
 
 @layer utilities {
-  /* Base fade-up animation */
+  /* Fade animations */
   .animate-fade-up {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeUp 0.6s ease-out forwards;
   }
 
   .animate-fade-up-delay-1 {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+    animation: fadeUp 0.6s ease-out 0.1s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-2 {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-3 {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    animation: fadeUp 0.6s ease-out 0.3s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-4 {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+    animation: fadeUp 0.6s ease-out 0.4s forwards;
     opacity: 0;
   }
 
   .animate-fade-up-delay-5 {
-    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+    animation: fadeUp 0.6s ease-out 0.5s forwards;
     opacity: 0;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-
-  /* Slide in from left animation */
-  .animate-slide-in-left {
-    animation: slideInLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  /* Reveal animation for text */
-  .animate-reveal {
-    animation: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    opacity: 0;
-  }
-
-  @keyframes reveal {
-    from {
-      opacity: 0;
-      transform: translateY(100%);
-      filter: blur(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
-
-  /* Subtle scale animation */
-  .animate-scale-in {
-    animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    opacity: 0;
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* Staggered children animation */
-  .stagger-children > * {
-    opacity: 0;
-    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
-  .stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
-  .stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
-  .stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
-  .stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
-  .stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
-  .stagger-children > *:nth-child(9) { animation-delay: 0.45s; }
-  .stagger-children > *:nth-child(10) { animation-delay: 0.5s; }
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {

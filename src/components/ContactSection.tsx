@@ -1,83 +1,166 @@
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Twitter } from "lucide-react";
-import { Button } from "./ui/button";
+import { useState } from 'react';
+import { useInView } from '../hooks/useInView';
+import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
+import { useToast } from '@/hooks/use-toast';
 
 const ContactSection = () => {
+  const { ref, isInView } = useInView({ threshold: 0.2 });
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Message sent!",
+      description: "Thanks for reaching out. I'll get back to you soon.",
+    });
+    
+    setIsSubmitting(false);
+    (e.target as HTMLFormElement).reset();
+  };
+
   return (
-    <section id="contact" className="py-24 md:py-32 relative">
-      {/* Background */}
-      <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      
-      <div className="container px-6 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Header */}
-          <p className="text-primary font-body font-medium mb-3">Get In Touch</p>
-          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
-            Let's Build Something
-            <br />
-            <span className="text-gradient">Amazing Together</span>
-          </h2>
-          <p className="text-muted-foreground font-body max-w-xl mx-auto mb-12">
-            Have a project in mind or just want to chat? I'm always open to discussing 
-            new opportunities and interesting ideas.
-          </p>
+    <section id="contact" className="py-24 md:py-32 px-6 section-light">
+      <div ref={ref} className="container mx-auto max-w-4xl">
+        <div className={`section-header transition-all duration-700 ${
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          <p className="section-label">Get in touch</p>
+          <h2 className="section-title">Contact</h2>
+        </div>
 
-          {/* Email Button */}
-          <Button size="lg" className="px-8 font-display font-semibold mb-16">
-            <Mail className="mr-2" size={18} />
-            Say Hello
-            <ArrowUpRight className="ml-2" size={18} />
-          </Button>
-
-          {/* Info Cards */}
-          <div className="grid sm:grid-cols-2 gap-6 mb-16">
-            <div className="p-6 rounded-xl card-gradient border border-border">
-              <Mail className="text-primary mb-4" size={24} />
-              <p className="text-muted-foreground text-sm mb-1">Email</p>
-              <a 
-                href="mailto:hello@vishwakumar.dev" 
-                className="font-display font-semibold hover:text-primary transition-colors"
-              >
-                hello@vishwakumar.dev
-              </a>
-            </div>
-            <div className="p-6 rounded-xl card-gradient border border-border">
-              <MapPin className="text-primary mb-4" size={24} />
-              <p className="text-muted-foreground text-sm mb-1">Location</p>
-              <p className="font-display font-semibold">India</p>
-            </div>
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Form */}
+          <div className={`transition-all duration-700 delay-100 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  Name
+                </label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  className="bg-background"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  className="bg-background"
+                />
+              </div>
+              
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  Message
+                </label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Your message..."
+                  rows={5}
+                  className="bg-background resize-none"
+                />
+              </div>
+              
+              <Button type="submit" disabled={isSubmitting} className="w-full">
+                {isSubmitting ? (
+                  'Sending...'
+                ) : (
+                  <>
+                    <Send size={18} className="mr-2" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center justify-center gap-6">
-            <SocialLink href="https://github.com/vkumxr" icon={<Github size={24} />} label="GitHub" />
-            <SocialLink href="https://linkedin.com/in/vishwakumar" icon={<Linkedin size={24} />} label="LinkedIn" />
-            <SocialLink href="https://twitter.com/vkumxr" icon={<Twitter size={24} />} label="Twitter" />
+          {/* Contact Info */}
+          <div className={`space-y-6 transition-all duration-700 delay-200 ${
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Contact Information</h3>
+              <div className="space-y-4">
+                <a 
+                  href="mailto:vishwakumarv05@gmail.com"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Mail size={18} />
+                  <span>vishwakumarv05@gmail.com</span>
+                </a>
+                <a 
+                  href="tel:+919342236718"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Phone size={18} />
+                  <span>+91 9342236718</span>
+                </a>
+                <div className="flex items-center gap-3 text-muted-foreground">
+                  <MapPin size={18} />
+                  <span>Bengaluru, Karnataka, India</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Connect</h3>
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/vkumxr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="GitHub"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href="https://linkedin.com/in/vishwakumarv/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </a>
+                <a
+                  href="mailto:vishwakumarv05@gmail.com"
+                  className="social-icon"
+                  aria-label="Email"
+                >
+                  <Mail size={18} />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-const SocialLink = ({ 
-  href, 
-  icon, 
-  label 
-}: { 
-  href: string; 
-  icon: React.ReactNode; 
-  label: string;
-}) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={label}
-    className="text-muted-foreground hover:text-primary transition-colors duration-300"
-  >
-    {icon}
-  </a>
-);
 
 export default ContactSection;
