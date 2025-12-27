@@ -101,12 +101,13 @@ const HeroSection = () => {
           01101<br/>10010<br/>01011
         </div>
         
-        {/* Terminal prompt - right side */}
+        {/* Terminal prompt - right side with typing animation */}
         <div 
-          className="absolute top-1/2 right-[12%] text-foreground/8 font-mono text-2xl animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-1/2 right-[12%] text-foreground/15 font-mono text-2xl animate-float-slow transition-transform duration-300 ease-out select-none flex items-center gap-1"
           style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
         >
-          ~/dev $
+          <span>~/dev $</span>
+          <span className="typing-animation inline-block">npm run dev</span>
         </div>
         
         {/* Array brackets - bottom right */}
