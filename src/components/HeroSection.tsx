@@ -190,8 +190,8 @@ const HeroSection = () => {
         
         {/* Sudo command - bottom right (near View Resume level) */}
         <div 
-          className="absolute bottom-[32%] right-[5%] text-foreground/[0.06] font-mono text-base animate-float-reverse transition-transform duration-300 ease-out select-none"
-          style={{ transform: `translate(${mousePosition.x * -18}px, ${mousePosition.y * -18}px)` }}
+          className="absolute bottom-[28%] right-[5%] text-foreground/[0.06] font-mono text-base transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translateX(${mousePosition.x * -18}px)` }}
         >
           <div className="flex items-center gap-2">
             <span className="text-foreground/[0.08]">$</span>
