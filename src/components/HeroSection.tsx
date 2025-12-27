@@ -148,11 +148,11 @@ const HeroSection = () => {
         
         {/* Terminal prompt - right side with cycling typing animation */}
         <div 
-          className="absolute top-1/2 right-[10%] text-foreground/[0.06] font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-1/2 right-[10%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
         >
           <div className="flex items-center gap-2">
-            <span className="text-foreground/[0.08]">$</span>
+            <span className="text-foreground/30">$</span>
             <span key={rightCommandIndex} className="typing-animation inline-block">
               {devCommandsRight[rightCommandIndex]}
             </span>
@@ -161,11 +161,11 @@ const HeroSection = () => {
         
         {/* Terminal prompt - left side with cycling typing animation */}
         <div 
-          className="absolute top-[35%] left-[8%] text-foreground/[0.06] font-mono text-base animate-float-medium transition-transform duration-300 ease-out select-none"
+          className="absolute top-[35%] left-[8%] text-foreground/20 font-mono text-base animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
         >
           <div className="flex items-center gap-2">
-            <span className="text-foreground/[0.08]">$</span>
+            <span className="text-foreground/30">$</span>
             <span key={leftCommandIndex} className="typing-animation inline-block">
               {devCommandsLeft[leftCommandIndex]}
             </span>
@@ -174,7 +174,7 @@ const HeroSection = () => {
         
         {/* Arrow function - center right */}
         <div 
-          className="absolute top-[65%] right-[35%] text-foreground/[0.05] font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-[65%] right-[35%] text-foreground/10 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
         >
           {'=>'}
@@ -182,7 +182,7 @@ const HeroSection = () => {
         
         {/* Semicolon - top center */}
         <div 
-          className="absolute top-[15%] left-1/2 text-foreground/[0.04] font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none"
+          className="absolute top-[15%] left-1/2 text-foreground/10 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)` }}
         >
           ;
@@ -190,11 +190,11 @@ const HeroSection = () => {
         
         {/* Sudo command - bottom right (near View Resume level) */}
         <div 
-          className="absolute bottom-[28%] right-[5%] text-foreground/[0.06] font-mono text-base transition-transform duration-300 ease-out select-none"
+          className="absolute bottom-[28%] right-[5%] text-foreground/20 font-mono text-base transition-transform duration-300 ease-out select-none"
           style={{ transform: `translateX(${mousePosition.x * -18}px)` }}
         >
           <div className="flex items-center gap-2">
-            <span className="text-foreground/[0.08]">$</span>
+            <span className="text-foreground/30">$</span>
             <span key={sudoTopRightIndex} className="typing-animation inline-block">
               {sudoCommandsTopRight[sudoTopRightIndex]}
             </span>
@@ -203,11 +203,11 @@ const HeroSection = () => {
         
         {/* Sudo command - bottom left */}
         <div 
-          className="absolute bottom-[22%] left-[8%] text-foreground/[0.06] font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute bottom-[22%] left-[8%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 12}px)` }}
         >
           <div className="flex items-center gap-2">
-            <span className="text-foreground/[0.08]">$</span>
+            <span className="text-foreground/30">$</span>
             <span key={sudoBottomLeftIndex} className="typing-animation inline-block">
               {sudoCommandsBottomLeft[sudoBottomLeftIndex]}
             </span>
