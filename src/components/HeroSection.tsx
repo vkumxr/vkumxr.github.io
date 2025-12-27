@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import profileImage from '@/assets/profile.png';
 
 const socialLinks = [
@@ -35,6 +36,19 @@ const socialLinks = [
 ];
 
 const HeroSection = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   const scrollToProjects = () => {
     const element = document.getElementById('projects');
     if (element) {
@@ -61,27 +75,51 @@ const HeroSection = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
       
-      {/* Floating Geometric Shapes */}
+      {/* Floating Geometric Shapes with Parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large circle - top right */}
-        <div className="absolute -top-20 -right-20 w-64 h-64 border border-foreground/10 rounded-full animate-float-slow" />
+        <div 
+          className="absolute -top-20 -right-20 w-64 h-64 border border-foreground/10 rounded-full animate-float-slow transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)` }}
+        />
         
         {/* Small circle - bottom left */}
-        <div className="absolute bottom-32 left-16 w-24 h-24 border border-foreground/5 rounded-full animate-float-medium" />
+        <div 
+          className="absolute bottom-32 left-16 w-24 h-24 border border-foreground/5 rounded-full animate-float-medium transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+        />
         
         {/* Square - top left */}
-        <div className="absolute top-40 left-[10%] w-16 h-16 border border-foreground/5 rotate-45 animate-float-reverse" />
+        <div 
+          className="absolute top-40 left-[10%] w-16 h-16 border border-foreground/5 rotate-45 animate-float-reverse transition-transform duration-300 ease-out"
+          style={{ transform: `rotate(45deg) translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
+        />
         
         {/* Rectangle - right side */}
-        <div className="absolute top-1/2 right-[15%] w-8 h-20 border border-foreground/5 animate-float-slow" />
+        <div 
+          className="absolute top-1/2 right-[15%] w-8 h-20 border border-foreground/5 animate-float-slow transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
+        />
         
         {/* Small square - bottom right */}
-        <div className="absolute bottom-40 right-[25%] w-12 h-12 border border-foreground/10 rotate-12 animate-float-medium" />
+        <div 
+          className="absolute bottom-40 right-[25%] w-12 h-12 border border-foreground/10 rotate-12 animate-float-medium transition-transform duration-300 ease-out"
+          style={{ transform: `rotate(12deg) translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)` }}
+        />
         
         {/* Tiny circles scattered */}
-        <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-foreground/5 rounded-full animate-float-reverse" />
-        <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-foreground/10 rounded-full animate-float-slow" />
-        <div className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-foreground/5 rounded-full animate-float-medium" />
+        <div 
+          className="absolute top-1/4 left-1/4 w-3 h-3 bg-foreground/5 rounded-full animate-float-reverse transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` }}
+        />
+        <div 
+          className="absolute top-2/3 right-1/3 w-2 h-2 bg-foreground/10 rounded-full animate-float-slow transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
+        />
+        <div 
+          className="absolute bottom-1/4 left-1/3 w-4 h-4 bg-foreground/5 rounded-full animate-float-medium transition-transform duration-300 ease-out"
+          style={{ transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)` }}
+        />
       </div>
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         {/* Profile Image */}

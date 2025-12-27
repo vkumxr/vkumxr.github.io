@@ -269,10 +269,8 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden">
-      <div ref={ref} className="container mx-auto max-w-6xl">
-        <div className={`section-header transition-all duration-700 ${
-          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+      <div ref={ref} className={`container mx-auto max-w-6xl ${isInView ? 'section-bounce' : 'opacity-0'}`}>
+        <div className="section-header">
           <p className="section-label">What I've built</p>
           <h2 className="section-title">Projects</h2>
         </div>

@@ -108,10 +108,10 @@ const Navbar = () => {
                 {item.isSection ? (
                   <button
                     onClick={() => handleNavClick(item)}
-                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    className={`nav-link-underline px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       isActive(item)
-                        ? `${textColor} ${activeBg}`
-                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
+                        ? `${textColor}`
+                        : `${textColorMuted} hover:${textColor}`
                     }`}
                   >
                     {item.label}
@@ -119,10 +119,10 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={item.href}
-                    className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                    className={`nav-link-underline px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       isActive(item)
-                        ? `${textColor} ${activeBg}`
-                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
+                        ? `${textColor}`
+                        : `${textColorMuted} hover:${textColor}`
                     }`}
                   >
                     {item.label}

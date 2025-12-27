@@ -29,10 +29,8 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" className="py-24 md:py-32 px-6 section-light">
-      <div ref={ref} className="container mx-auto max-w-5xl">
-        <div className={`section-header transition-all duration-700 ${
-          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+      <div ref={ref} className={`container mx-auto max-w-5xl ${isInView ? 'section-bounce' : 'opacity-0'}`}>
+        <div className="section-header">
           <p className="section-label">What I work with</p>
           <h2 className="section-title">Skills</h2>
         </div>

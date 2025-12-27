@@ -52,10 +52,8 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-24 md:py-32 px-6 section-dark">
-      <div ref={ref} className="container mx-auto max-w-4xl">
-        <div className={`section-header transition-all duration-700 ${
-          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+      <div ref={ref} className={`container mx-auto max-w-4xl ${isInView ? 'section-bounce' : 'opacity-0'}`}>
+        <div className="section-header">
           <p className="section-label">Get in touch</p>
           <h2 className="section-title">Contact</h2>
         </div>
