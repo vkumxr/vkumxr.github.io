@@ -75,8 +75,8 @@ const HeroSection = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
       
-      {/* Floating Geometric Shapes with Parallax */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Floating Geometric Shapes with Parallax - Hidden on mobile */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
         {/* Large circle - top right */}
         <div 
           className="absolute -top-20 -right-20 w-64 h-64 border border-foreground/10 rounded-full animate-float-slow transition-transform duration-300 ease-out"

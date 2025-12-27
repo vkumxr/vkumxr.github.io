@@ -161,42 +161,40 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? 'max-h-96 mt-4' : 'max-h-0'
-          }`}
-        >
-          <ul className="flex flex-col gap-1 py-4">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                {item.isSection ? (
-                  <button
-                    onClick={() => handleNavClick(item)}
-                    className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
-                      isActive(item)
-                        ? `${activeBg} ${textColor}`
-                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    to={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`block w-full text-left px-4 py-2 rounded-md transition-colors ${
-                      isActive(item)
-                        ? `${activeBg} ${textColor}`
-                        : `${textColorMuted} hover:${textColor} ${hoverBg}`
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-[72px] bg-background/95 backdrop-blur-md z-40">
+            <ul className="flex flex-col gap-1 p-6">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  {item.isSection ? (
+                    <button
+                      onClick={() => handleNavClick(item)}
+                      className={`block w-full text-left px-4 py-3 rounded-md transition-colors text-lg ${
+                        isActive(item)
+                          ? `${activeBg} ${textColor}`
+                          : `${textColorMuted} hover:${textColor} ${hoverBg}`
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`block w-full text-left px-4 py-3 rounded-md transition-colors text-lg ${
+                        isActive(item)
+                          ? `${activeBg} ${textColor}`
+                          : `${textColorMuted} hover:${textColor} ${hoverBg}`
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </nav>
     </header>
   );
