@@ -170,9 +170,9 @@ const MobileCardStack = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative flex flex-col items-center">
       <div
-        className="relative h-[480px] w-full max-w-[340px] mx-auto"
+        className="relative h-[480px] w-[340px]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
