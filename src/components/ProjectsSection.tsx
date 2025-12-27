@@ -59,20 +59,20 @@ const projects = [
 ];
 
 const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
-  <div className="group bg-background/5 border border-background/10 rounded-lg p-6 transition-all duration-500 hover:border-background/25 min-w-[340px] max-w-[340px] flex-shrink-0">
+  <div className="group card-clean min-w-[340px] max-w-[340px] flex-shrink-0">
     {/* Header */}
     <div className="flex items-start justify-between mb-4">
       <div>
-        <h3 className="text-lg font-semibold text-background group-hover:text-background transition-colors">
+        <h3 className="text-lg font-semibold text-foreground group-hover:text-foreground transition-colors">
           {project.title}
         </h3>
-        <p className="text-background/60 text-sm">{project.subtitle}</p>
+        <p className="text-muted-foreground text-sm">{project.subtitle}</p>
       </div>
       <a
         href={project.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-background/40 hover:text-background transition-colors"
+        className="text-muted-foreground hover:text-foreground transition-colors"
         aria-label={`View ${project.title} on GitHub`}
       >
         <Github size={20} />
@@ -80,14 +80,14 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     </div>
 
     {/* Description */}
-    <p className="text-background/70 text-sm mb-4">{project.description}</p>
+    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
 
     {/* Tech Stack */}
     <div className="flex flex-wrap gap-2 mb-4">
       {project.techStack.map((tech) => (
         <span
           key={tech}
-          className="px-2 py-1 text-xs rounded bg-background/10 text-background/70 border border-background/10"
+          className="skill-tag text-xs"
         >
           {tech}
         </span>
@@ -97,8 +97,8 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
     {/* Highlights */}
     <ul className="space-y-2 mb-5">
       {project.highlights.map((highlight, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm text-background/60">
-          <span className="w-1 h-1 rounded-full bg-background/40 mt-2 flex-shrink-0" />
+        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+          <span className="w-1 h-1 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
           <span>{highlight}</span>
         </li>
       ))}
@@ -110,7 +110,7 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
         href={project.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-sm text-background/70 hover:text-background transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         View on GitHub
         <ArrowUpRight size={14} />
@@ -120,7 +120,7 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
           href={project.demoUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm text-background/70 hover:text-background transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           Live Demo
           <ExternalLink size={14} />
@@ -202,7 +202,7 @@ const MobileCardStack = () => {
       <div className="flex justify-center gap-4 mt-8">
         <button
           onClick={goToPrev}
-          className="p-2 rounded-full border border-background/30 text-background/70 hover:border-background hover:text-background transition-colors"
+          className="p-2 rounded-full border border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
           aria-label="Previous project"
         >
           <ChevronLeft size={20} />
@@ -213,7 +213,7 @@ const MobileCardStack = () => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-background' : 'bg-background/30'
+                index === currentIndex ? 'bg-foreground' : 'bg-foreground/30'
               }`}
               aria-label={`Go to project ${index + 1}`}
             />
@@ -221,14 +221,14 @@ const MobileCardStack = () => {
         </div>
         <button
           onClick={goToNext}
-          className="p-2 rounded-full border border-background/30 text-background/70 hover:border-background hover:text-background transition-colors"
+          className="p-2 rounded-full border border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
           aria-label="Next project"
         >
           <ChevronRight size={20} />
         </button>
       </div>
 
-      <p className="text-center text-background/50 text-sm mt-4">
+      <p className="text-center text-muted-foreground text-sm mt-4">
         Swipe or use arrows to browse projects
       </p>
     </div>
@@ -268,13 +268,13 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 bg-foreground text-background overflow-hidden">
+    <section id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden">
       <div ref={ref} className="container mx-auto max-w-6xl">
         <div className={`section-header transition-all duration-700 ${
           isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <p className="text-background/50 text-sm tracking-widest uppercase mb-4">What I've built</p>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-background">Projects</h2>
+          <p className="section-label">What I've built</p>
+          <h2 className="section-title">Projects</h2>
         </div>
 
         <div className={`transition-all duration-700 ${

@@ -53,12 +53,12 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center px-6 bg-foreground text-background"
+      className="relative min-h-screen flex items-center justify-center px-6 section-light"
     >
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         {/* Profile Image */}
         <div className="mb-8 animate-fade-up">
-          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-background/20">
+          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-foreground/20">
             <img 
               src={profileImage} 
               alt="Vishwa Kumar - AI & Cybersecurity Engineer" 
@@ -68,12 +68,12 @@ const HeroSection = () => {
         </div>
 
         {/* Name */}
-        <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-background">
+        <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
           Vishwa Kumar Venkateswaran
         </h1>
 
         {/* Tagline */}
-        <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-background/70 max-w-2xl mx-auto leading-relaxed mb-10">
+        <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
           Engineering student specializing in AI-driven systems, cybersecurity, and scalable backend development.
         </p>
 
@@ -82,7 +82,7 @@ const HeroSection = () => {
           {/* View Projects - Left */}
           <button
             onClick={scrollToProjects}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-background/30 text-background font-medium hover:bg-background/10 transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-all duration-200"
           >
             View Projects
             <ArrowDown size={18} className="group-hover:translate-y-0.5 transition-transform" />
@@ -91,7 +91,7 @@ const HeroSection = () => {
           {/* Hire Me - Center with glowing border */}
           <button
             onClick={openLinkedIn}
-            className="relative group inline-flex items-center justify-center px-8 py-3 rounded-md bg-background text-foreground font-semibold transition-all duration-200 hover:scale-105 shadow-[0_0_12px_rgba(255,255,255,0.25),0_0_24px_rgba(255,255,255,0.15)] dark:shadow-[0_0_12px_rgba(255,255,255,0.25),0_0_24px_rgba(255,255,255,0.15)]"
+            className="relative group inline-flex items-center justify-center px-8 py-3 rounded-md bg-foreground text-background font-semibold transition-all duration-200 hover:scale-105 shadow-[0_0_12px_rgba(0,0,0,0.25),0_0_24px_rgba(0,0,0,0.15)]"
           >
             Hire Me
           </button>
@@ -99,7 +99,7 @@ const HeroSection = () => {
           {/* View Resume - Right */}
           <button
             onClick={openResume}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-background/30 text-background font-medium hover:bg-background/10 transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-all duration-200"
           >
             <FileText size={18} />
             View Resume
@@ -114,7 +114,7 @@ const HeroSection = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon-inverted"
+              className="social-icon"
               aria-label={link.label}
             >
               <link.icon size={20} />
@@ -125,8 +125,8 @@ const HeroSection = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-up-delay-5">
-        <div className="w-5 h-8 rounded-full border border-background/30 flex items-start justify-center p-1.5">
-          <div className="w-0.5 h-1.5 rounded-full bg-background/50 animate-bounce" />
+        <div className="w-5 h-8 rounded-full border border-foreground/30 flex items-start justify-center p-1.5">
+          <div className="w-0.5 h-1.5 rounded-full bg-foreground/50 animate-bounce" />
         </div>
       </div>
     </section>
