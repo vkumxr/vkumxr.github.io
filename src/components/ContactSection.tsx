@@ -51,8 +51,33 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 section-dark">
-      <div ref={ref} className={`container mx-auto max-w-4xl ${isInView ? 'section-bounce' : 'opacity-0'}`}>
+    <section id="contact" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative">
+      {/* Faded background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
+        <div 
+          className="absolute top-20 right-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none"
+        >
+          <div>{'// Let\'s connect'}</div>
+          <div>{'const contact = {'}</div>
+          <div className="pl-4">{'email: "...",'}</div>
+          <div className="pl-4">{'message: "..."'}</div>
+          <div>{'};'}</div>
+        </div>
+        <div 
+          className="absolute bottom-20 left-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none"
+        >
+          <div>{'async function sendMessage() {'}</div>
+          <div className="pl-4">{'await fetch("/api/contact");'}</div>
+          <div>{'}'}</div>
+        </div>
+        <div 
+          className="absolute top-1/2 right-1/4 text-background/[0.03] font-mono text-6xl select-none"
+        >
+          @
+        </div>
+      </div>
+
+      <div ref={ref} className={`container mx-auto max-w-4xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">
           <p className="section-label">Get in touch</p>
           <h2 className="section-title">Contact</h2>
