@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { useInView } from '../hooks/useInView';
 import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Button } from './ui/button';
@@ -6,25 +7,47 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 
+const EMAILJS_SERVICE_ID = 'service_hbvqs2f';
+const EMAILJS_TEMPLATE_ID = 'template_h66mljm';
+const EMAILJS_PUBLIC_KEY = 'pEkZwmUeWy6anm2tc';
+
 const ContactSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (!formRef.current) return;
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      
+      formRef.current.reset();
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Failed to send",
+        description: "Something went wrong. Please try again or email me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -42,14 +65,14 @@ const ContactSection = () => {
           <div className={`transition-all duration-700 delay-100 ${
             isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Name
                 </label>
                 <Input
                   id="name"
-                  name="name"
+                  name="from_name"
                   type="text"
                   required
                   placeholder="Your name"
@@ -63,7 +86,7 @@ const ContactSection = () => {
                 </label>
                 <Input
                   id="email"
-                  name="email"
+                  name="from_email"
                   type="email"
                   required
                   placeholder="your@email.com"
