@@ -56,8 +56,7 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
     >
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-muted/10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/3 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
       <div className="container mx-auto max-w-4xl text-center relative z-10">
         {/* Profile Image */}
         <div className="mb-8 animate-fade-up">
