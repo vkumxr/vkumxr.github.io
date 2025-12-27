@@ -140,24 +140,52 @@ const HeroSection = () => {
           [ ]
         </div>
         
-        {/* Function syntax - scattered */}
+        {/* React useState hook - left side */}
         <div 
-          className="absolute top-1/4 left-1/4 text-foreground/6 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
+          className="absolute top-1/4 left-[5%] text-foreground/8 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` }}
         >
-          {'() => {}'}
+          {'const [state, setState]'}
         </div>
+        
+        {/* console.log - right side */}
         <div 
-          className="absolute top-2/3 right-1/3 text-foreground/8 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
+          className="absolute top-[40%] right-[5%] text-foreground/10 font-mono text-sm animate-float-slow transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
         >
-          #
+          {'console.log()'}
         </div>
+        
+        {/* async/await - bottom left */}
+        <div 
+          className="absolute bottom-[35%] left-[20%] text-foreground/6 font-mono text-xs animate-float-medium transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)` }}
+        >
+          {'async () => await'}
+        </div>
+        
+        {/* useEffect hook - top right */}
+        <div 
+          className="absolute top-[25%] right-[20%] text-foreground/8 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)` }}
+        >
+          {'useEffect(() => {})'}
+        </div>
+        
+        {/* Arrow function - scattered */}
+        <div 
+          className="absolute top-2/3 right-1/3 text-foreground/10 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
+        >
+          {'=>'}
+        </div>
+        
+        {/* JSDoc comment */}
         <div 
           className="absolute bottom-1/4 left-1/3 text-foreground/6 font-mono text-sm animate-float-medium transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)` }}
         >
-          {'/**'}
+          {'/** @type */'}
         </div>
         
         {/* Semicolon - top center */}
@@ -168,12 +196,28 @@ const HeroSection = () => {
           ;
         </div>
         
-        {/* Import statement - bottom center */}
+        {/* Return statement - bottom center */}
         <div 
-          className="absolute bottom-[20%] left-[45%] text-foreground/5 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
+          className="absolute bottom-[20%] left-[45%] text-foreground/8 font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * 14}px, ${mousePosition.y * 14}px)` }}
         >
-          import * from
+          {'return <Component />'}
+        </div>
+        
+        {/* Promise - far left */}
+        <div 
+          className="absolute top-[60%] left-[3%] text-foreground/6 font-mono text-xs animate-float-slow transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 16}px, ${mousePosition.y * 16}px)` }}
+        >
+          {'.then().catch()'}
+        </div>
+        
+        {/* Map function - far right */}
+        <div 
+          className="absolute bottom-[45%] right-[3%] text-foreground/8 font-mono text-xs animate-float-medium transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * -18}px, ${mousePosition.y * -18}px)` }}
+        >
+          {'.map((item) => )'}
         </div>
       </div>
       <div className="container mx-auto max-w-4xl text-center relative z-10">
