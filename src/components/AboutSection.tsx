@@ -1,39 +1,12 @@
-import { useState } from 'react';
 import { useInView } from '../hooks/useInView';
 import profileImage from '@/assets/profile.png';
 
 const AboutSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
-  const [effectType, setEffectType] = useState<'gradient' | 'ghost'>('gradient');
 
   return (
     <section id="about" className="py-24 md:py-32 px-6 section-dark overflow-hidden">
       <div ref={ref} className={`container mx-auto max-w-6xl ${isInView ? 'section-bounce' : 'opacity-0'}`}>
-        
-        {/* Demo Toggle - Remove this after choosing */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => setEffectType('gradient')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              effectType === 'gradient' 
-                ? 'bg-background text-foreground' 
-                : 'bg-background/20 text-background/70 hover:bg-background/30'
-            }`}
-          >
-            Gradient Fade Effect
-          </button>
-          <button
-            onClick={() => setEffectType('ghost')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              effectType === 'ghost' 
-                ? 'bg-background text-foreground' 
-                : 'bg-background/20 text-background/70 hover:bg-background/30'
-            }`}
-          >
-            Ghost Effect (Low Opacity)
-          </button>
-        </div>
-
         <div className="relative flex flex-col lg:flex-row lg:items-center lg:gap-12">
           {/* Left side - Content */}
           <div className="relative z-10 lg:w-1/2">
@@ -80,31 +53,19 @@ const AboutSection = () => {
             </div>
           </div>
 
-          {/* Right side - Faded Profile Photo */}
+          {/* Right side - Faded Profile Photo with Gradient */}
           <div className="hidden lg:block lg:w-1/2 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2">
-            {effectType === 'gradient' ? (
-              /* Gradient Fade Effect */
-              <div className="relative w-full h-[600px]">
-                <div 
-                  className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-foreground z-10"
-                  style={{ background: 'linear-gradient(to left, transparent 0%, transparent 30%, hsl(var(--foreground)) 100%)' }}
-                />
-                <img 
-                  src={profileImage} 
-                  alt="Vishwa Kumar" 
-                  className="w-full h-full object-cover object-center opacity-40 grayscale"
-                />
-              </div>
-            ) : (
-              /* Ghost Effect (Low Opacity) */
-              <div className="relative w-full h-[600px] flex items-center justify-center">
-                <img 
-                  src={profileImage} 
-                  alt="Vishwa Kumar" 
-                  className="w-[400px] h-[400px] object-cover object-center rounded-full opacity-[0.12] grayscale blur-[1px]"
-                />
-              </div>
-            )}
+            <div className="relative w-full h-[600px]">
+              <div 
+                className="absolute inset-0 z-10"
+                style={{ background: 'linear-gradient(to left, transparent 0%, transparent 30%, hsl(var(--foreground)) 100%)' }}
+              />
+              <img 
+                src={profileImage} 
+                alt="Vishwa Kumar" 
+                className="w-full h-full object-cover object-center opacity-40 grayscale"
+              />
+            </div>
           </div>
         </div>
       </div>
