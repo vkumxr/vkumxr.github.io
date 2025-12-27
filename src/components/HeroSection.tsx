@@ -188,9 +188,9 @@ const HeroSection = () => {
           ;
         </div>
         
-        {/* Sudo command - top right */}
+        {/* Sudo command - bottom right (near View Resume level) */}
         <div 
-          className="absolute top-[20%] right-[8%] text-foreground/[0.06] font-mono text-base animate-float-reverse transition-transform duration-300 ease-out select-none"
+          className="absolute bottom-[32%] right-[5%] text-foreground/[0.06] font-mono text-base animate-float-reverse transition-transform duration-300 ease-out select-none"
           style={{ transform: `translate(${mousePosition.x * -18}px, ${mousePosition.y * -18}px)` }}
         >
           <div className="flex items-center gap-2">
