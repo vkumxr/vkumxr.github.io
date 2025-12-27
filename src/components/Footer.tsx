@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter, Instagram, BookOpen } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -27,6 +27,33 @@ const Footer = () => {
               aria-label="LinkedIn"
             >
               <Linkedin size={18} />
+            </a>
+            <a
+              href="https://x.com/vkumxrr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Twitter"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="https://www.instagram.com/vishwakumar_vk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="https://substack.com/@vkumxr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Substack"
+            >
+              <BookOpen size={18} />
             </a>
             <a
               href="mailto:vishwakumarv05@gmail.com"

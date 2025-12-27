@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, ArrowDown, FileText } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
 import profileImage from '@/assets/profile.png';
 
 const socialLinks = [
@@ -11,6 +11,21 @@ const socialLinks = [
     icon: Linkedin,
     href: 'https://linkedin.com/in/vishwakumarv/',
     label: 'LinkedIn',
+  },
+  {
+    icon: Twitter,
+    href: 'https://x.com/vkumxrr',
+    label: 'Twitter',
+  },
+  {
+    icon: Instagram,
+    href: 'https://www.instagram.com/vishwakumar_vk/',
+    label: 'Instagram',
+  },
+  {
+    icon: BookOpen,
+    href: 'https://substack.com/@vkumxr',
+    label: 'Substack',
   },
   {
     icon: Mail,
