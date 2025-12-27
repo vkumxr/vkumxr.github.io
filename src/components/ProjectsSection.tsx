@@ -1,7 +1,21 @@
 import { useInView } from '../hooks/useInView';
-import { ArrowUpRight, Github } from 'lucide-react';
+import { ArrowUpRight, Github, ExternalLink } from 'lucide-react';
 
 const projects = [
+  {
+    title: 'FruitCutter',
+    subtitle: 'The Classic Fruit Ninja Reimagined',
+    period: '2024',
+    description: 'A nostalgic recreation of the classic Fruit Ninja game built on Scratch with smooth gameplay mechanics.',
+    techStack: ['Scratch', 'Game Design', 'Animation'],
+    githubUrl: 'https://github.com/vkumxr/FruitCutter---The-Classic-Fruit-Ninja-Reimagined',
+    demoUrl: 'https://scratch.mit.edu/projects/1197626235',
+    highlights: [
+      'Smooth slicing mechanics with realistic fruit physics',
+      'Score tracking and combo system for engaging gameplay',
+      'Classic arcade-style visuals with polished animations',
+    ],
+  },
   {
     title: 'ReDroid-AI',
     subtitle: 'Reverse Engineering Assistant',
@@ -109,16 +123,29 @@ const ProjectsSection = () => {
                 ))}
               </ul>
 
-              {/* GitHub Link */}
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-background/70 hover:text-background transition-colors"
-              >
-                View on GitHub
-                <ArrowUpRight size={14} />
-              </a>
+              {/* Links */}
+              <div className="flex items-center gap-4">
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-background/70 hover:text-background transition-colors"
+                >
+                  View on GitHub
+                  <ArrowUpRight size={14} />
+                </a>
+                {'demoUrl' in project && project.demoUrl && (
+                  <a
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm text-background/70 hover:text-background transition-colors"
+                  >
+                    Live Demo
+                    <ExternalLink size={14} />
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
