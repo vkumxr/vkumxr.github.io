@@ -6,8 +6,7 @@ const sections = [
   { key: '3', id: 'skills', label: 'Skills' },
   { key: '4', id: 'experience', label: 'Experience' },
   { key: '5', id: 'projects', label: 'Projects' },
-  { key: '6', id: 'testimonials', label: 'Testimonials' },
-  { key: '7', id: 'contact', label: 'Contact' },
+  { key: '6', id: 'contact', label: 'Contact' },
 ];
 
 const KeyboardNavigation = () => {
