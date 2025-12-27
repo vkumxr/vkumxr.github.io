@@ -35,19 +35,24 @@ const socialLinks = [
   },
 ];
 
-const devCommands = [
+const devCommandsRight = [
   'npm run dev',
   'git commit -m "feat"',
   'npm install react',
   'git push origin main',
+];
+
+const devCommandsLeft = [
   'npm run build',
-  'yarn add typescript',
-  'npx create-react-app',
+  'git clone repo',
+  'yarn add axios',
+  'npm install -D',
 ];
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [currentCommandIndex, setCurrentCommandIndex] = useState(0);
+  const [rightCommandIndex, setRightCommandIndex] = useState(0);
+  const [leftCommandIndex, setLeftCommandIndex] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -61,10 +66,16 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentCommandIndex((prev) => (prev + 1) % devCommands.length);
+    const rightInterval = setInterval(() => {
+      setRightCommandIndex((prev) => (prev + 1) % devCommandsRight.length);
     }, 4000);
-    return () => clearInterval(interval);
+    const leftInterval = setInterval(() => {
+      setLeftCommandIndex((prev) => (prev + 1) % devCommandsLeft.length);
+    }, 3500);
+    return () => {
+      clearInterval(rightInterval);
+      clearInterval(leftInterval);
+    };
   }, []);
 
   const scrollToProjects = () => {
@@ -118,26 +129,23 @@ const HeroSection = () => {
         >
           <div className="flex items-center gap-2">
             <span className="text-foreground/[0.08]">$</span>
-            <span key={currentCommandIndex} className="typing-animation inline-block">
-              {devCommands[currentCommandIndex]}
+            <span key={rightCommandIndex} className="typing-animation inline-block">
+              {devCommandsRight[rightCommandIndex]}
             </span>
           </div>
         </div>
         
-        {/* Array brackets - bottom right */}
+        {/* Terminal prompt - left side with cycling typing animation */}
         <div 
-          className="absolute bottom-40 right-[25%] text-foreground/[0.04] font-mono text-4xl animate-float-medium transition-transform duration-300 ease-out select-none"
-          style={{ transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)` }}
+          className="absolute top-[35%] left-[8%] text-foreground/[0.06] font-mono text-base animate-float-medium transition-transform duration-300 ease-out select-none"
+          style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
         >
-          [ ]
-        </div>
-        
-        {/* useEffect hook - top left */}
-        <div 
-          className="absolute top-[30%] left-[8%] text-foreground/[0.03] font-mono text-xs animate-float-reverse transition-transform duration-300 ease-out select-none"
-          style={{ transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)` }}
-        >
-          {'useEffect(() => {})'}
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/[0.08]">$</span>
+            <span key={leftCommandIndex} className="typing-animation inline-block">
+              {devCommandsLeft[leftCommandIndex]}
+            </span>
+          </div>
         </div>
         
         {/* Arrow function - center right */}
