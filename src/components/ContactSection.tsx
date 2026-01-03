@@ -92,7 +92,7 @@ const ContactSection = () => {
       <div ref={ref} className={`container mx-auto max-w-4xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">
           <p className="section-label text-background/60">Get in touch</p>
-          <h2 className="section-title shimmer-text-light">Contact</h2>
+          <h2 className="section-title shimmer-text-light">Contact Vishwa</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">

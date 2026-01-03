@@ -226,10 +226,13 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Name */}
-        <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
+        {/* SEO H1 - visually hidden */}
+        <h1 className="sr-only">Vishwa Kumar — Portfolio in AI, Cybersecurity, and Backend Development</h1>
+        
+        {/* Visible Name */}
+        <p className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground" aria-hidden="true">
           Vishwa Kumar Venkateswaran
-        </h1>
+        </p>
 
         {/* Tagline */}
         <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">

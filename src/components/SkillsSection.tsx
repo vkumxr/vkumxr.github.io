@@ -103,7 +103,7 @@ const SkillsSection = () => {
       <div ref={ref} className={`container mx-auto max-w-5xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">
           <p className="section-label">What I work with</p>
-          <h2 className="section-title shimmer-text">Skills</h2>
+          <h2 className="section-title shimmer-text">Skills and Technologies</h2>
         </div>
 
         {/* Proficiency Progress Bars */}

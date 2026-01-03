@@ -246,7 +246,7 @@ const ProjectsSection = () => {
       <div ref={ref} className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">
           <p className="section-label">What I've built</p>
-          <h2 className="section-title shimmer-text">Projects</h2>
+          <h2 className="section-title shimmer-text">AI & Cybersecurity Projects</h2>
         </div>
 
         <div className={`transition-all duration-700 ${
