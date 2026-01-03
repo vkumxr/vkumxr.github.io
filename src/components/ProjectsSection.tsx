@@ -4,84 +4,87 @@ import { useInView } from '../hooks/useInView';
 import { useScrollY } from '../hooks/useParallax';
 import { ArrowUpRight, Github, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { projects } from '../data/projects';
+import TiltCard from './TiltCard';
 
 const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
-  <div className="group card-clean min-w-[340px] max-w-[340px] flex-shrink-0">
-    {/* Header */}
-    <div className="flex items-start justify-between mb-4">
-      <div>
-        <h3 className="text-lg font-semibold text-foreground group-hover:text-foreground transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-muted-foreground text-sm">{project.subtitle}</p>
-      </div>
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-muted-foreground hover:text-foreground transition-colors"
-        aria-label={`View ${project.title} on GitHub`}
-      >
-        <Github size={20} />
-      </a>
-    </div>
-
-    {/* Description */}
-    <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-
-    {/* Tech Stack */}
-    <div className="flex flex-wrap gap-2 mb-4">
-      {project.techStack.map((tech) => (
-        <span
-          key={tech}
-          className="skill-tag text-xs"
-        >
-          {tech}
-        </span>
-      ))}
-    </div>
-
-    {/* Highlights */}
-    <ul className="space-y-2 mb-5">
-      {project.highlights.map((highlight, i) => (
-        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-          <span className="w-1 h-1 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
-          <span>{highlight}</span>
-        </li>
-      ))}
-    </ul>
-
-    {/* Links */}
-    <div className="flex items-center gap-4 flex-wrap">
-      <Link
-        to={`/projects/${project.slug}`}
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
-      >
-        <FileText size={14} />
-        Case Study
-      </Link>
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-      >
-        GitHub
-        <ArrowUpRight size={14} />
-      </a>
-      {project.demoUrl && (
+  <TiltCard className="min-w-[340px] max-w-[340px] flex-shrink-0" tiltAmount={8}>
+    <div className="group card-clean h-full" data-depth-card>
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-foreground transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-muted-foreground text-sm">{project.subtitle}</p>
+        </div>
         <a
-          href={project.demoUrl}
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground hover:text-foreground transition-colors"
+          aria-label={`View ${project.title} on GitHub`}
+        >
+          <Github size={20} />
+        </a>
+      </div>
+
+      {/* Description */}
+      <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+
+      {/* Tech Stack */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.techStack.map((tech) => (
+          <span
+            key={tech}
+            className="skill-tag text-xs"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Highlights */}
+      <ul className="space-y-2 mb-5">
+        {project.highlights.map((highlight, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+            <span className="w-1 h-1 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
+            <span>{highlight}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Links */}
+      <div className="flex items-center gap-4 flex-wrap">
+        <Link
+          to={`/projects/${project.slug}`}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
+        >
+          <FileText size={14} />
+          Case Study
+        </Link>
+        <a
+          href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          Demo
-          <ExternalLink size={14} />
+          GitHub
+          <ArrowUpRight size={14} />
         </a>
-      )}
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Demo
+            <ExternalLink size={14} />
+          </a>
+        )}
+      </div>
     </div>
-  </div>
+  </TiltCard>
 );
 
 // Mobile Card Stack Component

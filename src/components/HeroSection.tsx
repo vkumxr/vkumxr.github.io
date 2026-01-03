@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import profileImage from '@/assets/profile.png';
 
+// Lazy load the 3D scene for performance
+const Hero3DScene = lazy(() => import('./Hero3DScene'));
 const socialLinks = [
   {
     icon: Github,
@@ -122,14 +124,19 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
     >
+      {/* 3D Scene Background */}
+      <Suspense fallback={null}>
+        <Hero3DScene />
+      </Suspense>
+      
       {/* Noise/Grain Texture Overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" style={{ zIndex: 1 }} />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" style={{ zIndex: 1 }} />
       
-      {/* Floating Code/Tech Elements with Parallax - Hidden on mobile */}
-      <div className="absolute inset-0 overflow-hidden hidden md:block">
+      {/* Floating Code/Tech Elements with Parallax - Hidden on mobile - positioned above 3D */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block" style={{ zIndex: 2 }}>
         {/* Code brackets - top right */}
         <div 
           className="absolute top-20 right-[10%] text-foreground/15 font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
