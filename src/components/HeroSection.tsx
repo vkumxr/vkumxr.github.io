@@ -1,9 +1,7 @@
 import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import profileImage from '@/assets/profile.png';
-
-// Lazy load the 3D scene for performance
-const Hero3DScene = lazy(() => import('./Hero3DScene'));
 const socialLinks = [
   {
     icon: Github,
@@ -119,16 +117,51 @@ const HeroSection = () => {
     window.open('https://linkedin.com/in/vishwakumarv/', '_blank');
   };
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: i * 0.03,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    }),
+  };
+
+  const heroTitle = "Vishwa Kumar";
+  const heroSubtitle = "Portfolio in AI, Cybersecurity, and Backend Development";
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
     >
-      {/* 3D Scene Background */}
-      <Suspense fallback={null}>
-        <Hero3DScene />
-      </Suspense>
-      
       {/* Noise/Grain Texture Overlay */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" style={{ zIndex: 1 }} />
       
@@ -221,41 +254,81 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto max-w-4xl text-center relative z-10">
+      <motion.div 
+        className="container mx-auto max-w-4xl text-center relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Profile Image */}
-        <div className="mb-8 animate-fade-up">
-          <div className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-foreground/20">
+        <motion.div className="mb-8" variants={itemVariants}>
+          <motion.div 
+            className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-foreground/20"
+            whileHover={{ scale: 1.05, borderColor: 'hsl(var(--foreground) / 0.4)' }}
+            transition={{ duration: 0.3 }}
+          >
             <img 
               src={profileImage} 
               alt="Vishwa Kumar - AI & Cybersecurity Engineer" 
               className="w-full h-full object-cover"
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Main H1 for SEO */}
-        <h1 className="animate-fade-up-delay-1 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-foreground">
-          Vishwa Kumar — Portfolio in AI, Cybersecurity, and Backend Development
+        {/* Main H1 for SEO - Animated letter by letter */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-2 text-foreground overflow-hidden">
+          {heroTitle.split('').map((letter, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={letterVariants}
+              initial="hidden"
+              animate="visible"
+              className="inline-block"
+              style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+            >
+              {letter === ' ' ? '\u00A0' : letter}
+            </motion.span>
+          ))}
         </h1>
+        
+        <motion.p 
+          className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
+          variants={itemVariants}
+        >
+          {heroSubtitle}
+        </motion.p>
 
         {/* Tagline */}
-        <p className="animate-fade-up-delay-2 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10">
+        <motion.p 
+          className="text-base sm:text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed mb-10"
+          variants={itemVariants}
+        >
           Engineering student specializing in AI-driven systems, cybersecurity, and scalable backend development.
-        </p>
+        </motion.p>
 
         {/* CTAs */}
-        <div className="animate-fade-up-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        <motion.div 
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          variants={itemVariants}
+        >
           {/* View Projects - Left */}
-          <button
+          <motion.button
             onClick={scrollToProjects}
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-colors duration-200"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
             View Projects
             <ArrowDown size={18} className="group-hover:translate-y-0.5 transition-transform" />
-          </button>
+          </motion.button>
           
           {/* Hire Me - Center with squircle running glow border */}
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
             <div className="absolute -inset-[3px] rounded-lg bg-gradient-to-r from-foreground via-foreground/50 to-foreground opacity-75 blur-sm animate-pulse" />
             <div className="absolute -inset-[2px] rounded-lg overflow-hidden">
               <div className="absolute inset-0 bg-gradient-conic from-transparent via-foreground to-transparent animate-spin-slow" 
@@ -263,46 +336,74 @@ const HeroSection = () => {
             </div>
             <button
               onClick={openLinkedIn}
-              className="relative inline-flex items-center justify-center px-8 py-3 rounded-md bg-foreground text-background font-semibold transition-all duration-200 hover:scale-105"
+              className="relative inline-flex items-center justify-center px-8 py-3 rounded-md bg-foreground text-background font-semibold transition-all duration-200"
             >
               Hire Me
             </button>
-          </div>
+          </motion.div>
 
           {/* Download Resume - Right */}
-          <a
+          <motion.a
             href="/VISHWA-RESUME.pdf"
             download="Vishwa_Kumar_Resume.pdf"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-all duration-200"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-colors duration-200"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
           >
             <FileText size={18} />
             Download Resume
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Social Links */}
-        <div className="animate-fade-up-delay-4 flex items-center justify-center gap-4">
-          {socialLinks.map((link) => (
-            <a
+        <motion.div 
+          className="flex items-center justify-center gap-4"
+          variants={itemVariants}
+        >
+          {socialLinks.map((link, index) => (
+            <motion.a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"
               aria-label={link.label}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ 
+                delay: 0.8 + index * 0.1, 
+                duration: 0.4,
+                type: "spring",
+                stiffness: 200 
+              }}
+              whileHover={{ scale: 1.2, y: -3 }}
+              whileTap={{ scale: 0.9 }}
             >
               <link.icon size={20} />
-            </a>
+            </motion.a>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-up-delay-5">
-        <div className="w-5 h-8 rounded-full border border-foreground/30 flex items-start justify-center p-1.5">
-          <div className="w-0.5 h-1.5 rounded-full bg-foreground/50 animate-bounce" />
-        </div>
-      </div>
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+      >
+        <motion.div 
+          className="w-5 h-8 rounded-full border border-foreground/30 flex items-start justify-center p-1.5"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <motion.div 
+            className="w-0.5 h-1.5 rounded-full bg-foreground/50"
+            animate={{ y: [0, 4, 0], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
