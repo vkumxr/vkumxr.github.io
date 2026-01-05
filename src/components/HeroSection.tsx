@@ -1,7 +1,10 @@
 import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import profileImage from '@/assets/profile.png';
+import { MagneticWrapper } from './motion/MagneticButton';
+import { AnimatedText, Typewriter } from './motion/AnimatedText';
+import { springPresets, easingPresets } from '@/hooks/useMotionAnimations';
 const socialLinks = [
   {
     icon: Github,
@@ -355,32 +358,31 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
-        {/* Social Links */}
+        {/* Social Links with Magnetic Effect */}
         <motion.div 
           className="flex items-center justify-center gap-4"
           variants={itemVariants}
         >
           {socialLinks.map((link, index) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-icon"
-              aria-label={link.label}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ 
-                delay: 0.8 + index * 0.1, 
-                duration: 0.4,
-                type: "spring",
-                stiffness: 200 
-              }}
-              whileHover={{ scale: 1.2, y: -3 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <link.icon size={20} />
-            </motion.a>
+            <MagneticWrapper key={link.label} strength={0.4} radius={100}>
+              <motion.a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label={link.label}
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ 
+                  delay: 0.8 + index * 0.1, 
+                  ...springPresets.bouncy,
+                }}
+                whileHover={{ scale: 1.2, y: -3 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <link.icon size={20} />
+              </motion.a>
+            </MagneticWrapper>
           ))}
         </motion.div>
       </motion.div>

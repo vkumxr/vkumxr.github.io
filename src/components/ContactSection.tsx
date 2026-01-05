@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { useInView } from '../hooks/useInView';
 import { useScrollY } from '../hooks/useParallax';
@@ -7,6 +8,9 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { staggerContainer, fadeUp, slideIn, springPresets } from '../hooks/useMotionAnimations';
+import { MagneticWrapper } from './motion/MagneticButton';
+import { Parallax } from './motion/ScrollAnimations';
 
 const EMAILJS_SERVICE_ID = 'service_hbvqs2f';
 const EMAILJS_TEMPLATE_ID = 'template_h66mljm';
@@ -89,19 +93,29 @@ const ContactSection = () => {
         style={{ transform: `translateX(-50%) translateY(${scrollY * -0.03}px)` }}
       />
 
-      <div ref={ref} className={`container mx-auto max-w-4xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
-        <div className="section-header">
+      <motion.div 
+        ref={ref} 
+        className="container mx-auto max-w-4xl relative z-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer(0.15, 0.1)}
+      >
+        <motion.div className="section-header" variants={fadeUp}>
           <p className="section-label text-background/60">Get in touch</p>
           <h2 className="section-title shimmer-text-light">Contact Vishwa</h2>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Form */}
-          <div className={`transition-all duration-700 delay-100 ${
-            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          <motion.div variants={slideIn('left')}>
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, ...springPresets.gentle }}
+              >
                 <label htmlFor="name" className="block text-sm font-medium mb-2 text-background">
                   Name
                 </label>
@@ -113,9 +127,14 @@ const ContactSection = () => {
                   placeholder="Your name"
                   className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
-              </div>
+              </motion.div>
               
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, ...springPresets.gentle }}
+              >
                 <label htmlFor="email" className="block text-sm font-medium mb-2 text-background">
                   Email
                 </label>
@@ -127,9 +146,14 @@ const ContactSection = () => {
                   placeholder="your@email.com"
                   className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
-              </div>
+              </motion.div>
               
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, ...springPresets.gentle }}
+              >
                 <label htmlFor="message" className="block text-sm font-medium mb-2 text-background">
                   Message
                 </label>
@@ -141,82 +165,109 @@ const ContactSection = () => {
                   rows={5}
                   className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50 resize-none"
                 />
-              </div>
+              </motion.div>
               
-              <Button type="submit" disabled={isSubmitting} className="w-full bg-background text-foreground hover:bg-background/90">
-                {isSubmitting ? (
-                  'Sending...'
-                ) : (
-                  <>
-                    <Send size={18} className="mr-2" />
-                    Send Message
-                  </>
-                )}
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, ...springPresets.bouncy }}
+              >
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting} 
+                  className="w-full bg-background text-foreground hover:bg-background/90"
+                >
+                  {isSubmitting ? (
+                    <motion.span
+                      animate={{ opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    >
+                      Sending...
+                    </motion.span>
+                  ) : (
+                    <>
+                      <Send size={18} className="mr-2" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </motion.div>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className={`space-y-6 transition-all duration-700 delay-200 ${
-            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
+          <motion.div className="space-y-6" variants={slideIn('right')}>
             <div>
               <h3 className="text-lg font-semibold mb-4 text-background">Contact Information</h3>
               <div className="space-y-4">
-                <a 
-                  href="mailto:vishwakumarv05@gmail.com"
-                  className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
+                {[
+                  { href: 'mailto:vishwakumarv05@gmail.com', icon: Mail, text: 'vishwakumarv05@gmail.com' },
+                  { href: 'tel:+919342236718', icon: Phone, text: '+91 9342236718' },
+                ].map((item, i) => (
+                  <motion.a 
+                    key={item.text}
+                    href={item.href}
+                    className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, ...springPresets.gentle }}
+                    whileHover={{ x: 5 }}
+                  >
+                    <item.icon size={18} />
+                    <span>{item.text}</span>
+                  </motion.a>
+                ))}
+                <motion.div 
+                  className="flex items-center gap-3 text-background/70"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, ...springPresets.gentle }}
                 >
-                  <Mail size={18} />
-                  <span>vishwakumarv05@gmail.com</span>
-                </a>
-                <a 
-                  href="tel:+919342236718"
-                  className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
-                >
-                  <Phone size={18} />
-                  <span>+91 9342236718</span>
-                </a>
-                <div className="flex items-center gap-3 text-background/70">
                   <MapPin size={18} />
                   <span>Bengaluru, Karnataka, India</span>
-                </div>
+                </motion.div>
               </div>
             </div>
 
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, ...springPresets.gentle }}
+            >
               <h3 className="text-lg font-semibold mb-4 text-background">Connect</h3>
               <div className="flex items-center gap-3">
-                <a
-                  href="https://github.com/vkumxr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon-inverted"
-                  aria-label="GitHub"
-                >
-                  <Github size={18} />
-                </a>
-                <a
-                  href="https://linkedin.com/in/vishwakumarv/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon-inverted"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </a>
-                <a
-                  href="mailto:vishwakumarv05@gmail.com"
-                  className="social-icon-inverted"
-                  aria-label="Email"
-                >
-                  <Mail size={18} />
-                </a>
+                {[
+                  { href: 'https://github.com/vkumxr', icon: Github, label: 'GitHub' },
+                  { href: 'https://linkedin.com/in/vishwakumarv/', icon: Linkedin, label: 'LinkedIn' },
+                  { href: 'mailto:vishwakumarv05@gmail.com', icon: Mail, label: 'Email' },
+                ].map((link, i) => (
+                  <MagneticWrapper key={link.label} strength={0.4} radius={80}>
+                    <motion.a
+                      href={link.href}
+                      target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                      rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                      className="social-icon-inverted"
+                      aria-label={link.label}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.7 + i * 0.1, ...springPresets.bouncy }}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <link.icon size={18} />
+                    </motion.a>
+                  </MagneticWrapper>
+                ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

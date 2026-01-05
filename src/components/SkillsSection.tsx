@@ -1,7 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
 import { useScrollY } from '../hooks/useParallax';
 import { Code2, Wrench, Monitor, Shield } from 'lucide-react';
+import { staggerContainer, fadeUp, scaleUp, springPresets } from '../hooks/useMotionAnimations';
+import { HoverTilt } from './motion/GestureEffects';
 
 const skillCategories = [
   {
@@ -100,16 +103,21 @@ const SkillsSection = () => {
         style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * -0.02}px)` }}
       />
 
-      <div ref={ref} className={`container mx-auto max-w-5xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
-        <div className="section-header">
+      <motion.div 
+        ref={ref} 
+        className="container mx-auto max-w-5xl relative z-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerContainer(0.1, 0.1)}
+      >
+        <motion.div className="section-header" variants={fadeUp}>
           <p className="section-label">What I work with</p>
           <h2 className="section-title shimmer-text">Skills and Technologies</h2>
-        </div>
+        </motion.div>
 
         {/* Proficiency Progress Bars */}
-        <div className={`mb-12 max-w-2xl mx-auto transition-all duration-700 ${
-          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
+        <motion.div className="mb-12 max-w-2xl mx-auto" variants={fadeUp}>
           <h3 className="text-lg font-semibold text-foreground mb-6 text-center">Proficiency Levels</h3>
           <div className="space-y-4">
             {proficiencySkills.map((skill, index) => (
@@ -127,36 +135,50 @@ const SkillsSection = () => {
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Skill Categories Grid */}
+        {/* Skill Categories Grid with 3D Tilt */}
         <div className="grid md:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => (
-            <div
+            <motion.div
               key={category.title}
-              className={`card-glow corner-accent transition-all duration-700 ${
-                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${index * 100 + 500}ms` }}
+              variants={scaleUp}
+              custom={index}
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-10 rounded-md bg-foreground/10 flex items-center justify-center transition-all duration-300 group-hover:bg-foreground/20">
-                  <category.icon className="text-foreground" size={20} />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
-              </div>
+              <HoverTilt tiltAmount={8} glare>
+                <div className="card-glow corner-accent h-full">
+                  <div className="flex items-center gap-3 mb-5">
+                    <motion.div 
+                      className="w-10 h-10 rounded-md bg-foreground/10 flex items-center justify-center"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={springPresets.bouncy}
+                    >
+                      <category.icon className="text-foreground" size={20} />
+                    </motion.div>
+                    <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
+                  </div>
 
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span key={skill} className="skill-tag cursor-default">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.span 
+                        key={skill} 
+                        className="skill-tag cursor-default"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: skillIndex * 0.05 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
+              </HoverTilt>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
