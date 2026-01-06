@@ -1,57 +1,356 @@
-import { Github, Linkedin, FileText, ArrowDown } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, ArrowDown, FileText, Twitter, Instagram, BookOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import profileImage from '@/assets/profile.png';
+import { MagneticWrapper } from './motion/MagneticButton';
+import { AnimatedText, Typewriter } from './motion/AnimatedText';
+import { springPresets, easingPresets } from '@/hooks/useMotionAnimations';
+const socialLinks = [
+  {
+    icon: Github,
+    href: 'https://github.com/vkumxr',
+    label: 'GitHub',
+  },
+  {
+    icon: Linkedin,
+    href: 'https://linkedin.com/in/vishwakumarv/',
+    label: 'LinkedIn',
+  },
+  {
+    icon: Twitter,
+    href: 'https://x.com/vkumxrr',
+    label: 'Twitter',
+  },
+  {
+    icon: Instagram,
+    href: 'https://www.instagram.com/vishwakumar_vk/',
+    label: 'Instagram',
+  },
+  {
+    icon: BookOpen,
+    href: 'https://substack.com/@vkumxr',
+    label: 'Substack',
+  },
+  {
+    icon: Mail,
+    href: 'mailto:vishwakumarv05@gmail.com',
+    label: 'Email',
+  },
+];
+
+const devCommandsRight = [
+  'npm run dev',
+  'git commit -m "feat"',
+  'npm install react',
+  'git push origin main',
+];
+
+const devCommandsLeft = [
+  'npm run build',
+  'git clone repo',
+  'yarn add axios',
+  'npm install -D',
+];
+
+const sudoCommandsTopRight = [
+  'sudo apt update',
+  'sudo systemctl start',
+  'sudo chmod 755',
+  'sudo service restart',
+];
+
+const sudoCommandsBottomLeft = [
+  'sudo apt install',
+  'sudo rm -rf node_modules',
+  'sudo nano config',
+  'sudo ufw enable',
+];
 
 const HeroSection = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [rightCommandIndex, setRightCommandIndex] = useState(0);
+  const [leftCommandIndex, setLeftCommandIndex] = useState(0);
+  const [sudoTopRightIndex, setSudoTopRightIndex] = useState(0);
+  const [sudoBottomLeftIndex, setSudoBottomLeftIndex] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const rightInterval = setInterval(() => {
+      setRightCommandIndex((prev) => (prev + 1) % devCommandsRight.length);
+    }, 4000);
+    const leftInterval = setInterval(() => {
+      setLeftCommandIndex((prev) => (prev + 1) % devCommandsLeft.length);
+    }, 3500);
+    const sudoTopRightInterval = setInterval(() => {
+      setSudoTopRightIndex((prev) => (prev + 1) % sudoCommandsTopRight.length);
+    }, 4500);
+    const sudoBottomLeftInterval = setInterval(() => {
+      setSudoBottomLeftIndex((prev) => (prev + 1) % sudoCommandsBottomLeft.length);
+    }, 3800);
+    return () => {
+      clearInterval(rightInterval);
+      clearInterval(leftInterval);
+      clearInterval(sudoTopRightInterval);
+      clearInterval(sudoBottomLeftInterval);
+    };
+  }, []);
+
   const scrollToProjects = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('projects');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 pt-20">
-      <div className="max-w-3xl mx-auto text-center">
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Hi — I'm Vishwa.
-          <br />
-          <span className="text-muted-foreground">
-            I build practical tools, AI systems, and debugging automation.
-          </span>
-        </motion.h1>
+  const openResume = () => {
+    window.open('/VISHWA-RESUME.pdf', '_blank');
+  };
 
-        <motion.p
-          className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+  const openLinkedIn = () => {
+    window.open('https://linkedin.com/in/vishwakumarv/', '_blank');
+  };
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
+  };
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: i * 0.03,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    }),
+  };
+
+  const heroTitle = "Vishwa Kumar";
+  const heroSubtitle = "Portfolio in AI, Cybersecurity, and Backend Development";
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
+    >
+      {/* Noise/Grain Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" style={{ zIndex: 1 }} />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" style={{ zIndex: 1 }} />
+      
+      {/* Floating Code/Tech Elements with Parallax - Hidden on mobile - positioned above 3D */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block" style={{ zIndex: 2 }}>
+        {/* Code brackets - top right */}
+        <div 
+          className="absolute top-20 right-[10%] text-foreground/15 font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)` }}
         >
-          Focused on reverse-engineering, backend systems, and intelligent developer tools.
+          {'{ }'}
+        </div>
+        
+        {/* HTML tag - bottom left */}
+        <div 
+          className="absolute bottom-32 left-[8%] text-foreground/15 font-mono text-3xl animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+        >
+          {'</>'}
+        </div>
+        
+        {/* Terminal prompt - right side with cycling typing animation */}
+        <div 
+          className="absolute top-1/2 right-[10%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/30">$</span>
+            <span key={rightCommandIndex} className="typing-animation inline-block">
+              {devCommandsRight[rightCommandIndex]}
+            </span>
+          </div>
+        </div>
+        
+        {/* Terminal prompt - left side with cycling typing animation */}
+        <div 
+          className="absolute top-[35%] left-[8%] text-foreground/20 font-mono text-base animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/30">$</span>
+            <span key={leftCommandIndex} className="typing-animation inline-block">
+              {devCommandsLeft[leftCommandIndex]}
+            </span>
+          </div>
+        </div>
+        
+        {/* Arrow function - center right */}
+        <div 
+          className="absolute top-[65%] right-[35%] text-foreground/15 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
+        >
+          {'=>'}
+        </div>
+        
+        {/* Semicolon - top center */}
+        <div 
+          className="absolute top-[15%] left-1/2 text-foreground/15 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)` }}
+        >
+          ;
+        </div>
+        
+        {/* Sudo command - bottom right (near View Resume level) */}
+        <div 
+          className="absolute bottom-[28%] right-[5%] text-foreground/20 font-mono text-base transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translateX(${mousePosition.x * -18}px)` }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/30">$</span>
+            <span key={sudoTopRightIndex} className="typing-animation inline-block">
+              {sudoCommandsTopRight[sudoTopRightIndex]}
+            </span>
+          </div>
+        </div>
+        
+        {/* Sudo command - bottom left */}
+        <div 
+          className="absolute bottom-[22%] left-[8%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
+          style={{ transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 12}px)` }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="text-foreground/30">$</span>
+            <span key={sudoBottomLeftIndex} className="typing-animation inline-block">
+              {sudoCommandsBottomLeft[sudoBottomLeftIndex]}
+            </span>
+          </div>
+        </div>
+      </div>
+      <motion.div 
+        className="container mx-auto max-w-4xl text-center relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Profile Image */}
+        <motion.div className="mb-8" variants={itemVariants}>
+          <motion.div 
+            className="w-32 h-32 mx-auto rounded-full overflow-hidden border-2 border-foreground/20"
+            whileHover={{ scale: 1.05, borderColor: 'hsl(var(--foreground) / 0.4)' }}
+            transition={{ duration: 0.3 }}
+          >
+            <img 
+              src={profileImage} 
+              alt="Vishwa Kumar - AI & Cybersecurity Engineer" 
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Main H1 for SEO - Animated letter by letter */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-2 text-foreground overflow-hidden">
+          {heroTitle.split('').map((letter, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={letterVariants}
+              initial="hidden"
+              animate="visible"
+              className="inline-block"
+              style={{ display: letter === ' ' ? 'inline' : 'inline-block' }}
+            >
+              {letter === ' ' ? '\u00A0' : letter}
+            </motion.span>
+          ))}
+        </h1>
+        
+        <motion.p 
+          className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
+          variants={itemVariants}
+        >
+          {heroSubtitle}
         </motion.p>
 
-        <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        {/* Tagline */}
+        <motion.p 
+          className="text-base sm:text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed mb-10"
+          variants={itemVariants}
         >
+          Engineering student specializing in AI-driven systems, cybersecurity, and scalable backend development.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div 
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+          variants={itemVariants}
+        >
+          {/* View Projects - Left */}
           <motion.button
             onClick={scrollToProjects}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-foreground text-background font-medium"
-            whileHover={{ scale: 1.02 }}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-colors duration-200"
+            whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
             View Projects
-            <ArrowDown size={18} />
+            <ArrowDown size={18} className="group-hover:translate-y-0.5 transition-transform" />
           </motion.button>
+          
+          {/* Hire Me - Center with squircle running glow border */}
+          <motion.div 
+            className="relative"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="absolute -inset-[3px] rounded-lg bg-gradient-to-r from-foreground via-foreground/50 to-foreground opacity-75 blur-sm animate-pulse" />
+            <div className="absolute -inset-[2px] rounded-lg overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-conic from-transparent via-foreground to-transparent animate-spin-slow" 
+                   style={{ animationDuration: '3s' }} />
+            </div>
+            <button
+              onClick={openLinkedIn}
+              className="relative inline-flex items-center justify-center px-8 py-3 rounded-md bg-foreground text-background font-semibold transition-all duration-200"
+            >
+              Hire Me
+            </button>
+          </motion.div>
 
+          {/* Download Resume - Right */}
           <motion.a
             href="/VISHWA-RESUME.pdf"
             download="Vishwa_Kumar_Resume.pdf"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md border border-border text-foreground font-medium hover:border-foreground/40 transition-colors"
-            whileHover={{ scale: 1.02 }}
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-md border border-foreground/30 text-foreground font-medium hover:bg-foreground/10 transition-colors duration-200"
+            whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
             <FileText size={18} />
@@ -59,36 +358,54 @@ const HeroSection = () => {
           </motion.a>
         </motion.div>
 
-        <motion.div
-          className="flex items-center justify-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        {/* Social Links with Magnetic Effect */}
+        <motion.div 
+          className="flex items-center justify-center gap-4"
+          variants={itemVariants}
         >
-          <motion.a
-            href="https://github.com/vkumxr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon"
-            aria-label="GitHub"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Github size={18} />
-          </motion.a>
-          <motion.a
-            href="https://linkedin.com/in/vishwakumarv/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon"
-            aria-label="LinkedIn"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Linkedin size={18} />
-          </motion.a>
+          {socialLinks.map((link, index) => (
+            <MagneticWrapper key={link.label} strength={0.4} radius={100}>
+              <motion.a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label={link.label}
+                initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ 
+                  delay: 0.8 + index * 0.1, 
+                  ...springPresets.bouncy,
+                }}
+                whileHover={{ scale: 1.2, y: -3 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <link.icon size={20} />
+              </motion.a>
+            </MagneticWrapper>
+          ))}
         </motion.div>
-      </div>
+      </motion.div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
+      >
+        <motion.div 
+          className="w-5 h-8 rounded-full border border-foreground/30 flex items-start justify-center p-1.5"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <motion.div 
+            className="w-0.5 h-1.5 rounded-full bg-foreground/50"
+            animate={{ y: [0, 4, 0], opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
