@@ -4,20 +4,15 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
 
 const navItems = [
-  { label: 'Home', href: '#home', isSection: true },
-  { label: 'About', href: '#about', isSection: true },
-  { label: 'Skills', href: '#skills', isSection: true },
-  { label: 'Experience', href: '#experience', isSection: true },
   { label: 'Projects', href: '#projects', isSection: true },
-  { label: 'Blog', href: '/blog', isSection: false },
+  { label: 'Skills', href: '#skills', isSection: true },
+  { label: 'About', href: '#about', isSection: true },
   { label: 'Contact', href: '#contact', isSection: true },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [isInHero, setIsInHero] = useState(true);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const { theme, toggleTheme } = useTheme();
@@ -25,41 +20,15 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      
-      // Check if we're in the hero section (dark background)
-      const heroSection = document.getElementById('home');
-      if (heroSection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setIsInHero(heroBottom > 80);
-      }
-
-      if (!isHomePage) {
-        setIsInHero(false);
-        return;
-      }
-
-      const sectionItems = navItems.filter((item) => item.isSection);
-      const sections = sectionItems.map((item) => item.href.slice(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
+  }, []);
 
   const handleNavClick = (item: typeof navItems[0]) => {
     setIsMobileMenuOpen(false);
-    
+
     if (!item.isSection) return;
 
     if (!isHomePage) {
@@ -73,67 +42,36 @@ const Navbar = () => {
     }
   };
 
-  const isActive = (item: typeof navItems[0]) => {
-    if (!item.isSection) {
-      return location.pathname.startsWith(item.href);
-    }
-    return isHomePage && activeSection === item.href.slice(1);
-  };
-
-  // Hero section is now light (section-light), so we use dark text colors
-  // When scrolled past hero, check if we're on a dark or light section
-  const textColor = 'text-foreground';
-  const textColorMuted = 'text-muted-foreground';
-  const hoverBg = 'hover:bg-foreground/5';
-  const activeBg = 'bg-foreground/10';
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         isScrolled
-          ? 'bg-background/90 backdrop-blur-md shadow-md border-b border-border/50'
+          ? 'bg-background/90 backdrop-blur-md border-b border-border'
           : 'bg-transparent'
       }`}
     >
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="max-w-5xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className={`text-lg font-semibold ${textColor}`}>
-            VK
+          <Link to="/" className="text-lg font-semibold">
+            Vishwa Kumar
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center gap-6">
             {navItems.map((item) => (
               <li key={item.href}>
-                {item.isSection ? (
-                  <button
-                    onClick={() => handleNavClick(item)}
-                    className={`nav-link-underline px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive(item)
-                        ? `${textColor}`
-                        : `${textColorMuted} hover:${textColor}`
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className={`nav-link-underline px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive(item)
-                        ? `${textColor}`
-                        : `${textColorMuted} hover:${textColor}`
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <button
+                  onClick={() => handleNavClick(item)}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {item.label}
+                </button>
               </li>
             ))}
             <li>
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-full ${textColorMuted} hover:${textColor} ${hoverBg} transition-all duration-200`}
+                className="p-2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -145,14 +83,14 @@ const Navbar = () => {
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full ${textColorMuted} hover:${textColor} ${hoverBg} transition-all duration-200`}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`p-2 ${textColor}`}
+              className="p-2"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -162,34 +100,16 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-[72px] bg-background/95 backdrop-blur-md z-40">
-            <ul className="flex flex-col gap-1 p-6">
+          <div className="md:hidden fixed inset-0 top-[72px] bg-background z-40">
+            <ul className="flex flex-col gap-2 p-6">
               {navItems.map((item) => (
                 <li key={item.href}>
-                  {item.isSection ? (
-                    <button
-                      onClick={() => handleNavClick(item)}
-                      className={`block w-full text-left px-4 py-3 rounded-md transition-colors text-lg ${
-                        isActive(item)
-                          ? `${activeBg} ${textColor}`
-                          : `${textColorMuted} hover:${textColor} ${hoverBg}`
-                      }`}
-                    >
-                      {item.label}
-                    </button>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block w-full text-left px-4 py-3 rounded-md transition-colors text-lg ${
-                        isActive(item)
-                          ? `${activeBg} ${textColor}`
-                          : `${textColorMuted} hover:${textColor} ${hoverBg}`
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <button
+                    onClick={() => handleNavClick(item)}
+                    className="block w-full text-left px-4 py-3 text-lg text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.label}
+                  </button>
                 </li>
               ))}
             </ul>
