@@ -158,7 +158,7 @@ const HeroSection = () => {
   };
 
   const heroTitle = "Vishwa Kumar";
-  const heroSubtitle = "Portfolio in AI, Cybersecurity, and Backend Development";
+  const heroSubtitle = "AI & Cybersecurity Student | Tooling + Reverse Engineering | Building ReDroid-AI";
 
   return (
     <section
@@ -171,91 +171,57 @@ const HeroSection = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/[0.02] to-foreground/5 pointer-events-none" style={{ zIndex: 1 }} />
       
-      {/* Floating Code/Tech Elements with Parallax - Hidden on mobile - positioned above 3D */}
-      <div className="absolute inset-0 overflow-hidden hidden md:block" style={{ zIndex: 2 }}>
+      {/* Floating Code/Tech Elements with Parallax - positioned above 3D */}
+      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 2 }}>
         {/* Code brackets - top right */}
-        <div 
-          className="absolute top-20 right-[10%] text-foreground/15 font-mono text-6xl animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * -30}px, ${mousePosition.y * -30}px)` }}
+        <motion.div 
+          className="absolute top-20 right-[10%] text-foreground/10 md:text-foreground/15 font-mono text-3xl md:text-6xl select-none pointer-events-none"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
           {'{ }'}
-        </div>
+        </motion.div>
         
         {/* HTML tag - bottom left */}
-        <div 
-          className="absolute bottom-32 left-[8%] text-foreground/15 font-mono text-3xl animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)` }}
+        <motion.div 
+          className="absolute bottom-32 left-[8%] text-foreground/10 md:text-foreground/15 font-mono text-xl md:text-3xl select-none pointer-events-none"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
         >
           {'</>'}
-        </div>
+        </motion.div>
         
-        {/* Terminal prompt - right side with cycling typing animation */}
-        <div 
-          className="absolute top-1/2 right-[10%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * -25}px, ${mousePosition.y * -25}px)` }}
+        {/* Terminal prompt - right side - hidden on mobile for cleaner look */}
+        <motion.div 
+          className="absolute top-1/2 right-[10%] text-foreground/15 font-mono text-sm md:text-base select-none pointer-events-none hidden sm:block"
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
           <div className="flex items-center gap-2">
-            <span className="text-foreground/30">$</span>
+            <span className="text-foreground/20">$</span>
             <span key={rightCommandIndex} className="typing-animation inline-block">
               {devCommandsRight[rightCommandIndex]}
             </span>
           </div>
-        </div>
-        
-        {/* Terminal prompt - left side with cycling typing animation */}
-        <div 
-          className="absolute top-[35%] left-[8%] text-foreground/20 font-mono text-base animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)` }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/30">$</span>
-            <span key={leftCommandIndex} className="typing-animation inline-block">
-              {devCommandsLeft[leftCommandIndex]}
-            </span>
-          </div>
-        </div>
+        </motion.div>
         
         {/* Arrow function - center right */}
-        <div 
-          className="absolute top-[65%] right-[35%] text-foreground/15 font-mono text-lg animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * -12}px, ${mousePosition.y * -12}px)` }}
+        <motion.div 
+          className="absolute top-[65%] right-[30%] md:right-[35%] text-foreground/10 md:text-foreground/15 font-mono text-base md:text-lg select-none pointer-events-none"
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
         >
           {'=>'}
-        </div>
+        </motion.div>
         
         {/* Semicolon - top center */}
-        <div 
-          className="absolute top-[15%] left-1/2 text-foreground/15 font-mono text-5xl animate-float-medium transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * -20}px, ${mousePosition.y * -20}px)` }}
+        <motion.div 
+          className="absolute top-[15%] left-1/2 text-foreground/10 md:text-foreground/15 font-mono text-3xl md:text-5xl select-none pointer-events-none"
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
           ;
-        </div>
-        
-        {/* Sudo command - bottom right (near View Resume level) */}
-        <div 
-          className="absolute bottom-[28%] right-[5%] text-foreground/20 font-mono text-base transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translateX(${mousePosition.x * -18}px)` }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/30">$</span>
-            <span key={sudoTopRightIndex} className="typing-animation inline-block">
-              {sudoCommandsTopRight[sudoTopRightIndex]}
-            </span>
-          </div>
-        </div>
-        
-        {/* Sudo command - bottom left */}
-        <div 
-          className="absolute bottom-[22%] left-[8%] text-foreground/20 font-mono text-base animate-float-slow transition-transform duration-300 ease-out select-none pointer-events-auto floating-glow cursor-default"
-          style={{ transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 12}px)` }}
-        >
-          <div className="flex items-center gap-2">
-            <span className="text-foreground/30">$</span>
-            <span key={sudoBottomLeftIndex} className="typing-animation inline-block">
-              {sudoCommandsBottomLeft[sudoBottomLeftIndex]}
-            </span>
-          </div>
-        </div>
+        </motion.div>
       </div>
       <motion.div 
         className="container mx-auto max-w-4xl text-center relative z-10"
@@ -296,18 +262,10 @@ const HeroSection = () => {
         </h1>
         
         <motion.p 
-          className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-6"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           variants={itemVariants}
         >
           {heroSubtitle}
-        </motion.p>
-
-        {/* Tagline */}
-        <motion.p 
-          className="text-base sm:text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed mb-10"
-          variants={itemVariants}
-        >
-          Engineering student specializing in AI-driven systems, cybersecurity, and scalable backend development.
         </motion.p>
 
         {/* CTAs */}

@@ -82,6 +82,11 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
+  /* Add scroll margin for sections to account for fixed navbar */
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   ::selection {
     @apply bg-foreground/10 text-foreground;
   }
