@@ -6,70 +6,70 @@
 
 @layer base {
   :root {
-    --background: 30 5% 8%;
-    --foreground: 35 20% 95%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
 
-    --card: 30 8% 12%;
-    --card-foreground: 35 20% 95%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 30 8% 10%;
-    --popover-foreground: 35 20% 95%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 25 80% 55%;
-    --primary-foreground: 30 5% 8%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 30 10% 18%;
-    --secondary-foreground: 35 15% 80%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 85%;
 
-    --muted: 30 8% 20%;
-    --muted-foreground: 35 10% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 25 70% 50%;
-    --accent-foreground: 30 5% 8%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 10% 20%;
-    --input: 30 10% 20%;
-    --ring: 25 80% 55%;
+    --border: 0 0% 18%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 100%;
 
     --radius: 1rem;
 
-    /* Custom gradient colors */
-    --glow-orange: 25 90% 50%;
-    --glow-amber: 35 95% 55%;
-    --glow-brown: 20 60% 25%;
+    /* Custom gradient colors - grey tones */
+    --glow-orange: 0 0% 70%;
+    --glow-amber: 0 0% 85%;
+    --glow-brown: 0 0% 25%;
   }
 
   .dark {
-    --background: 30 5% 4%;
-    --foreground: 35 20% 95%;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 95%;
 
-    --card: 30 8% 8%;
-    --card-foreground: 35 20% 95%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 30 8% 6%;
-    --popover-foreground: 35 20% 95%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 25 85% 55%;
-    --primary-foreground: 30 5% 4%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 30 10% 14%;
-    --secondary-foreground: 35 15% 80%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 80%;
 
-    --muted: 30 8% 16%;
-    --muted-foreground: 35 10% 55%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 25 75% 50%;
-    --accent-foreground: 30 5% 4%;
+    --accent: 0 0% 85%;
+    --accent-foreground: 0 0% 2%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 10% 16%;
-    --input: 30 10% 16%;
-    --ring: 25 85% 55%;
+    --border: 0 0% 14%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 100%;
   }
 }
 
@@ -142,17 +142,39 @@
     font-family: 'Space Grotesk', sans-serif;
   }
 
-  /* Hero title gradient */
+  /* Hero title gradient - grey shimmer */
   .gradient-text {
     background: linear-gradient(
       135deg,
-      hsl(var(--foreground)) 0%,
-      hsl(var(--primary)) 50%,
-      hsl(var(--glow-amber)) 100%
+      hsl(0 0% 100%) 0%,
+      hsl(0 0% 70%) 50%,
+      hsl(0 0% 100%) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Shimmer text animation */
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--foreground)) 0%,
+      hsl(0 0% 70%) 25%,
+      hsl(0 0% 95%) 50%,
+      hsl(0 0% 70%) 75%,
+      hsl(var(--foreground)) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
   }
 
   /* Social icon */
@@ -193,12 +215,12 @@
 }
 
 @layer utilities {
-  /* Orange radial glow background */
+  /* Grey radial glow background */
   .bg-glow-radial {
     background: 
-      radial-gradient(ellipse 80% 60% at 50% 120%, hsl(var(--glow-orange) / 0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 50% 100%, hsl(var(--glow-amber) / 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 100% at 50% 50%, hsl(var(--glow-brown) / 0.2) 0%, transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 120%, hsl(0 0% 30% / 0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 50% 100%, hsl(0 0% 40% / 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 100% at 50% 50%, hsl(0 0% 15% / 0.3) 0%, transparent 70%),
       hsl(var(--background));
   }
 

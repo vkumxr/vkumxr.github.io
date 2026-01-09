@@ -27,30 +27,9 @@ const ExperienceSection = () => {
   const scrollY = useScrollY();
 
   return (
-    <section ref={sectionRef} id="experience" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
-      {/* Faded background terminal elements with parallax */}
-      <Parallax offset={40} className="absolute top-1/4 right-10 hidden lg:block">
-        <div className="text-background/[0.04] font-mono text-sm leading-relaxed select-none pointer-events-none">
-          <div>$ sudo systemctl start</div>
-          <div>$ npm run deploy</div>
-          <div>$ git push origin main</div>
-        </div>
-      </Parallax>
-      <Parallax offset={-30} className="absolute bottom-1/4 left-10 hidden lg:block">
-        <div className="text-background/[0.04] font-mono text-sm leading-relaxed select-none pointer-events-none">
-          <div>$ docker-compose up</div>
-          <div>$ kubectl apply -f</div>
-          <div>$ ssh user@server</div>
-        </div>
-      </Parallax>
-
-      {/* Gradient accents with parallax */}
-      <Parallax offset={30}>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-background/5 to-transparent pointer-events-none rounded-full blur-3xl" />
-      </Parallax>
-      <Parallax offset={-30}>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-background/5 to-transparent pointer-events-none rounded-full blur-3xl" />
-      </Parallax>
+    <section ref={sectionRef} id="experience" className="py-24 md:py-32 px-6 overflow-hidden relative">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-muted/30 to-background pointer-events-none" />
 
       <motion.div 
         ref={ref} 
@@ -61,8 +40,8 @@ const ExperienceSection = () => {
         variants={staggerContainer(0.2, 0.1)}
       >
         <motion.div className="section-header" variants={fadeUp}>
-          <p className="section-label text-background/60">Where I've worked</p>
-          <h2 className="section-title shimmer-text-light">Experience</h2>
+          <p className="section-label">Where I've worked</p>
+          <h2 className="section-title shimmer-text">Experience</h2>
         </motion.div>
 
         <div className="space-y-8">
@@ -74,35 +53,28 @@ const ExperienceSection = () => {
             >
               {/* Timeline */}
               <motion.div 
-                className="absolute left-[7px] top-4 bottom-0 w-px bg-gradient-to-b from-background/50 to-background/10"
+                className="absolute left-[7px] top-4 bottom-0 w-px bg-gradient-to-b from-foreground/50 to-foreground/10"
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 style={{ transformOrigin: 'top' }}
               />
-              <motion.div 
-                className="timeline-dot-pulse"
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ ...springPresets.bouncy, delay: 0.2 }}
-              />
+              <div className="absolute left-0 top-2 w-4 h-4 rounded-full bg-foreground/20 border-2 border-foreground/60" />
               
               <ScaleOnScroll>
                 <motion.div 
-                  className="bg-background/5 border border-background/10 rounded-lg p-6 ml-4 backdrop-blur-sm"
+                  className="glass-card p-6 ml-4"
                   whileHover={{ 
-                    borderColor: 'hsl(var(--background) / 0.3)',
-                    backgroundColor: 'hsl(var(--background) / 0.1)',
+                    borderColor: 'hsl(var(--foreground) / 0.3)',
                     y: -4,
                   }}
                   transition={springPresets.smooth}
                 >
                   <div className="mb-4">
-                    <h3 className="text-xl font-semibold text-background">{exp.title}</h3>
-                    <p className="text-background/80 font-medium">{exp.company}</p>
-                    <div className="flex flex-wrap items-center gap-4 text-background/60 text-sm mt-2">
+                    <h3 className="text-xl font-semibold text-foreground">{exp.title}</h3>
+                    <p className="text-foreground/80 font-medium">{exp.company}</p>
+                    <div className="flex flex-wrap items-center gap-4 text-muted-foreground text-sm mt-2">
                       <motion.div 
                         className="flex items-center gap-1.5"
                         whileHover={{ x: 3 }}
@@ -124,19 +96,13 @@ const ExperienceSection = () => {
                     {exp.responsibilities.map((item, i) => (
                       <motion.li 
                         key={i} 
-                        className="flex items-start gap-3 text-background/70"
+                        className="flex items-start gap-3 text-muted-foreground"
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.4 + i * 0.1, ...springPresets.gentle }}
                       >
-                        <motion.span 
-                          className="w-1.5 h-1.5 rounded-full bg-background/40 mt-2 flex-shrink-0"
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: 0.5 + i * 0.1, ...springPresets.bouncy }}
-                        />
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
                         <span>{item}</span>
                       </motion.li>
                     ))}
