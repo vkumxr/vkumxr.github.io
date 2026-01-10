@@ -1,114 +1,126 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
+import { useScrollY } from '../hooks/useParallax';
+import { staggerContainer, fadeUp, blurIn, springPresets } from '../hooks/useMotionAnimations';
+import { Parallax } from './motion/ScrollAnimations';
 import profileImage from '@/assets/profile.png';
 
 const AboutSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+  const textVariants = {
+    hidden: { opacity: 0, y: 30, filter: 'blur(10px)' },
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
-    },
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.6,
+        delay: i * 0.15,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+      },
+    }),
   };
 
-  const infoItems = [
-    { label: 'Education', value: 'RV University — B.Tech' },
-    { label: 'Focus', value: 'AI & Cybersecurity' },
-    { label: 'Location', value: 'Bengaluru, India' },
-    { label: 'Status', value: 'Open to opportunities' },
-  ];
-
   return (
-    <section
-      ref={ref}
-      id="about"
-      className="py-24 md:py-32 px-6 bg-background relative overflow-hidden"
-    >
-      {/* Background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+    <section ref={sectionRef} id="about" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Gradient orbs with parallax */}
+      <Parallax offset={30}>
+        <div 
+          className="absolute top-1/4 left-1/4 w-72 h-72 bg-background/5 rounded-full blur-3xl pointer-events-none"
+        />
+      </Parallax>
+      <Parallax offset={-40}>
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-background/3 rounded-full blur-3xl pointer-events-none"
+        />
+      </Parallax>
 
-      <motion.div
+      <motion.div 
+        ref={ref} 
         className="container mx-auto max-w-6xl relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        variants={containerVariants}
+        variants={staggerContainer(0.15, 0.1)}
       >
-        <motion.div className="section-header" variants={itemVariants}>
-          <p className="section-label">Get to know me</p>
-          <h2 className="section-title">About Me</h2>
+        {/* Centered Header */}
+        <motion.div className="section-header text-center mb-12" variants={fadeUp}>
+          <p className="section-label text-background/60">Get to know me</p>
+          <h2 className="section-title shimmer-text-light">About Vishwa Kumar</h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Profile Image */}
-          <motion.div variants={itemVariants} className="order-2 lg:order-1">
-            <div className="relative">
-              <motion.div
-                className="w-full max-w-md mx-auto aspect-square rounded-3xl overflow-hidden glass-card"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img
-                  src={profileImage}
-                  alt="Vishwa Kumar"
-                  className="w-full h-full object-cover opacity-80"
-                />
-              </motion.div>
-              {/* Decorative element */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/20 rounded-2xl blur-xl" />
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:gap-12">
+          {/* Profile Photo - First on mobile, positioned right on desktop */}
+          <motion.div 
+            className="order-1 lg:order-2 mb-8 lg:mb-0 lg:w-1/2 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2"
+            variants={blurIn}
+          >
+            <div className="relative w-full h-[300px] lg:h-[600px]">
+              {/* Mobile gradient - bottom fade */}
+              <div 
+                className="absolute inset-0 z-10 lg:hidden"
+                style={{ background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, hsl(var(--foreground)) 100%)' }}
+              />
+              {/* Desktop gradient - left fade */}
+              <div 
+                className="absolute inset-0 z-10 hidden lg:block"
+                style={{ background: 'linear-gradient(to left, transparent 0%, transparent 30%, hsl(var(--foreground)) 100%)' }}
+              />
+              <motion.img 
+                src={profileImage} 
+                alt="Vishwa Kumar" 
+                className="w-full h-full object-cover object-top lg:object-center opacity-40 grayscale"
+                whileHover={{ scale: 1.05, opacity: 0.5 }}
+                transition={springPresets.smooth}
+              />
             </div>
           </motion.div>
 
-          {/* Content */}
-          <motion.div variants={itemVariants} className="order-1 lg:order-2 space-y-6">
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                I'm an engineering student with a focus on building{' '}
-                <span className="text-foreground font-medium">intelligent tools</span> that actually work in the real world.
-                My interests span AI-driven systems, backend development, and cybersecurity—three areas that, when combined,
-                create software that's both smart and secure.
-              </p>
-              <p>
-                I run <span className="text-foreground font-medium">Linux as my primary OS</span>, not because it's trendy,
-                but because I want to understand what's happening under the hood. From writing BASH scripts to debugging embedded systems,
-                I'm drawn to problems that require digging deeper than surface-level solutions.
-              </p>
-              <p>
-                My projects reflect this approach: a{' '}
-                <span className="text-foreground font-medium">reverse engineering framework</span> for Android apps,
-                a <span className="text-foreground font-medium">conversational banking assistant</span> powered by LLMs,
-                and a <span className="text-foreground font-medium">modular robotics system</span> with voice control.
-              </p>
-            </div>
-
-            {/* Info Grid */}
-            <div className="grid grid-cols-2 gap-4 pt-6">
-              {infoItems.map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  className="glass-card p-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
+          {/* Content - Second on mobile, positioned left on desktop */}
+          <div className="order-2 lg:order-1 relative z-10 lg:w-1/2">
+            <div className="space-y-6 text-lg leading-relaxed text-background/70">
+              {[
+                <>
+                  I'm an engineering student with a focus on building{' '}
+                  <span className="text-background font-medium">intelligent tools</span> that actually work in the real world.
+                  My interests span AI-driven systems, backend development, and cybersecurity—three areas that, when combined, 
+                  create software that's both smart and secure.
+                </>,
+                <>
+                  I run <span className="text-background font-medium">Linux as my primary OS</span>, not because it's trendy, 
+                  but because I want to understand what's happening under the hood. From writing BASH scripts to automate 
+                  repetitive tasks to debugging embedded systems on Raspberry Pi, I'm drawn to problems that require 
+                  digging deeper than surface-level solutions.
+                </>,
+                <>
+                  My projects reflect this approach: a{' '}
+                  <span className="text-background font-medium">reverse engineering framework</span> for Android apps, 
+                  a <span className="text-background font-medium">conversational banking assistant</span> powered by LLMs, 
+                  and a <span className="text-background font-medium">modular robotics system</span> with voice control.
+                  Each one started with a practical problem and ended with working code.
+                </>,
+                <>
+                  When I'm not coding, I'm usually exploring CTF challenges, learning about network protocols, 
+                  or experimenting with new automation workflows.
+                </>,
+              ].map((content, i) => (
+                <motion.p
+                  key={i}
+                  custom={i}
+                  variants={textVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.5 }}
                 >
-                  <p className="text-sm text-primary font-medium mb-1">{item.label}</p>
-                  <p className="text-foreground font-medium">{item.value}</p>
-                </motion.div>
+                  {content}
+                </motion.p>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </section>

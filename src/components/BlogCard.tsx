@@ -12,7 +12,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
   const readingTime = Math.ceil(wordCount / 200);
 
   return (
-    <article className="group relative glass-card overflow-hidden transition-all duration-500 hover:border-primary/30 hover:-translate-y-1">
+    <article className="group relative bg-background/5 border border-background/10 rounded-2xl overflow-hidden transition-all duration-500 hover:bg-background/10 hover:border-background/20 hover:-translate-y-1">
       <Link to={`/blog/${post.slug}`} className="block">
         <div className="aspect-video overflow-hidden">
           <img
@@ -24,7 +24,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
       </Link>
       
       <div className="p-6 space-y-4">
-        <div className="flex items-center gap-4 text-muted-foreground text-sm">
+        <div className="flex items-center gap-4 text-background/50 text-sm">
           <div className="flex items-center gap-1.5">
             <Calendar size={12} />
             <time dateTime={post.date}>{post.date}</time>
@@ -36,18 +36,18 @@ const BlogCard = ({ post }: BlogCardProps) => {
         </div>
         
         <Link to={`/blog/${post.slug}`}>
-          <h2 className="text-xl font-semibold tracking-tight text-foreground hover:text-foreground/80 transition-colors line-clamp-2 leading-snug">
+          <h2 className="text-xl font-semibold tracking-tight text-background hover:text-background/80 transition-colors line-clamp-2 leading-snug">
             {post.title}
           </h2>
         </Link>
         
-        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+        <p className="text-background/60 text-sm leading-relaxed line-clamp-3">
           {post.description}
         </p>
         
         <Link
           to={`/blog/${post.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground group/link pt-2"
+          className="inline-flex items-center gap-2 text-sm font-medium text-background/80 hover:text-background group/link pt-2"
         >
           Read More
           <ArrowRight 

@@ -10,18 +10,18 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | Vishwa Kumar Venkateswaran</title>
+        <title>Blog | Vishwa Kumar</title>
         <meta 
           name="description" 
           content="Thoughts, ideas, and updates from my learning journey. Read articles about software engineering, technology, and development insights." 
         />
-        <meta property="og:title" content="Blog | Vishwa Kumar Venkateswaran" />
+        <meta property="og:title" content="Blog | Vishwa Kumar" />
         <meta property="og:description" content="Thoughts, ideas, and updates from my learning journey." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/blog" />
       </Helmet>
 
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-foreground text-background">
         <Navbar />
         
         <main className="pt-24 pb-20">
@@ -29,7 +29,7 @@ const Blog = () => {
             {/* Back to Home */}
             <Link 
               to="/" 
-              className="animate-fade-up inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
+              className="animate-fade-up inline-flex items-center gap-2 text-sm text-background/60 hover:text-background transition-colors mb-10"
             >
               <ArrowLeft size={16} />
               Back to Home
@@ -40,7 +40,7 @@ const Blog = () => {
               <h1 className="animate-fade-up-delay-1 text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6">
                 Blog
               </h1>
-              <p className="animate-fade-up-delay-2 text-xl text-muted-foreground leading-relaxed">
+              <p className="animate-fade-up-delay-2 text-xl text-background/60 leading-relaxed">
                 Thoughts, ideas, and updates from my learning journey.
               </p>
             </header>
@@ -55,7 +55,7 @@ const Blog = () => {
                 </div>
               ) : (
                 <div className="text-center py-20">
-                  <p className="text-muted-foreground text-lg">No blog posts yet. Check back soon!</p>
+                  <p className="text-background/60 text-lg">No blog posts yet. Check back soon!</p>
                 </div>
               )}
             </section>

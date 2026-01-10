@@ -27,14 +27,14 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} | Vishwa Kumar Venkateswaran</title>
+        <title>{post.title} | Vishwa Kumar</title>
         <meta name="description" content={post.description} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:image" content={post.coverImage} />
         <meta property="og:type" content="article" />
         <meta property="article:published_time" content={post.date} />
-        <meta property="article:author" content="Vishwa Kumar Venkateswaran" />
+        <meta property="article:author" content="Vishwa Kumar" />
         <link rel="canonical" href={`/blog/${post.slug}`} />
         
         {/* Structured Data */}
@@ -48,13 +48,13 @@ const BlogPost = () => {
             "datePublished": post.date,
             "author": {
               "@type": "Person",
-              "name": "Vishwa Kumar Venkateswaran"
+              "name": "Vishwa Kumar"
             }
           })}
         </script>
       </Helmet>
 
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-foreground text-background">
         <Navbar />
         
         <main className="pt-24 pb-20">
@@ -72,7 +72,7 @@ const BlogPost = () => {
             {/* Back Link */}
             <Link 
               to="/blog" 
-              className="animate-fade-up-delay-1 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
+              className="animate-fade-up-delay-1 inline-flex items-center gap-2 text-sm text-background/60 hover:text-background transition-colors mb-10"
             >
               <ArrowLeft size={16} />
               Back to Blog
@@ -85,17 +85,17 @@ const BlogPost = () => {
               </h1>
               
               {/* Meta Info */}
-              <div className="animate-fade-up-delay-3 flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8">
+              <div className="animate-fade-up-delay-3 flex flex-wrap items-center gap-4 text-sm text-background/60 mb-8">
                 <div className="flex items-center gap-2">
                   <User size={14} />
-                  <span>Vishwa Kumar Venkateswaran</span>
+                  <span>Vishwa Kumar</span>
                 </div>
-                <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                <div className="w-1 h-1 rounded-full bg-background/30" />
                 <div className="flex items-center gap-2">
                   <Calendar size={14} />
                   <time dateTime={post.date}>{post.date}</time>
                 </div>
-                <div className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+                <div className="w-1 h-1 rounded-full bg-background/30" />
                 <div className="flex items-center gap-2">
                   <Clock size={14} />
                   <span>{readingTime} min read</span>
@@ -122,27 +122,27 @@ const BlogPost = () => {
               <ReactMarkdown
                 components={{
                   h2: ({ children }) => (
-                    <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-16 mb-6 text-foreground border-b border-border pb-4">
+                    <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-16 mb-6 text-background border-b border-background/20 pb-4">
                       {children}
                     </h2>
                   ),
                   h3: ({ children }) => (
-                    <h3 className="text-xl sm:text-2xl font-semibold tracking-tight mt-10 mb-4 text-foreground">
+                    <h3 className="text-xl sm:text-2xl font-semibold tracking-tight mt-10 mb-4 text-background">
                       {children}
                     </h3>
                   ),
                   p: ({ children }) => (
-                    <p className="text-foreground/80 text-lg leading-[1.8] mb-6">
+                    <p className="text-background/80 text-lg leading-[1.8] mb-6">
                       {children}
                     </p>
                   ),
                   strong: ({ children }) => (
-                    <strong className="text-foreground font-semibold">
+                    <strong className="text-background font-semibold">
                       {children}
                     </strong>
                   ),
                   em: ({ children }) => (
-                    <em className="text-foreground/90 italic">
+                    <em className="text-background/90 italic">
                       {children}
                     </em>
                   ),
@@ -152,23 +152,23 @@ const BlogPost = () => {
                     </ul>
                   ),
                   li: ({ children }) => (
-                    <li className="text-foreground/80 text-lg leading-[1.8] flex gap-3">
-                      <span className="text-muted-foreground select-none mt-1">•</span>
+                    <li className="text-background/80 text-lg leading-[1.8] flex gap-3">
+                      <span className="text-background/40 select-none mt-1">•</span>
                       <span>{children}</span>
                     </li>
                   ),
                   hr: () => (
-                    <hr className="my-12 border-none h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+                    <hr className="my-12 border-none h-px bg-gradient-to-r from-transparent via-background/30 to-transparent" />
                   ),
                   blockquote: ({ children }) => (
-                    <blockquote className="my-8 pl-6 border-l-4 border-primary/50 bg-muted/50 py-4 pr-4 rounded-r-lg">
-                      <div className="text-foreground/90 italic text-lg">
+                    <blockquote className="my-8 pl-6 border-l-4 border-background/50 bg-background/5 py-4 pr-4 rounded-r-lg">
+                      <div className="text-background/90 italic text-lg">
                         {children}
                       </div>
                     </blockquote>
                   ),
                   code: ({ children }) => (
-                    <code className="px-2 py-1 bg-muted text-foreground rounded text-base font-mono">
+                    <code className="px-2 py-1 bg-background/10 text-background rounded text-base font-mono">
                       {children}
                     </code>
                   ),
@@ -179,17 +179,17 @@ const BlogPost = () => {
             </div>
 
             {/* Read on Substack CTA */}
-            <div className="mt-20 pt-10 border-t border-border">
+            <div className="mt-20 pt-10 border-t border-background/20">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div>
-                  <p className="text-sm text-muted-foreground mb-3 uppercase tracking-wide">
+                  <p className="text-sm text-background/50 mb-3 uppercase tracking-wide">
                     Originally published on Substack
                   </p>
                   <a
                     href={post.substackUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+                    className="inline-flex items-center gap-2 px-8 py-4 bg-background text-foreground font-semibold rounded-full hover:bg-background/90 transition-all duration-300 hover:scale-105"
                   >
                     Read on Substack
                     <ExternalLink size={18} />
