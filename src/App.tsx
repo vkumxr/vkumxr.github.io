@@ -8,7 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { AnimatePresence, motion } from "framer-motion";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Preloader from "@/components/Preloader";
-import CursorTrail from "@/components/CursorTrail";
+import CursorSpotlight from "@/components/CursorSpotlight";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgress from "@/components/ScrollProgress";
 import SideNavDots from "@/components/SideNavDots";
@@ -125,7 +125,7 @@ const App: React.FC = () => (
       <ThemeProvider>
         <TooltipProvider>
           <Preloader />
-          <CursorTrail />
+          <CursorSpotlight />
           <BackToTop />
           <ScrollProgress />
           <SideNavDots />

@@ -30,7 +30,7 @@ const Footer = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            © {new Date().getFullYear()} Vishwa Kumar. All rights reserved.
+            © {new Date().getFullYear()} Vishwa Kumar Venkateswaran. All rights reserved.
           </motion.p>
           
           <div className="flex items-center gap-3">

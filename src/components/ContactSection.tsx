@@ -103,7 +103,7 @@ const ContactSection = () => {
       >
         <motion.div className="section-header" variants={fadeUp}>
           <p className="section-label text-background/60">Get in touch</p>
-          <h2 className="section-title shimmer-text-light">Contact Vishwa</h2>
+          <h2 className="section-title shimmer-text-light">Contact Vishwa Kumar</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">

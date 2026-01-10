@@ -36,7 +36,7 @@ const ProjectDetail = () => {
   return (
     <main className="relative min-h-screen bg-background">
       <Helmet>
-        <title>{project.title} | Vishwa Kumar</title>
+        <title>{project.title} | Vishwa Kumar Venkateswaran</title>
         <meta name="description" content={project.description} />
       </Helmet>
 

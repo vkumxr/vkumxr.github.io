@@ -27,14 +27,14 @@ const BlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{post.title} | Vishwa Kumar</title>
+        <title>{post.title} | Vishwa Kumar Venkateswaran</title>
         <meta name="description" content={post.description} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:image" content={post.coverImage} />
         <meta property="og:type" content="article" />
         <meta property="article:published_time" content={post.date} />
-        <meta property="article:author" content="Vishwa Kumar" />
+        <meta property="article:author" content="Vishwa Kumar Venkateswaran" />
         <link rel="canonical" href={`/blog/${post.slug}`} />
         
         {/* Structured Data */}
@@ -48,7 +48,7 @@ const BlogPost = () => {
             "datePublished": post.date,
             "author": {
               "@type": "Person",
-              "name": "Vishwa Kumar"
+              "name": "Vishwa Kumar Venkateswaran"
             }
           })}
         </script>
@@ -88,7 +88,7 @@ const BlogPost = () => {
               <div className="animate-fade-up-delay-3 flex flex-wrap items-center gap-4 text-sm text-background/60 mb-8">
                 <div className="flex items-center gap-2">
                   <User size={14} />
-                  <span>Vishwa Kumar</span>
+                  <span>Vishwa Kumar Venkateswaran</span>
                 </div>
                 <div className="w-1 h-1 rounded-full bg-background/30" />
                 <div className="flex items-center gap-2">

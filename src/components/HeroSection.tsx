@@ -157,7 +157,7 @@ const HeroSection = () => {
     }),
   };
 
-  const heroTitle = "Vishwa Kumar";
+  const heroTitle = "Vishwa Kumar Venkateswaran";
   const heroSubtitle = "AI & Cybersecurity Student | Tooling + Reverse Engineering | Building ReDroid-AI";
 
   return (
@@ -238,7 +238,7 @@ const HeroSection = () => {
           >
             <img 
               src={profileImage} 
-              alt="Vishwa Kumar - AI & Cybersecurity Engineer" 
+              alt="Vishwa Kumar Venkateswaran - AI & Cybersecurity Engineer" 
               className="w-full h-full object-cover"
             />
           </motion.div>
