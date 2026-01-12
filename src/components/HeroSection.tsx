@@ -5,6 +5,7 @@ import profileImage from '@/assets/profile.png';
 import { MagneticWrapper } from './motion/MagneticButton';
 import { AnimatedText, Typewriter } from './motion/AnimatedText';
 import { springPresets, easingPresets } from '@/hooks/useMotionAnimations';
+import { HeroDecorations } from './DecorativeShapes';
 const socialLinks = [
   {
     icon: Github,
@@ -165,6 +166,9 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-6 section-light overflow-hidden"
     >
+      {/* Decorative geometric shapes */}
+      <HeroDecorations />
+      
       {/* Noise/Grain Texture Overlay */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none noise-texture" style={{ zIndex: 1 }} />
       

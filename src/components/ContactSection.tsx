@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { staggerContainer, fadeUp, slideIn, springPresets } from '../hooks/useMotionAnimations';
 import { MagneticWrapper } from './motion/MagneticButton';
 import { Parallax } from './motion/ScrollAnimations';
+import { ContactDecorations } from './DecorativeShapes';
 
 const EMAILJS_SERVICE_ID = 'service_hbvqs2f';
 const EMAILJS_TEMPLATE_ID = 'template_h66mljm';
@@ -59,6 +60,9 @@ const ContactSection = () => {
 
   return (
     <section ref={sectionRef} id="contact" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Decorative geometric shapes */}
+      <ContactDecorations />
+      
       {/* Faded background elements with parallax */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
         <div 

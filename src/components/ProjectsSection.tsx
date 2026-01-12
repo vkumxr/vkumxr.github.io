@@ -5,6 +5,7 @@ import { useScrollY } from '../hooks/useParallax';
 import { ArrowUpRight, Github, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { projects } from '../data/projects';
 import TiltCard from './TiltCard';
+import { ProjectsDecorations } from './DecorativeShapes';
 
 const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
   <TiltCard className="min-w-[340px] max-w-[340px] flex-shrink-0" tiltAmount={8}>
@@ -228,23 +229,8 @@ const ProjectsSection = () => {
 
   return (
     <section ref={sectionRef} id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden relative gradient-mesh">
-      {/* Decorative elements with parallax */}
-      <div 
-        className="absolute top-20 left-10 w-32 h-32 border border-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
-        style={{ transform: `translateY(${scrollY * 0.03}px)` }}
-      />
-      <div 
-        className="absolute bottom-20 right-10 w-48 h-48 border border-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
-        style={{ transform: `translateY(${scrollY * -0.04}px)` }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/4 w-2 h-2 bg-foreground/10 rounded-full pointer-events-none transition-transform duration-100"
-        style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * -0.02}px)` }}
-      />
-      <div 
-        className="absolute top-1/3 right-1/3 w-3 h-3 bg-foreground/5 rounded-full pointer-events-none transition-transform duration-100"
-        style={{ transform: `translate(${scrollY * -0.03}px, ${scrollY * 0.02}px)` }}
-      />
+      {/* Decorative geometric shapes */}
+      <ProjectsDecorations />
 
       <div ref={ref} className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
         <div className="section-header">

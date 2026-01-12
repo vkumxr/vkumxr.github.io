@@ -5,6 +5,7 @@ import { useScrollY } from '../hooks/useParallax';
 import { staggerContainer, fadeUp, blurIn, springPresets } from '../hooks/useMotionAnimations';
 import { Parallax } from './motion/ScrollAnimations';
 import profileImage from '@/assets/profile.png';
+import { AboutDecorations } from './DecorativeShapes';
 
 const AboutSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
@@ -27,6 +28,9 @@ const AboutSection = () => {
 
   return (
     <section ref={sectionRef} id="about" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Decorative geometric shapes */}
+      <AboutDecorations />
+      
       {/* Gradient orbs with parallax */}
       <Parallax offset={30}>
         <div 
