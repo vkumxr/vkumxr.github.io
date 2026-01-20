@@ -54,7 +54,7 @@ const AboutSection = () => {
         {/* Centered Header */}
         <motion.div className="section-header text-center mb-12" variants={fadeUp}>
           <p className="section-label text-background/60">Get to know me</p>
-          <h2 className="section-title shimmer-text-light">About Vishwa Kumar Venkateswaran</h2>
+          <h2 className="section-title text-background">About Vishwa Kumar Venkateswaran</h2>
         </motion.div>
 
         <div className="relative flex flex-col lg:flex-row lg:items-center lg:gap-12">
