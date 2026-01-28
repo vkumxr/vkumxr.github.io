@@ -159,7 +159,7 @@ const HeroSection = () => {
   };
 
   const heroTitle = "Vishwa Kumar Venkateswaran";
-  const heroSubtitle = "AI & Cybersecurity Student | Tooling + Reverse Engineering | Building ReDroid-AI";
+  const heroSubtitle = "Engineering student focused on understanding how systems break and how to secure them.";
 
   return (
     <section
