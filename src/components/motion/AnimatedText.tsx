@@ -345,4 +345,77 @@ export const Typewriter = ({
   );
 };
 
+// Cycling Typewriter - types, deletes, and cycles through phrases
+interface CyclingTypewriterProps {
+  phrases: string[];
+  className?: string;
+  typeSpeed?: number;
+  deleteSpeed?: number;
+  pauseDuration?: number;
+  cursor?: boolean;
+}
+
+export const CyclingTypewriter = ({
+  phrases,
+  className = '',
+  typeSpeed = 60,
+  deleteSpeed = 30,
+  pauseDuration = 2000,
+  cursor = true,
+}: CyclingTypewriterProps) => {
+  const [displayText, setDisplayText] = useState('');
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isPaused) {
+      const pauseTimeout = setTimeout(() => {
+        setIsPaused(false);
+        setIsDeleting(true);
+      }, pauseDuration);
+      return () => clearTimeout(pauseTimeout);
+    }
+
+    if (isDeleting) {
+      if (displayText.length === 0) {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+        return;
+      }
+      const deleteTimeout = setTimeout(() => {
+        setDisplayText(displayText.slice(0, -1));
+      }, deleteSpeed);
+      return () => clearTimeout(deleteTimeout);
+    }
+
+    if (displayText.length === currentPhrase.length) {
+      setIsPaused(true);
+      return;
+    }
+
+    const typeTimeout = setTimeout(() => {
+      setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+    }, typeSpeed);
+    return () => clearTimeout(typeTimeout);
+  }, [displayText, phraseIndex, isDeleting, isPaused, phrases, typeSpeed, deleteSpeed, pauseDuration]);
+
+  return (
+    <span className={className}>
+      {displayText}
+      {cursor && (
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
+          className="ml-0.5 inline-block"
+        >
+          |
+        </motion.span>
+      )}
+    </span>
+  );
+};
+
 export default AnimatedText;

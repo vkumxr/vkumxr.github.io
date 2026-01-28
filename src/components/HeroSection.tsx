@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import profileImage from '@/assets/profile.png';
 import { MagneticWrapper } from './motion/MagneticButton';
-import { AnimatedText, Typewriter } from './motion/AnimatedText';
+import { AnimatedText, Typewriter, CyclingTypewriter } from './motion/AnimatedText';
 import { springPresets, easingPresets } from '@/hooks/useMotionAnimations';
 import { HeroDecorations } from './DecorativeShapes';
 const socialLinks = [
@@ -159,7 +159,12 @@ const HeroSection = () => {
   };
 
   const heroTitle = "Vishwa Kumar Venkateswaran";
-  const heroSubtitle = "Engineering student focused on understanding how systems break and how to secure them.";
+  const focusAreas = [
+    "Understanding how systems break and how to secure them.",
+    "Building tools that dig deeper than surface-level solutions.",
+    "Reverse engineering, tooling, and system security.",
+    "AI-driven security and backend development.",
+  ];
 
   return (
     <section
@@ -282,7 +287,14 @@ const HeroSection = () => {
           className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto"
           variants={itemVariants}
         >
-          {heroSubtitle}
+          Engineering student focused on{' '}
+          <CyclingTypewriter 
+            phrases={focusAreas} 
+            typeSpeed={50} 
+            deleteSpeed={25} 
+            pauseDuration={2500}
+            className="text-foreground"
+          />
         </motion.p>
 
         {/* CTAs */}
