@@ -5,8 +5,8 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 px-6 section-cyber border-t border-border relative">
-      <div className="absolute inset-0 grid-cyber opacity-20" />
+    <footer className="py-12 px-6 section-cyber border-t border-border/50 relative">
+      <div className="absolute inset-0 grid-animated opacity-10" />
       
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">

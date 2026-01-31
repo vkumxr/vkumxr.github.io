@@ -61,8 +61,8 @@ const SkillsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="py-24 md:py-32 px-6 section-cyber relative">
-      <div className="absolute inset-0 grid-cyber opacity-30" />
+    <section id="skills" className="py-24 md:py-32 px-6 section-cyber section-brackets relative">
+      <div className="absolute inset-0 grid-animated opacity-20" />
       
       <motion.div 
         ref={ref} 
@@ -79,7 +79,7 @@ const SkillsSection = () => {
           viewport={{ once: true }}
         >
           <p className="section-label">// capability modules</p>
-          <h2 className="section-title cyber-glow">SKILL MATRIX</h2>
+          <h2 className="section-title">SKILL MATRIX</h2>
         </motion.div>
 
         {/* Main skill modules */}
