@@ -1,98 +1,94 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useInView';
-import { ExternalLink, Github, FileSearch, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
+import { useScrollY } from '../hooks/useParallax';
+import { ArrowUpRight, Github, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-react';
 import { projects } from '../data/projects';
+import TiltCard from './TiltCard';
+import { ProjectsDecorations } from './DecorativeShapes';
 
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => (
-  <motion.div
-    className="glass-panel-glow p-6 min-w-[340px] max-w-[340px] flex-shrink-0"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.1 }}
-    whileHover={{ scale: 1.02 }}
-  >
-    {/* Classification header */}
-    <div className="flex items-center justify-between mb-4 pb-3 border-b border-border">
-      <div className="flex items-center gap-2">
-        <AlertTriangle className="w-4 h-4 text-primary" />
-        <span className="font-mono text-xs text-primary uppercase tracking-wider">
-          Security Analysis
-        </span>
-      </div>
-      <span className="font-mono text-xs text-muted-foreground">
-        #{String(index + 1).padStart(3, '0')}
-      </span>
-    </div>
-
-    {/* Project name */}
-    <h3 className="font-mono text-lg text-primary mb-1 glitch-hover">
-      {project.title}
-    </h3>
-    <p className="font-mono text-xs text-muted-foreground mb-4">
-      {project.subtitle}
-    </p>
-
-    {/* Description */}
-    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-      {project.description}
-    </p>
-
-    {/* Tech stack */}
-    <div className="flex flex-wrap gap-2 mb-4">
-      {project.techStack.slice(0, 4).map((tech) => (
-        <span key={tech} className="cyber-tag text-xs">
-          {tech}
-        </span>
-      ))}
-    </div>
-
-    {/* Highlights */}
-    <div className="space-y-2 mb-6">
-      {project.highlights.slice(0, 2).map((highlight, i) => (
-        <div key={i} className="flex items-start gap-2 text-xs text-muted-foreground">
-          <span className="text-primary">▸</span>
-          <span>{highlight}</span>
+const ProjectCard = ({ project }: { project: typeof projects[0] }) => (
+  <TiltCard className="min-w-[340px] max-w-[340px] flex-shrink-0" tiltAmount={8}>
+    <div className="group card-clean h-full" data-depth-card>
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-foreground transition-colors">
+            {project.title}
+          </h3>
+          <p className="text-muted-foreground text-sm">{project.subtitle}</p>
         </div>
-      ))}
-    </div>
-
-    {/* Actions */}
-    <div className="flex items-center gap-4 pt-4 border-t border-border">
-      <Link
-        to={`/projects/${project.slug}`}
-        className="flex items-center gap-2 font-mono text-xs text-primary hover:text-primary/80 transition-colors"
-      >
-        <FileSearch size={14} />
-        VIEW ANALYSIS
-      </Link>
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
-      >
-        <Github size={14} />
-        SOURCE
-      </a>
-      {project.demoUrl && (
         <a
-          href={project.demoUrl}
+          href={project.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-colors"
+          className="text-muted-foreground hover:text-foreground transition-colors"
+          aria-label={`View ${project.title} on GitHub`}
         >
-          <ExternalLink size={14} />
-          DEMO
+          <Github size={20} />
         </a>
-      )}
+      </div>
+
+      {/* Description */}
+      <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+
+      {/* Tech Stack */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.techStack.map((tech) => (
+          <span
+            key={tech}
+            className="skill-tag text-xs"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* Highlights */}
+      <ul className="space-y-2 mb-5">
+        {project.highlights.map((highlight, i) => (
+          <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+            <span className="w-1 h-1 rounded-full bg-foreground/40 mt-2 flex-shrink-0" />
+            <span>{highlight}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Links */}
+      <div className="flex items-center gap-4 flex-wrap">
+        <Link
+          to={`/projects/${project.slug}`}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
+        >
+          <FileText size={14} />
+          Case Study
+        </Link>
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          GitHub
+          <ArrowUpRight size={14} />
+        </a>
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Demo
+            <ExternalLink size={14} />
+          </a>
+        )}
+      </div>
     </div>
-  </motion.div>
+  </TiltCard>
 );
 
-// Mobile Card Stack
+// Mobile Card Stack Component
 const MobileCardStack = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -112,18 +108,29 @@ const MobileCardStack = () => {
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
-    if (distance > minSwipeDistance) {
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
       setCurrentIndex((prev) => (prev + 1) % projects.length);
     }
-    if (distance < -minSwipeDistance) {
+    if (isRightSwipe) {
       setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
     }
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   return (
     <div className="relative flex flex-col items-center">
       <div
-        className="relative h-[500px] w-[340px]"
+        className="relative h-[480px] w-[340px]"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -135,7 +142,7 @@ const MobileCardStack = () => {
           return (
             <div
               key={project.title}
-              className={`absolute inset-0 transition-all duration-300 ${
+              className={`absolute inset-0 transition-all duration-300 ease-out ${
                 isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
               style={{
@@ -143,17 +150,18 @@ const MobileCardStack = () => {
                 zIndex: projects.length - offset,
               }}
             >
-              <ProjectCard project={project} index={index} />
+              <ProjectCard project={project} />
             </div>
           );
         })}
       </div>
 
-      {/* Navigation */}
-      <div className="flex items-center gap-4 mt-8">
+      {/* Navigation buttons */}
+      <div className="flex justify-center gap-4 mt-8">
         <button
-          onClick={() => setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)}
-          className="p-2 rounded-sm border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+          onClick={goToPrev}
+          className="p-2 rounded-full border border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
+          aria-label="Previous project"
         >
           <ChevronLeft size={20} />
         </button>
@@ -163,74 +171,78 @@ const MobileCardStack = () => {
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? 'bg-primary' : 'bg-muted'
+                index === currentIndex ? 'bg-foreground' : 'bg-foreground/30'
               }`}
+              aria-label={`Go to project ${index + 1}`}
             />
           ))}
         </div>
         <button
-          onClick={() => setCurrentIndex((prev) => (prev + 1) % projects.length)}
-          className="p-2 rounded-sm border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+          onClick={goToNext}
+          className="p-2 rounded-full border border-foreground/30 text-muted-foreground hover:border-foreground hover:text-foreground transition-colors"
+          aria-label="Next project"
         >
           <ChevronRight size={20} />
         </button>
       </div>
-      <p className="font-mono text-xs text-muted-foreground mt-4">
-        SWIPE TO BROWSE MISSION FILES
+
+      <p className="text-center text-muted-foreground text-sm mt-4">
+        Swipe or use arrows to browse projects
       </p>
     </div>
   );
 };
 
-// Desktop Marquee
-const DesktopMarquee = () => (
-  <div className="overflow-hidden">
-    <div className="flex animate-marquee gap-6" style={{ width: 'fit-content' }}>
-      {projects.map((project, index) => (
-        <ProjectCard key={`first-${project.title}`} project={project} index={index} />
-      ))}
-      {projects.map((project, index) => (
-        <ProjectCard key={`second-${project.title}`} project={project} index={index} />
-      ))}
+// Desktop Marquee Component
+const DesktopMarquee = () => {
+  return (
+    <div className="overflow-hidden">
+      <div className="flex animate-marquee gap-6" style={{ width: 'fit-content' }}>
+        {/* First set of cards */}
+        {projects.map((project) => (
+          <ProjectCard key={`first-${project.title}`} project={project} />
+        ))}
+        {/* Duplicate set for seamless loop */}
+        {projects.map((project) => (
+          <ProjectCard key={`second-${project.title}`} project={project} />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ProjectsSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 section-cyber section-brackets relative overflow-hidden">
-      <div className="absolute inset-0 grid-animated opacity-20" />
-      
-      <div ref={ref} className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
-        <motion.div 
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="section-label">// mission files</p>
-          <h2 className="section-title">SECURITY ANALYSES</h2>
-        </motion.div>
+    <section ref={sectionRef} id="projects" className="py-24 md:py-32 px-6 section-light overflow-hidden relative gradient-mesh">
+      {/* Decorative geometric shapes */}
+      <ProjectsDecorations />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
+      <div ref={ref} className={`container mx-auto max-w-6xl relative z-10 ${isInView ? 'section-bounce' : 'opacity-0'}`}>
+        <div className="section-header">
+          <p className="section-label">What I've built</p>
+          <h2 className="section-title shimmer-text">AI & Cybersecurity Projects</h2>
+        </div>
+
+        <div className={`transition-all duration-700 ${
+          isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`} style={{ transitionDelay: '200ms' }}>
           {isMobile ? <MobileCardStack /> : <DesktopMarquee />}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -2,8 +2,16 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { useInView } from '../hooks/useInView';
-import { Github, Linkedin, Mail, MapPin, Phone, Send, Shield } from 'lucide-react';
+import { useScrollY } from '../hooks/useParallax';
+import { Github, Linkedin, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { staggerContainer, fadeUp, slideIn, springPresets } from '../hooks/useMotionAnimations';
+import { MagneticWrapper } from './motion/MagneticButton';
+import { Parallax } from './motion/ScrollAnimations';
+import { ContactDecorations } from './DecorativeShapes';
 
 const EMAILJS_SERVICE_ID = 'service_hbvqs2f';
 const EMAILJS_TEMPLATE_ID = 'template_h66mljm';
@@ -11,12 +19,15 @@ const EMAILJS_PUBLIC_KEY = 'pEkZwmUeWy6anm2tc';
 
 const ContactSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.2 });
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrollY = useScrollY();
   const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     if (!formRef.current) return;
     
     setIsSubmitting(true);
@@ -30,15 +41,16 @@ const ContactSection = () => {
       );
       
       toast({
-        title: "Handshake successful",
-        description: "Message transmitted. Awaiting response.",
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
       });
       
       formRef.current.reset();
     } catch (error) {
+      console.error('EmailJS error:', error);
       toast({
-        title: "Transmission failed",
-        description: "Connection error. Try direct channel.",
+        title: "Failed to send",
+        description: "Something went wrong. Please try again or email me directly.",
         variant: "destructive",
       });
     } finally {
@@ -47,191 +59,216 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 section-cyber section-brackets relative">
-      <div className="absolute inset-0 grid-animated opacity-20" />
+    <section ref={sectionRef} id="contact" className="py-24 md:py-32 px-6 section-dark overflow-hidden relative grid-bg-light">
+      {/* Decorative geometric shapes */}
+      <ContactDecorations />
       
+      {/* Faded background elements with parallax */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
+        <div 
+          className="absolute top-20 right-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.03}px)` }}
+        >
+          <div>{'// Let\'s connect'}</div>
+          <div>{'const contact = {'}</div>
+          <div className="pl-4">{'email: "...",'}</div>
+          <div className="pl-4">{'message: "..."'}</div>
+          <div>{'};'}</div>
+        </div>
+        <div 
+          className="absolute bottom-20 left-10 text-background/[0.04] font-mono text-lg leading-relaxed select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * -0.04}px)` }}
+        >
+          <div>{'async function sendMessage() {'}</div>
+          <div className="pl-4">{'await fetch("/api/contact");'}</div>
+          <div>{'}'}</div>
+        </div>
+        <div 
+          className="absolute top-1/2 right-1/4 text-background/[0.03] font-mono text-6xl select-none transition-transform duration-100"
+          style={{ transform: `translateY(${scrollY * 0.02}px)` }}
+        >
+          @
+        </div>
+      </div>
+
+      {/* Gradient orbs with parallax */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gradient-to-b from-background/10 to-transparent rounded-full blur-3xl pointer-events-none transition-transform duration-100"
+        style={{ transform: `translateX(-50%) translateY(${scrollY * -0.03}px)` }}
+      />
+
       <motion.div 
         ref={ref} 
         className="container mx-auto max-w-4xl relative z-10"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer(0.15, 0.1)}
       >
-        {/* Header */}
-        <motion.div 
-          className="section-header"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <p className="section-label">// establish connection</p>
-          <h2 className="section-title flex items-center justify-center gap-3">
-            <Shield className="w-8 h-8 text-accent" />
-            ESTABLISH SECURE CHANNEL
-          </h2>
+        <motion.div className="section-header" variants={fadeUp}>
+          <p className="section-label text-background/60">Get in touch</p>
+          <h2 className="section-title shimmer-text-light">Contact Vishwa Kumar</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Form */}
-          <motion.div
-            className="glass-panel-glow p-6"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-          >
-            {/* Terminal header */}
-            <div className="flex items-center gap-2 mb-6 pb-4 border-b border-border">
-              <div className="w-3 h-3 rounded-full bg-destructive/50" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-              <div className="w-3 h-3 rounded-full bg-primary/50" />
-              <span className="ml-4 font-mono text-xs text-muted-foreground">
-                secure_channel.sh
-              </span>
-            </div>
-
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block font-mono text-xs text-muted-foreground mb-2">
-                  SENDER_ID:
+          <motion.div variants={slideIn('left')}>
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, ...springPresets.gentle }}
+              >
+                <label htmlFor="name" className="block text-sm font-medium mb-2 text-background">
+                  Name
                 </label>
-                <input
+                <Input
+                  id="name"
                   name="from_name"
                   type="text"
                   required
-                  placeholder="Enter name..."
-                  className="w-full terminal-input rounded-sm px-4 py-3 text-sm"
+                  placeholder="Your name"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
-              </div>
+              </motion.div>
               
-              <div>
-                <label className="block font-mono text-xs text-muted-foreground mb-2">
-                  RETURN_ADDRESS:
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, ...springPresets.gentle }}
+              >
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-background">
+                  Email
                 </label>
-                <input
+                <Input
+                  id="email"
                   name="from_email"
                   type="email"
                   required
-                  placeholder="Enter email..."
-                  className="w-full terminal-input rounded-sm px-4 py-3 text-sm"
+                  placeholder="your@email.com"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50"
                 />
-              </div>
+              </motion.div>
               
-              <div>
-                <label className="block font-mono text-xs text-muted-foreground mb-2">
-                  MESSAGE_PAYLOAD:
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, ...springPresets.gentle }}
+              >
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-background">
+                  Message
                 </label>
-                <textarea
+                <Textarea
+                  id="message"
                   name="message"
                   required
-                  placeholder="Enter message..."
+                  placeholder="Your message..."
                   rows={5}
-                  className="w-full terminal-input rounded-sm px-4 py-3 text-sm resize-none"
+                  className="bg-foreground/10 border-background/20 text-background placeholder:text-background/50 resize-none"
                 />
-              </div>
+              </motion.div>
               
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full cyber-button-primary flex items-center justify-center gap-2"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, ...springPresets.bouncy }}
               >
-                {isSubmitting ? (
-                  <motion.span
-                    animate={{ opacity: [1, 0.5, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                    className="font-mono"
-                  >
-                    TRANSMITTING...
-                  </motion.span>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    INITIATE HANDSHAKE
-                  </>
-                )}
-              </motion.button>
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting} 
+                  className="w-full bg-background text-foreground hover:bg-background/90"
+                >
+                  {isSubmitting ? (
+                    <motion.span
+                      animate={{ opacity: [1, 0.5, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    >
+                      Sending...
+                    </motion.span>
+                  ) : (
+                    <>
+                      <Send size={18} className="mr-2" />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </motion.div>
             </form>
           </motion.div>
 
           {/* Contact Info */}
-          <motion.div 
-            className="space-y-6"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="glass-panel p-6">
-              <div className="font-mono text-xs text-muted-foreground mb-4 tracking-widest">
-                DIRECT_CHANNELS:
-              </div>
-              
+          <motion.div className="space-y-6" variants={slideIn('right')}>
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-background">Contact Information</h3>
               <div className="space-y-4">
-                <a 
-                  href="mailto:vishwakumarv05@gmail.com"
-                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors group"
+                {[
+                  { href: 'mailto:vishwakumarv05@gmail.com', icon: Mail, text: 'vishwakumarv05@gmail.com' },
+                  { href: 'tel:+919342236718', icon: Phone, text: '+91 9342236718' },
+                ].map((item, i) => (
+                  <motion.a 
+                    key={item.text}
+                    href={item.href}
+                    className="flex items-center gap-3 text-background/70 hover:text-background transition-colors"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, ...springPresets.gentle }}
+                    whileHover={{ x: 5 }}
+                  >
+                    <item.icon size={18} />
+                    <span>{item.text}</span>
+                  </motion.a>
+                ))}
+                <motion.div 
+                  className="flex items-center gap-3 text-background/70"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, ...springPresets.gentle }}
                 >
-                  <div className="w-8 h-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Mail size={14} className="text-primary" />
-                  </div>
-                  <span className="font-mono">vishwakumarv05@gmail.com</span>
-                </a>
-                
-                <a 
-                  href="tel:+919342236718"
-                  className="flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-colors group"
-                >
-                  <div className="w-8 h-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Phone size={14} className="text-primary" />
-                  </div>
-                  <span className="font-mono">+91 9342236718</span>
-                </a>
-                
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <div className="w-8 h-8 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center">
-                    <MapPin size={14} className="text-primary" />
-                  </div>
-                  <span className="font-mono">Bengaluru, Karnataka, India</span>
-                </div>
+                  <MapPin size={18} />
+                  <span>Bengaluru, Karnataka, India</span>
+                </motion.div>
               </div>
             </div>
 
-            <div className="glass-panel p-6">
-              <div className="font-mono text-xs text-muted-foreground mb-4 tracking-widest">
-                NETWORK_PROFILES:
-              </div>
-              
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.6, ...springPresets.gentle }}
+            >
+              <h3 className="text-lg font-semibold mb-4 text-background">Connect</h3>
               <div className="flex items-center gap-3">
                 {[
                   { href: 'https://github.com/vkumxr', icon: Github, label: 'GitHub' },
                   { href: 'https://linkedin.com/in/vishwakumarv/', icon: Linkedin, label: 'LinkedIn' },
                   { href: 'mailto:vishwakumarv05@gmail.com', icon: Mail, label: 'Email' },
-                ].map((link) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    target={link.href.startsWith('mailto') ? undefined : '_blank'}
-                    rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                    className="social-icon"
-                    aria-label={link.label}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <link.icon size={18} />
-                  </motion.a>
+                ].map((link, i) => (
+                  <MagneticWrapper key={link.label} strength={0.4} radius={80}>
+                    <motion.a
+                      href={link.href}
+                      target={link.href.startsWith('mailto') ? undefined : '_blank'}
+                      rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                      className="social-icon-inverted"
+                      aria-label={link.label}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.7 + i * 0.1, ...springPresets.bouncy }}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <link.icon size={18} />
+                    </motion.a>
+                  </MagneticWrapper>
                 ))}
               </div>
-            </div>
-
-            {/* Status indicator */}
-            <div className="glass-panel p-4 flex items-center gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full animate-glow-pulse" />
-              <span className="font-mono text-xs text-muted-foreground">
-                OPEN TO OPPORTUNITIES • RESPONSE TIME: &lt;24H
-              </span>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>
