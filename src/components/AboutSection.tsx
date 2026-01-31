@@ -42,8 +42,8 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 px-6 section-cyber relative">
-      <div className="absolute inset-0 grid-cyber opacity-30" />
+    <section id="about" className="py-24 md:py-32 px-6 section-cyber section-brackets relative">
+      <div className="absolute inset-0 grid-animated opacity-20" />
       
       <motion.div 
         ref={ref} 
@@ -56,7 +56,7 @@ const AboutSection = () => {
         {/* Header */}
         <motion.div className="section-header" variants={itemVariants}>
           <p className="section-label">// system profile</p>
-          <h2 className="section-title cyber-glow">SYSTEM PROFILE</h2>
+          <h2 className="section-title">SYSTEM PROFILE</h2>
         </motion.div>
 
         {/* Terminal-style profile log */}
@@ -92,7 +92,7 @@ const AboutSection = () => {
                   <div className="font-mono text-xs text-muted-foreground tracking-widest mb-1">
                     {info.label}:
                   </div>
-                  <div className="font-mono text-sm text-secondary-foreground">
+                  <div className="font-mono text-sm text-foreground">
                     {info.value}
                   </div>
                 </div>

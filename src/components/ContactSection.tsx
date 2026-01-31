@@ -47,8 +47,8 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6 section-cyber relative">
-      <div className="absolute inset-0 grid-cyber opacity-30" />
+    <section id="contact" className="py-24 md:py-32 px-6 section-cyber section-brackets relative">
+      <div className="absolute inset-0 grid-animated opacity-20" />
       
       <motion.div 
         ref={ref} 
@@ -65,8 +65,8 @@ const ContactSection = () => {
           viewport={{ once: true }}
         >
           <p className="section-label">// establish connection</p>
-          <h2 className="section-title cyber-glow flex items-center justify-center gap-3">
-            <Shield className="w-8 h-8" />
+          <h2 className="section-title flex items-center justify-center gap-3">
+            <Shield className="w-8 h-8 text-accent" />
             ESTABLISH SECURE CHANNEL
           </h2>
         </motion.div>

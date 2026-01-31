@@ -208,8 +208,8 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6 section-cyber relative overflow-hidden">
-      <div className="absolute inset-0 grid-cyber opacity-30" />
+    <section id="projects" className="py-24 md:py-32 px-6 section-cyber section-brackets relative overflow-hidden">
+      <div className="absolute inset-0 grid-animated opacity-20" />
       
       <div ref={ref} className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
@@ -220,7 +220,7 @@ const ProjectsSection = () => {
           viewport={{ once: true }}
         >
           <p className="section-label">// mission files</p>
-          <h2 className="section-title cyber-glow">SECURITY ANALYSES</h2>
+          <h2 className="section-title">SECURITY ANALYSES</h2>
         </motion.div>
 
         <motion.div

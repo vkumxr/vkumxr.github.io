@@ -27,8 +27,8 @@ const ExperienceSection = () => {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="experience" className="py-24 md:py-32 px-6 section-cyber relative">
-      <div className="absolute inset-0 grid-cyber opacity-30" />
+    <section id="experience" className="py-24 md:py-32 px-6 section-cyber section-brackets relative">
+      <div className="absolute inset-0 grid-animated opacity-20" />
       
       <motion.div 
         ref={ref} 
@@ -42,7 +42,7 @@ const ExperienceSection = () => {
           viewport={{ once: true }}
         >
           <p className="section-label">// operation history</p>
-          <h2 className="section-title cyber-glow">EXPERIENCE LOG</h2>
+          <h2 className="section-title">EXPERIENCE LOG</h2>
         </motion.div>
 
         {/* Timeline */}

@@ -47,13 +47,16 @@ const HeroSection = () => {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const } },
   };
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center px-6 section-cyber overflow-hidden">
-      {/* Terminal glow effect */}
-      <div className="absolute inset-0 terminal-glow" />
+      {/* HUD corner elements */}
+      <div className="hud-corner hud-corner-tl" />
+      <div className="hud-corner hud-corner-tr" />
+      <div className="hud-corner hud-corner-bl" />
+      <div className="hud-corner hud-corner-br" />
       
       {/* Boot sequence overlay */}
       <AnimatePresence>
@@ -63,46 +66,41 @@ const HeroSection = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="font-mono text-primary text-sm space-y-1">
+            <div className="font-mono text-sm space-y-2">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0 }}
+                className="text-muted-foreground"
               >
-                <span className="text-muted-foreground">[</span>
-                <span className="text-primary">SYSTEM</span>
-                <span className="text-muted-foreground">]</span> Initializing secure connection...
+                <span className="text-primary">[SYSTEM]</span> Initializing secure connection...
               </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
+                className="text-muted-foreground"
               >
-                <span className="text-muted-foreground">[</span>
-                <span className="text-primary">AUTH</span>
-                <span className="text-muted-foreground">]</span> Verifying credentials...
+                <span className="text-accent">[ AUTH ]</span> Verifying credentials...
               </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
+                className="text-muted-foreground"
               >
-                <span className="text-muted-foreground">[</span>
-                <span className="text-primary">ACCESS</span>
-                <span className="text-muted-foreground">]</span> Granted
+                <span className="text-primary">[ACCESS]</span> Granted
               </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.9 }}
-                className="flex items-center gap-2"
+                className="flex items-center gap-3"
               >
-                <span className="text-muted-foreground">[</span>
-                <span className="text-primary">LOAD</span>
-                <span className="text-muted-foreground">]</span>
-                <motion.div
-                  className="h-1 w-32 bg-muted rounded-full overflow-hidden"
-                >
+                <span className="text-muted-foreground">
+                  <span className="text-accent">[ LOAD ]</span>
+                </span>
+                <motion.div className="h-1 w-32 bg-secondary rounded-full overflow-hidden">
                   <motion.div
                     className="h-full bg-primary"
                     initial={{ width: 0 }}
@@ -125,7 +123,7 @@ const HeroSection = () => {
       >
         {/* System status indicator */}
         <motion.div 
-          className="flex items-center justify-center gap-2 mb-8"
+          className="flex items-center justify-center gap-3 mb-8"
           variants={itemVariants}
         >
           <div className="w-2 h-2 bg-primary rounded-full animate-glow-pulse" />
@@ -136,22 +134,22 @@ const HeroSection = () => {
 
         {/* Identity header */}
         <motion.div className="mb-6" variants={itemVariants}>
-          <div className="font-mono text-xs text-muted-foreground mb-2 tracking-widest">
+          <div className="font-mono text-xs text-muted-foreground mb-3 tracking-widest">
             IDENTITY:
           </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-bold tracking-tight text-primary cyber-glow">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-bold tracking-tight text-primary name-pulse">
             VISHWA KUMAR
           </h1>
         </motion.div>
 
         {/* Role */}
         <motion.div className="mb-8" variants={itemVariants}>
-          <div className="font-mono text-xs text-muted-foreground mb-2 tracking-widest">
+          <div className="font-mono text-xs text-muted-foreground mb-3 tracking-widest">
             ROLE:
           </div>
           <div className="flex items-center justify-center gap-3">
-            <Shield className="w-5 h-5 text-primary" />
-            <span className="font-mono text-lg md:text-xl text-secondary-foreground">
+            <Shield className="w-5 h-5 text-accent" />
+            <span className="font-mono text-lg md:text-xl text-foreground">
               Cybersecurity & Reverse Engineering
             </span>
           </div>
@@ -169,7 +167,7 @@ const HeroSection = () => {
               typeSpeed={40} 
               deleteSpeed={20} 
               pauseDuration={3000}
-              className="text-secondary-foreground"
+              className="text-foreground"
             />
           </div>
         </motion.div>
@@ -181,7 +179,7 @@ const HeroSection = () => {
         >
           <motion.button
             onClick={scrollToProjects}
-            className="cyber-button flex items-center gap-2"
+            className="cyber-button flex items-center gap-2 button-glow"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -191,7 +189,7 @@ const HeroSection = () => {
           
           <motion.button
             onClick={scrollToContact}
-            className="cyber-button-primary flex items-center gap-2"
+            className="cyber-button-primary flex items-center gap-2 button-glow"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -208,7 +206,7 @@ const HeroSection = () => {
           <motion.a
             href="/VISHWA-RESUME.pdf"
             download="Vishwa_Kumar_Venkateswaran_Resume.pdf"
-            className="flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
+            className="flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors duration-300"
             whileHover={{ x: 2 }}
           >
             <FileText size={16} />
@@ -253,7 +251,7 @@ const HeroSection = () => {
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <span className="font-mono text-xs text-muted-foreground">SCROLL</span>
+          <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">SCROLL</span>
           <ArrowDown size={16} className="text-primary" />
         </motion.div>
       </motion.div>

@@ -1,126 +1,201 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
-// Matrix rain character component
-const MatrixColumn = ({ delay, left }: { delay: number; left: string }) => {
-  const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-  const randomChar = () => chars[Math.floor(Math.random() * chars.length)];
-  
-  return (
-    <motion.div
-      className="absolute top-0 font-mono text-xs text-primary/20 whitespace-pre leading-4 pointer-events-none select-none"
-      style={{ left }}
-      initial={{ y: '-100%' }}
-      animate={{ y: '100vh' }}
-      transition={{
-        duration: Math.random() * 10 + 15,
-        repeat: Infinity,
-        delay,
-        ease: 'linear'
-      }}
-    >
-      {Array.from({ length: 30 }, () => randomChar()).join('\n')}
-    </motion.div>
-  );
-};
-
-// Floating network node
-const NetworkNode = ({ x, y, delay }: { x: string; y: string; delay: number }) => (
+// Floating particle with drift animation
+const DriftingParticle = ({ 
+  x, y, delay, size = 2, opacity = 0.3 
+}: { 
+  x: string; y: string; delay: number; size?: number; opacity?: number;
+}) => (
   <motion.div
-    className="absolute w-1 h-1 bg-primary/30 rounded-full"
-    style={{ left: x, top: y }}
+    className="absolute rounded-full bg-primary"
+    style={{ 
+      left: x, 
+      top: y, 
+      width: size, 
+      height: size,
+    }}
     animate={{
-      scale: [1, 1.5, 1],
-      opacity: [0.3, 0.6, 0.3],
+      y: [-20, 20, -20],
+      x: [-10, 10, -10],
+      opacity: [opacity * 0.5, opacity, opacity * 0.5],
     }}
     transition={{
-      duration: 3,
+      duration: 15 + Math.random() * 10,
       repeat: Infinity,
       delay,
+      ease: 'easeInOut',
     }}
   />
 );
 
-// Connection line between nodes
-const ConnectionLine = ({ 
-  x1, y1, x2, y2, delay 
-}: { 
-  x1: string; y1: string; x2: string; y2: string; delay: number 
-}) => (
-  <motion.svg
-    className="absolute inset-0 w-full h-full pointer-events-none"
-    style={{ overflow: 'visible' }}
-  >
-    <motion.line
-      x1={x1}
-      y1={y1}
-      x2={x2}
-      y2={y2}
-      stroke="hsl(142 70% 45% / 0.1)"
-      strokeWidth="1"
-      initial={{ pathLength: 0 }}
-      animate={{ pathLength: 1 }}
+// Subtle floating code fragment
+const CodeFragment = ({ x, y, delay }: { x: string; y: string; delay: number }) => {
+  const fragments = ['0x', '//', '{}', '[]', '=>', '&&', '||', '!=', '++', '--'];
+  const fragment = useMemo(() => fragments[Math.floor(Math.random() * fragments.length)], []);
+  
+  return (
+    <motion.div
+      className="absolute font-mono text-xs text-primary/10 select-none pointer-events-none"
+      style={{ left: x, top: y }}
+      animate={{
+        y: [-30, 30, -30],
+        opacity: [0.05, 0.15, 0.05],
+      }}
       transition={{
-        duration: 2,
+        duration: 20 + Math.random() * 10,
         repeat: Infinity,
-        repeatType: 'reverse',
         delay,
+        ease: 'easeInOut',
+      }}
+    >
+      {fragment}
+    </motion.div>
+  );
+};
+
+// Animated connection line
+const ConnectionPath = ({ 
+  startX, startY, endX, endY, delay 
+}: { 
+  startX: string; startY: string; endX: string; endY: string; delay: number;
+}) => (
+  <svg className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
+    <motion.line
+      x1={startX}
+      y1={startY}
+      x2={endX}
+      y2={endY}
+      stroke="hsl(var(--primary))"
+      strokeWidth="0.5"
+      strokeOpacity="0.1"
+      initial={{ pathLength: 0 }}
+      animate={{ pathLength: [0, 1, 0] }}
+      transition={{
+        duration: 8,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
       }}
     />
-  </motion.svg>
+  </svg>
 );
 
-export const CyberBackground = () => {
-  const matrixColumns = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    delay: Math.random() * 5,
-    left: `${(i / 15) * 100}%`,
-  }));
+// Radial gradient orb
+const GradientOrb = ({ 
+  x, y, size, color, delay 
+}: { 
+  x: string; y: string; size: number; color: 'primary' | 'accent'; delay: number;
+}) => {
+  const colorVar = color === 'primary' ? 'var(--primary)' : 'var(--accent)';
+  
+  return (
+    <motion.div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        left: x,
+        top: y,
+        width: size,
+        height: size,
+        background: `radial-gradient(circle, hsl(${colorVar} / 0.15) 0%, transparent 70%)`,
+        filter: 'blur(40px)',
+        transform: 'translate(-50%, -50%)',
+      }}
+      animate={{
+        scale: [1, 1.2, 1],
+        opacity: [0.3, 0.5, 0.3],
+      }}
+      transition={{
+        duration: 10 + Math.random() * 5,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
+      }}
+    />
+  );
+};
 
-  const nodes = [
-    { x: '10%', y: '20%' },
-    { x: '25%', y: '60%' },
-    { x: '40%', y: '30%' },
-    { x: '55%', y: '70%' },
-    { x: '70%', y: '25%' },
-    { x: '85%', y: '55%' },
-    { x: '15%', y: '80%' },
-    { x: '90%', y: '15%' },
-  ];
+export const CyberBackground = () => {
+  // Generate particles with varied positions
+  const particles = useMemo(() => 
+    Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: `${5 + Math.random() * 90}%`,
+      y: `${5 + Math.random() * 90}%`,
+      delay: Math.random() * 5,
+      size: 1 + Math.random() * 2,
+      opacity: 0.2 + Math.random() * 0.3,
+    })), []
+  );
+
+  // Code fragments for atmosphere
+  const codeFragments = useMemo(() => 
+    Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      x: `${10 + Math.random() * 80}%`,
+      y: `${10 + Math.random() * 80}%`,
+      delay: Math.random() * 8,
+    })), []
+  );
+
+  // Connection paths
+  const connections = useMemo(() => [
+    { startX: '10%', startY: '20%', endX: '30%', endY: '40%', delay: 0 },
+    { startX: '70%', startY: '15%', endX: '85%', endY: '35%', delay: 2 },
+    { startX: '20%', startY: '70%', endX: '40%', endY: '85%', delay: 4 },
+    { startX: '60%', startY: '60%', endX: '80%', endY: '75%', delay: 6 },
+  ], []);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-cyber opacity-50" />
-      
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      
-      {/* Matrix rain - very subtle */}
-      <div className="absolute inset-0 opacity-30">
-        {matrixColumns.map((col) => (
-          <MatrixColumn key={col.id} delay={col.delay} left={col.left} />
-        ))}
-      </div>
-
-      {/* Network nodes */}
-      {nodes.map((node, i) => (
-        <NetworkNode key={i} x={node.x} y={node.y} delay={i * 0.5} />
-      ))}
-
-      {/* Vignette effect */}
+      {/* Base gradient background */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, hsl(120 5% 3%) 100%)',
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% 0%, hsl(220 15% 8%) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 100% 100%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 0% 100%, hsl(var(--accent) / 0.03) 0%, transparent 50%),
+            hsl(220 15% 4%)
+          `,
         }}
       />
 
-      {/* Corner accents */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-l border-t border-primary/20" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-primary/20" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-primary/20" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-r border-b border-primary/20" />
+      {/* Animated grid */}
+      <div className="absolute inset-0 grid-animated opacity-40" />
+      
+      {/* Gradient orbs for depth */}
+      <GradientOrb x="20%" y="30%" size={400} color="primary" delay={0} />
+      <GradientOrb x="80%" y="60%" size={300} color="accent" delay={3} />
+      <GradientOrb x="50%" y="80%" size={350} color="primary" delay={6} />
+
+      {/* Connection paths */}
+      {connections.map((conn, i) => (
+        <ConnectionPath key={i} {...conn} />
+      ))}
+
+      {/* Floating particles */}
+      {particles.map((particle) => (
+        <DriftingParticle
+          key={particle.id}
+          x={particle.x}
+          y={particle.y}
+          delay={particle.delay}
+          size={particle.size}
+          opacity={particle.opacity}
+        />
+      ))}
+
+      {/* Code fragments */}
+      {codeFragments.map((frag) => (
+        <CodeFragment key={frag.id} x={frag.x} y={frag.y} delay={frag.delay} />
+      ))}
+
+      {/* Vignette overlay */}
+      <div className="vignette" />
+
+      {/* Noise texture */}
+      <div className="noise-overlay" />
     </div>
   );
 };
