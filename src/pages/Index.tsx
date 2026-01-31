@@ -2,33 +2,35 @@ import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import SkillsSection from '../components/SkillsSection';
-import StatsSection from '../components/StatsSection';
-import CertificationsSection from '../components/CertificationsSection';
 import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
+import CyberBackground, { Scanlines } from '../components/CyberBackground';
 import KeyboardNavigation from '../components/KeyboardNavigation';
-import ScrollDepthEffects from '../components/ScrollDepthEffects';
 
 const Index = () => {
   return (
-    <ScrollDepthEffects>
-      <main className="relative min-h-screen bg-background overflow-x-hidden">
+    <>
+      {/* Global cyber background */}
+      <CyberBackground />
+      
+      {/* Scanline overlay */}
+      <Scanlines />
+      
+      <main className="relative min-h-screen overflow-x-hidden">
         <KeyboardNavigation />
         <Navbar />
         
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <StatsSection />
-        <CertificationsSection />
         <ExperienceSection />
         <ProjectsSection />
         <ContactSection />
         <Footer />
       </main>
-    </ScrollDepthEffects>
+    </>
   );
 };
 
