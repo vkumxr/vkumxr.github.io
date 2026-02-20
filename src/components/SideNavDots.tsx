@@ -7,6 +7,8 @@ const sections = [
   { id: 'skills', label: 'Skills', isDark: false },
   { id: 'experience', label: 'Experience', isDark: true },
   { id: 'projects', label: 'Projects', isDark: false },
+  { id: 'ctf-writeups', label: 'CTF Writeups', isDark: true },
+  { id: 'writing', label: 'Writing', isDark: false },
   { id: 'contact', label: 'Contact', isDark: true },
 ];
 

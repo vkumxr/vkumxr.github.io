@@ -14,6 +14,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import SideNavDots from "@/components/SideNavDots";
 import Index from "./pages/Index";
 import ProjectDetail from "./pages/ProjectDetail";
+import CTFWriteupDetail from "./pages/CTFWriteupDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -70,6 +71,19 @@ const AnimatedRoutes = () => {
               variants={pageVariants}
             >
               <ProjectDetail />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/ctf/:slug"
+          element={
+            <motion.div
+              initial="initial"
+              animate="enter"
+              exit="exit"
+              variants={pageVariants}
+            >
+              <CTFWriteupDetail />
             </motion.div>
           }
         />

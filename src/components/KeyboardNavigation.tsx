@@ -6,7 +6,9 @@ const sections = [
   { key: '3', id: 'skills', label: 'Skills' },
   { key: '4', id: 'experience', label: 'Experience' },
   { key: '5', id: 'projects', label: 'Projects' },
-  { key: '6', id: 'contact', label: 'Contact' },
+  { key: '6', id: 'ctf-writeups', label: 'CTF Writeups' },
+  { key: '7', id: 'writing', label: 'Writing' },
+  { key: '8', id: 'contact', label: 'Contact' },
 ];
 
 const KeyboardNavigation = () => {
