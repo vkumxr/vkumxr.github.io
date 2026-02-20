@@ -4,7 +4,7 @@ import { useInView } from '../hooks/useInView';
 import { useScrollY } from '../hooks/useParallax';
 import { staggerContainer, fadeUp, blurIn, springPresets } from '../hooks/useMotionAnimations';
 import { Parallax } from './motion/ScrollAnimations';
-import profileImage from '@/assets/profile.png';
+import profileImage from '@/assets/profile-about.png';
 import { AboutDecorations } from './DecorativeShapes';
 
 const AboutSection = () => {
