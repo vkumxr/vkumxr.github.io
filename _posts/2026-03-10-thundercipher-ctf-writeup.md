@@ -1,53 +1,45 @@
 ---
-title: "ThunderCipher CTF – Easy Cipher Writeup"
+title: "ThunderCipher CTF Writeup"
 date: 2026-03-10
-categories: [CTF, Cryptography]
-tags: [base64, beginner, thundercipher]
+categories: [CTF]
+tags: [thundercipher, cryptography, osint, forensics, web, reverse]
 ---
+
+## Introduction
+
+This post contains my writeups for several challenges from the **ThunderCipher CTF**.  
+The challenges covered multiple domains including **Cryptography, OSINT, Web Exploitation, Forensics, Hardware Analysis, and Binary Signal Analysis**.
+
+---
+
+# 1. Easy Cipher
 
 ## Challenge Overview
 
-This challenge provided only a ciphertext string without any additional files.
+The challenge provided only a ciphertext string without any additional files.
 
 From its structure, it appeared to be an encoded string rather than encrypted data.
 
----
-
 ## Analysis
 
-When analyzing the string, the character pattern suggested **Base64 encoding**.
+The string contained:
 
-Characteristics observed:
+- Uppercase and lowercase letters
+- Numbers
+- A structure typical of encoded text
 
-- Only letters and numbers
-- Standard Base64 character set
-- Structured encoding format
+This pattern suggested **Base64 encoding**, which is commonly used in beginner cryptography challenges.
 
-This strongly indicated that the text was encoded using Base64.
+## Solution
 
----
-
-## Decoding
-
-To decode the string, I used **CyberChef**.
+I used **CyberChef** to decode the string using the Base64 decode function.
 
 Steps:
 
 1. Open CyberChef
-2. Use the **From Base64** operation
-3. Paste the encoded string
-4. Decode
+2. Paste the ciphertext
+3. Apply **From Base64**
 
-The decoding process immediately revealed the hidden flag.
-
----
+The decoding immediately revealed the flag.
 
 ## Flag
-ThunderCipher{34sy_b4s3}
-
-
----
-
-## Conclusion
-
-This was a beginner-friendly cryptography challenge that focused on recognizing common encoding techniques. Base64 encoding is frequently used in CTF challenges and can usually be identified by its character patterns.
