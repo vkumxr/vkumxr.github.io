@@ -49,3 +49,44 @@ Completed hands-on training focused on offensive and defensive security methodol
 Most of my learning comes from hands-on experimentation — solving CTF challenges, analyzing binaries, studying vulnerabilities, and building tools that automate parts of the security research process.
 
 Security research, to me, is about curiosity and persistence: understanding how systems work, where they fail, and how those weaknesses can be discovered and documented.
+
+
+
+
+
+---
+
+## Get In Touch
+
+If you want to collaborate, discuss cybersecurity, or just talk about reverse engineering and CTFs, feel free to reach out.
+
+### Contact Information
+
+📧 **Email:** vishwakumarv05@gmail.com  
+📍 **Location:** Bengaluru, Karnataka, India  
+
+### Connect
+
+- GitHub: https://github.com/vkumxr  
+- LinkedIn: https://linkedin.com/in/vishwakumarv  
+- HackTheBox: https://app.hackthebox.com/users/2569138
+
+---
+
+<form action="https://formspree.io/f/your-form-id" method="POST">
+
+**Name**
+
+<input type="text" name="name" placeholder="Your name" required>
+
+**Email**
+
+<input type="email" name="email" placeholder="your@email.com" required>
+
+**Message**
+
+<textarea name="message" placeholder="Your message..." rows="5"></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
