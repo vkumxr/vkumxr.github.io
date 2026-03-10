@@ -56,6 +56,9 @@ webmaster_verifications:
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
 
+paginate: 10
+paginate_path: "/page:num"
+
 # Web Analytics Settings
 analytics:
   google:
