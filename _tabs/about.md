@@ -1,3 +1,9 @@
+---
+title: About
+icon: fas fa-info-circle
+order: 4
+---
+
 Hi, I'm Vishwa Kumar.
 
 I'm a cybersecurity enthusiast focused on reverse engineering,
