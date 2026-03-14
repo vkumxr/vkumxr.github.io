@@ -73,11 +73,11 @@ If you want to collaborate, discuss cybersecurity, or just talk about reverse en
 
 ### Contact Information
 
-📧 **Email:** vishwakumarv05@gmail.com  
-📍 **Location:** Bengaluru, Karnataka, India  
+📧 **Email:** vishwakumarv05@gmail.com
 
 ### Connect
 
+- 📧 **Email:** vishwakumarv05@gmail.com
 - GitHub: https://github.com/vkumxr  
 - LinkedIn: https://linkedin.com/in/vishwakumarv  
 - HackTheBox: https://app.hackthebox.com/users/2569138
