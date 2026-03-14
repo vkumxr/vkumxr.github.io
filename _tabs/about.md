@@ -73,20 +73,3 @@ If you want to collaborate, discuss cybersecurity, or just talk about reverse en
 
 ---
 
-<form action="https://formspree.io/f/your-form-id" method="POST">
-
-**Name**
-
-<input type="text" name="name" placeholder="Your name" required>
-
-**Email**
-
-<input type="email" name="email" placeholder="your@email.com" required>
-
-**Message**
-
-<textarea name="message" placeholder="Your message..." rows="5"></textarea>
-
-<button type="submit">Send Message</button>
-
-</form>
