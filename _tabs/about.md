@@ -6,13 +6,24 @@ order: 4
 
 ## About
 
-Hi, I’m Vishwa Kumar.
+I’m an engineering student focused on cybersecurity and low-level system understanding, with a strong interest in how real-world systems break and how to secure them.
 
-I’m a cybersecurity enthusiast focused on reverse engineering, binary analysis, and vulnerability research. I’m particularly interested in understanding how software behaves internally, identifying security weaknesses, and analyzing systems from an attacker’s perspective.
+My work revolves around Linux environments, offensive security techniques, and security automation. I enjoy going beyond surface-level development to analyze system behavior, find weaknesses, and build tools that improve security workflows.
 
-My work revolves around Linux environments, Android application analysis, and offensive security techniques. I spend much of my time exploring binaries, studying system behavior, and experimenting with security tools to better understand how modern software can be attacked and defended.
+Current focus areas:
+• Offensive security & penetration testing labs (TryHackMe, CTFs)
+• Linux internals, networking, and system exploitation
+• Security automation using Python, Bash, and scripting
+• Web & Android security fundamentals
 
-I actively solve security challenges on platforms like HackTheBox and document my learning through technical writeups that break down enumeration techniques, exploitation strategies, and vulnerability discovery.
+Hands-on experience with:
+• Vulnerability assessment & exploitation labs
+• Bug bounty methodology and recon techniques
+• Password cracking, enumeration, and privilege escalation
+• Linux-based workflows and system-level debugging
+
+I’m driven by curiosity and hands-on learning, aiming to grow into a professional cybersecurity engineer who understands systems deeply rather than relying only on tools.
+
 
 ---
 
@@ -26,10 +37,10 @@ Completed hands-on training focused on offensive and defensive security methodol
 
 ### Areas of Interest
 
-* Reverse Engineering
+* Digital Forensics and Incident Response
 * Binary Analysis
 * Vulnerability Research
-* Offensive Security
+* Offensive/ Defensive Security
 * Android Application Security
 * System Internals
 
