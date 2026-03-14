@@ -8,44 +8,42 @@ theme: jekyll-theme-chirpy
 # otherwise, the layout language will use the default value of 'en'.
 lang: en
 
-# Change to your timezone › https://zones.arilyn.cc
-timezone: Asia/Kolkata
+# Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
+timezone: Asia/Calcutta
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Vishwa Kumar # the main title
+title: 0xSairaj # the main title
 
-tagline: Cybersecurity | CTF Player # it will display as the subtitle
+tagline: Focus, Learn, Detach, Repeat! # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  Focus, Learn, Break, Repeat!
+  A space where I share ctf writeups, red team insights, and my journey through the world of hacking and cybersecurity.
+  learning, breaking, and building — one exploit at a time.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://vkumxr.github.io"
+url: "https://sai3aj.github.io"
 
 github:
-  username: vkumxr # change to your GitHub username
+  username: sai3aj # change to your GitHub username
 
 twitter:
-  username: vkumxrr # change to your Twitter username
+  username: 0xDekuSec # change to your Twitter username
 
-linkedin:
-  username: vishwakumarv
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: Vishwa Kumar Venkateswaran
-  email: vishwakumarv05@gmail.com # change to your email address
+  name: 0xSairaj
+  email: sairajsbarve@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/vkumxrr # change to your Twitter homepage
-    - https://github.com/vkumxr # change to your GitHub homepage
-    - https://linkedin.com/in/vishwakumarv/
+    - https://x.com/0xDekuSec # change to your Twitter homepage
+    - https://github.com/sai3aj # change to your GitHub homepage
+    - https://www.linkedin.com/in/sairaj-barve-85713b264/
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    - https://www.linkedin.com/in/vishwakumarv
 
 # Site Verification Settings
 webmaster_verifications:
@@ -58,9 +56,6 @@ webmaster_verifications:
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
-
-paginate: 10
-paginate_path: "/page:num"
 
 # Web Analytics Settings
 analytics:
@@ -104,7 +99,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/avatar.png
+avatar: https://ih1.redbubble.net/image.5524525391.6495/st,medium,507x507-pad,600x600,f8f8f8.jpg
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
