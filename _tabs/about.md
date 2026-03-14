@@ -71,10 +71,6 @@ Security research, to me, is about curiosity and persistence: understanding how 
 
 If you want to collaborate, discuss cybersecurity, or just talk about reverse engineering and CTFs, feel free to reach out.
 
-### Contact Information
-
-📧 **Email:** vishwakumarv05@gmail.com
-
 ### Connect
 
 - 📧 **Email:** vishwakumarv05@gmail.com
