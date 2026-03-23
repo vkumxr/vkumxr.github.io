@@ -6,12 +6,12 @@ order: 4
 
 ## About
 
-I’m an engineering student focused on cybersecurity and low-level system understanding, with a strong interest in how real-world systems break and how to secure them.
+I’m an engineering student focused on offensive security, with a strong interest in how real-world systems break and how to secure them.
 
 My work revolves around Linux environments, offensive security techniques, and security automation. I enjoy going beyond surface-level development to analyze system behavior, find weaknesses, and build tools that improve security workflows.
 
 Current focus areas:
-• Offensive security & penetration testing labs (TryHackMe, CTFs)
+• Offensive security & penetration testing labs
 • Linux internals, networking, and system exploitation
 • Security automation using Python, Bash, and scripting
 • Web & Android security fundamentals
@@ -37,11 +37,11 @@ Completed hands-on training focused on offensive and defensive security methodol
 
 ### Areas of Interest
 
-* Digital Forensics and Incident Response
+* Ethical Hacking
+* * Digital Forensics and Incident Response
 * Binary Analysis
 * Vulnerability Research
-* Offensive/ Defensive Security
-* Android Application Security
+* Offensive Security
 * System Internals
 
 ---
@@ -50,7 +50,7 @@ Completed hands-on training focused on offensive and defensive security methodol
 
 * **Languages:** Python, C, C++, Java, Bash, JavaScript
 * **Security Tools:** Nmap, Burp Suite, Metasploit
-* **Platforms:** Linux, QEMU, VirtualBox
+* **Platforms:** Linux, VMWare, VirtualBox
 * **Other Tools:** Git, VS Code
 
 ---
@@ -75,8 +75,7 @@ If you want to collaborate, discuss cybersecurity, or just talk about reverse en
 
 - 📧 **Email:** vishwakumarv05@gmail.com
 - GitHub: https://github.com/vkumxr  
-- LinkedIn: https://linkedin.com/in/vishwakumarv  
-- HackTheBox: https://app.hackthebox.com/users/2569138
+- LinkedIn: https://linkedin.com/in/vishwakumarv
 
 ---
 
