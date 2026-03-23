@@ -38,7 +38,7 @@ Completed hands-on training focused on offensive and defensive security methodol
 ### Areas of Interest
 
 * Ethical Hacking
-* * Digital Forensics and Incident Response
+* Digital Forensics and Incident Response
 * Binary Analysis
 * Vulnerability Research
 * Offensive Security
