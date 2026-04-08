@@ -2,27 +2,27 @@
 title: About
 icon: fas fa-info-circle
 order: 4
----
+---## About
 
-## About
+I’m an Electronics and Communication Engineering student focused on cybersecurity, with hands-on experience in Linux environments, network analysis, and system-level security concepts.
 
-I’m an engineering student focused on offensive security, with a strong interest in how real-world systems break and how to secure them.
-
-My work revolves around Linux environments, offensive security techniques, and security automation. I enjoy going beyond surface-level development to analyze system behavior, find weaknesses, and build tools that improve security workflows.
+My work centers on understanding how systems behave at a low level — from analyzing network traffic and identifying vulnerabilities to experimenting with security tools in controlled environments. I focus on building practical skills through labs, CTF challenges, and real-world problem solving rather than relying only on theoretical knowledge.
 
 Current focus areas:
-• Offensive security & penetration testing labs
-• Linux internals, networking, and system exploitation
-• Security automation using Python, Bash, and scripting
-• Web & Android security fundamentals
+• Vulnerability analysis and penetration testing fundamentals  
+• Linux internals, networking, and system behavior  
+• Security tooling and workflow automation using Python  
+• Web and application security basics  
 
 Hands-on experience with:
-• Vulnerability assessment & exploitation labs
-• Bug bounty methodology and recon techniques
-• Password cracking, enumeration, and privilege escalation
-• Linux-based workflows and system-level debugging
+• Vulnerability assessment and controlled exploitation labs  
+• Network analysis using tools like Wireshark and Nmap  
+• Password cracking, hashing techniques (MD5, SHA), and enumeration  
+• System-level debugging and Linux-based workflows  
 
-I’m driven by curiosity and hands-on learning, aiming to grow into a professional cybersecurity engineer who understands systems deeply rather than relying only on tools.
+I’ve also worked on projects involving reverse engineering assistance tools and embedded systems, where I applied security thinking to analyze behavior and identify potential weaknesses.
+
+My approach to learning is practical and iterative — breaking systems, understanding why they fail, and improving how they can be secured. I aim to build a strong foundation in cybersecurity with a focus on real-world systems, networking, and secure system design.
 
 
 ---
