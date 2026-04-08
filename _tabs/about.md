@@ -24,7 +24,7 @@ My work centers on understanding how systems behave at a low level — from anal
 
 I’ve also worked on projects involving reverse engineering assistance tools and embedded systems, where I applied security thinking to analyze behavior and identify potential weaknesses.
 
-My approach to learning is practical and iterative — breaking systems, understanding why they fail, and improving how they can be secured. I aim to build a strong foundation in cybersecurity with a focus on real-world systems, networking, and secure system design.
+My approach to learning is practical and iterative — breaking systems, understanding why they fail, and improving how they can be secured.
 
 ---
 
@@ -62,15 +62,9 @@ My approach to learning is practical and iterative — breaking systems, underst
 
 Most of my learning comes from hands-on experimentation — solving CTF challenges, analyzing binaries, studying vulnerabilities, and building tools that automate parts of the security research process.
 
-Security research, to me, is about curiosity and persistence: understanding how systems work, where they fail, and how those weaknesses can be discovered and documented.
-
 ---
 
 ## Get In Touch
-
-If you want to collaborate, discuss cybersecurity, or just talk about reverse engineering and CTFs, feel free to reach out.
-
-### Connect
 
 - 📧 **Email:** vishwakumarv05@gmail.com  
 - GitHub: https://github.com/vkumxr  
